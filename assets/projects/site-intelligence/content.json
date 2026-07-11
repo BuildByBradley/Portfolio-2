@@ -1,0 +1,20 @@
+{
+  "projectTitle": "Terrain + Context Reconstruction",
+  "projectType": "Site Intelligence // Point Cloud // Photogrammetry",
+  "heroSequence": "../../assets/projects/site-intelligence/hero-sequence/frame_",
+  "heroSequenceExt": ".webp",
+  "heroFrameCount": 1081,
+  "poster": "../../assets/projects/site-intelligence/hero-poster.jpg",
+  "nextProjectUrl": "../belhar-bim/index.html",
+  "totalDuration": 45,
+  "overlays": [
+    {
+      "start": 4,
+      "end": 20,
+      "audience": "TERRAIN REALITY",
+      "headline": "Locking down absolute slope metrics.",
+      "supporting": "Extracting topological features and spatial realities using advanced aerial photogrammetry data.",
+      "proof": ["Point Clouds", "Terrain Modeling", "Context Capture"]
+    }
+  ]
+}

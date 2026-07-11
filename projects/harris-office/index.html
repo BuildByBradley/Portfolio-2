@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Harris Office Fit-Out — Bradley Brits</title>
+  <meta name="description" content="Interior fit-out design and spatial planning for Harris Office.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/project.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --void: #0a0a0a; --carbon: #141414; --surface: #1a1a1a; --border: #1f1f1f; --border-light: #2a2a2a;
+      --text: #f5f5f5; --text-muted: #888888; --text-dim: #666666;
+      --gold: #C8A96E; --gold-dim: rgba(200,169,110,0.15); --gold-border: rgba(200,169,110,0.25);
+      --ff-display: 'Instrument Serif', serif; --ff-body: 'Inter', sans-serif; --ff-mono: 'JetBrains Mono', monospace;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--void); color: var(--text); font-family: var(--ff-body); font-weight: 300; line-height: 1.7; overflow-x: hidden; }
+    .eyebrow { font-family: var(--ff-mono); font-size: 0.65rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; margin-bottom: 1rem; }
+    h1 { font-family: var(--ff-display); font-size: clamp(3.5rem, 8vw, 6.5rem); line-height: 0.92; letter-spacing: -0.02em; margin-bottom: 1.5rem; font-style: italic; font-weight: 400; }
+    .subtitle { font-size: 1.25rem; color: var(--text-muted); line-height: 1.7; max-width: 900px; }
+    .metadata-block { max-width: 1200px; margin: 0 auto; padding: 0 4rem 4rem; display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; border-bottom: 1px solid var(--border); }
+    .meta-item { display: flex; flex-direction: column; gap: 0.5rem; }
+    .meta-label { font-family: var(--ff-mono); font-size: 0.58rem; letter-spacing: 0.15em; color: var(--text-dim); text-transform: uppercase; }
+    .meta-value { font-size: 0.85rem; color: var(--text); font-weight: 400; }
+    .hero-still-section { max-width: 1200px; margin: 4rem auto; padding: 0 4rem; }
+    .hero-image-wrapper { position: relative; width: 100%; height: auto; aspect-ratio: 16/9; background: var(--carbon); border: 1px solid var(--border); overflow: hidden; }
+    .hero-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .hero-caption { margin-top: 1.5rem; display: grid; grid-template-columns: 2fr 1fr; gap: 4rem; align-items: start; }
+    .hero-intro { font-size: 0.95rem; color: var(--text-muted); line-height: 1.8; }
+    .role-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .chip { font-family: var(--ff-mono); font-size: 0.58rem; letter-spacing: 0.1em; padding: 0.3rem 0.7rem; border: 1px solid var(--gold-border); color: var(--gold); text-transform: uppercase; background: var(--gold-dim); }
+    
+    /* PROOF MODULES SECTION */
+    .proof-section {
+      max-width: 1200px;
+      margin: 4rem auto;
+      padding: 4rem;
+      border-top: 1px solid var(--border);
+    }
+    .module-header {
+      margin-bottom: 2rem;
+    }
+    .module-num {
+      font-family: var(--ff-mono);
+      font-size: 0.65rem;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+    .module-title {
+      font-family: var(--ff-display);
+      font-size: 3rem;
+      letter-spacing: -0.01em;
+      font-style: italic;
+      font-weight: 400;
+      line-height: 1.1;
+    }
+    .proof-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .proof-media {
+      background: var(--carbon);
+      border: 1px solid var(--border);
+      position: relative;
+    }
+    .proof-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+    .proof-narrative {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .proof-caption {
+      font-size: 1rem;
+      color: var(--text);
+      font-weight: 400;
+      line-height: 1.6;
+    }
+    .proof-details {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+    }
+    
+    .cta-footer { background: #060606; padding: 8rem 4rem; border-top: 1px solid var(--border); text-align: center; }
+    .cta-label { font-family: var(--ff-mono); font-size: 0.65rem; letter-spacing: 0.3em; color: var(--text-dim); text-transform: uppercase; display: block; margin-bottom: 1.5rem; }
+    .cta-heading { font-family: var(--ff-display); font-size: clamp(2.5rem, 5vw, 4rem); font-style: italic; font-weight: 400; line-height: 1.1; color: var(--text); margin-bottom: 2.5rem; max-width: 600px; margin-left: auto; margin-right: auto; }
+    .cta-btn { display: inline-flex; background: #fff; color: #000; font-family: var(--ff-body); font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.75rem; padding: 1rem 2.5rem; border-radius: 50px; text-decoration: none; border: 1px solid #fff; transition: all 0.3s; }
+    .cta-btn:hover { background: transparent; color: #fff; }
+    @media (max-width: 1024px) {
+      header { padding: 4rem 2rem 2rem !important; }
+      .metadata-block { padding: 0 2rem 3rem; grid-template-columns: repeat(2, 1fr); }
+      .hero-still-section { padding: 0 2rem; }
+      .hero-caption { grid-template-columns: 1fr; gap: 2rem; }
+      .proof-section { padding: 3rem 2rem; }
+      .proof-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .cta-footer { padding: 5rem 2rem; }
+    }
+  </style>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3PV9G8CCTQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-3PV9G8CCTQ');
+  </script>
+</head>
+<body>
+  <nav class="fixed top-0 left-0 right-0 z-50 flex justify-between items-center p-6 bg-gradient-to-b from-black/90 to-transparent pointer-events-none">
+    <a href="../../index.html#projects" class="inline-flex items-center gap-2 pointer-events-auto backdrop-blur-md border border-white/10 bg-[#141414]/80 text-xs text-white uppercase tracking-wider rounded-full px-5 py-2 hover:border-white transition-all duration-300" style="text-decoration:none;font-family:'Inter',sans-serif;">← BACK TO PORTFOLIO</a>
+    <a href="../house-pather/index.html" class="inline-flex items-center gap-2 pointer-events-auto backdrop-blur-md border border-white/10 bg-[#141414]/80 text-xs text-white uppercase tracking-wider rounded-full px-5 py-2 hover:border-white transition-all duration-300" style="text-decoration:none;font-family:'Inter',sans-serif;">NEXT CASE STUDY →</a>
+  </nav>
+
+    <section class="cinematic-hero-section relative w-screen h-screen overflow-hidden bg-black z-0">
+    <img src="../../assets/projects/harris-office/img-0.webp" alt="harris-office Hero" class="cinematic-hero-img absolute inset-0 w-full h-full object-cover" loading="eager">
+    
+    <!-- Gradient Overlay -->
+    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" style="background: linear-gradient(to top, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.4) 25%, transparent 50%);"></div>
+    
+    <!-- Title Area (Bottom Left) -->
+    <div class="absolute bottom-12 left-6 md:bottom-16 md:left-12 z-10 max-w-2xl hero-text-anim">
+      <div class="eyebrow mb-2 text-gold tracking-widest text-xs uppercase" style="font-family: var(--ff-mono);">Case Study · Interior Architecture</div>
+      <h1 class="!mb-4 !text-6xl md:!text-[7rem] leading-none" style="font-family: var(--ff-display); font-style: italic;">HARRIS OFFICE</h1>
+      <div style="margin-top: -0.5rem; margin-bottom: 1.25rem; font-family: var(--ff-mono); font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;">
+        <a href="https://ibradleyqbrits.wixsite.com/website-the1" target="_blank" rel="noopener" style="color: var(--gold); text-decoration: none; display: inline-flex; align-items: center; gap: 0.35rem; transition: opacity 0.3s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+          Visit Live Website ↗
+        </a>
+      </div>
+      <p class="subtitle !text-sm md:!text-base !max-w-xl text-white/80" style="font-family: var(--ff-body);">
+        Interior fit-out design and spatial planning for Harris Office — translating a corporate programme into a refined, functional workspace.
+      </p>
+    </div>
+
+    <!-- HUD Metadata (Bottom Right) -->
+    <div class="absolute bottom-12 right-6 md:bottom-16 md:right-12 z-10 hidden md:flex flex-col gap-6 text-right hero-text-anim">
+      <div class="flex flex-col gap-1">
+        <span class="meta-label !text-[0.55rem] text-white/50 tracking-widest uppercase" style="font-family: var(--ff-mono);">Client</span>
+        <span class="meta-value !text-sm text-white/90" style="font-family: var(--ff-body);">Harris Group</span>
+      </div>
+      <div class="flex flex-col gap-1">
+        <span class="meta-label !text-[0.55rem] text-white/50 tracking-widest uppercase" style="font-family: var(--ff-mono);">Type</span>
+        <span class="meta-value !text-sm text-white/90" style="font-family: var(--ff-body);">Office Interior</span>
+      </div>
+      <div class="flex flex-col gap-1">
+        <span class="meta-label !text-[0.55rem] text-white/50 tracking-widest uppercase" style="font-family: var(--ff-mono);">Phase</span>
+        <span class="meta-value !text-sm text-white/90" style="font-family: var(--ff-body);">Fit Out · 2023</span>
+      </div>
+      <div class="flex flex-col gap-1">
+        <span class="meta-label !text-[0.55rem] text-white/50 tracking-widest uppercase" style="font-family: var(--ff-mono);">Key Scope</span>
+        <span class="meta-value !text-sm text-white/90" style="font-family: var(--ff-body);">Spatial Planning + Interior Coordination</span>
+      </div>
+    </div>
+  
+    <!-- Scroll Indicator -->
+    <div id="scroll-indicator" class="scroll-indicator">
+      <span class="scroll-indicator__text">SCROLL TO EXPLORE</span>
+      <div class="scroll-indicator__line"></div>
+    </div>
+</section>
+
+  <!-- Wrapping the rest of the page so it can slide over the pinned hero -->
+  <main class="relative z-10" style="background-color: var(--void);">
+
+  <!-- PROOF MODULE 01 -->
+  <section class="proof-section" style="margin-top: 4rem;">
+    <div class="module-header">
+      <span class="module-num">Proof Module 01</span>
+      <h2 class="module-title">Spatial Layout & Detail Archive</h2>
+    </div>
+    <div class="proof-grid">
+      <div class="proof-media">
+        <picture>
+          <source srcset="../../assets/projects/harris-office/harris-1.webp" type="image/webp">
+          <img src="../../assets/projects/harris-office/harris-1.webp" alt="Harris Office Layout Plans" class="proof-img viewer-trigger" data-index="0" style="cursor: pointer; transition: filter 0.3s;" onmouseover="this.style.filter='brightness(0.9)'" onmouseout="this.style.filter='brightness(1)'">
+        </picture>
+      </div>
+      <div class="proof-narrative">
+        <p class="proof-caption">
+          Coordinated interior fit-out plans covering partition layouts, ceiling systems, electrical grids, and schedules.
+        </p>
+        <p class="proof-details">
+          The Harris Office project centered on transforming a raw commercial shell into a purposeful, well-resolved workspace. My scope covered full spatial planning, furniture zone layout, and coordination of interior finishes — ensuring the design aligned with operational requirements while maintaining a considered aesthetic standard. By translating corporate briefs into clear technical packages, we resolved material specification details, partition layouts, and ceiling system paths.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-footer">
+    <span class="cta-label">Reducing Pipeline Uncertainty</span>
+    <h2 class="cta-heading">Ready to secure design accountability?</h2>
+    <a href="../../cv/index.html" class="cta-btn">Discuss a Project ↗</a>
+  </section>
+  </main>
+
+  <!-- NPT Container (Will be injected by next-project.js) -->
+  <div id="next-project-transition"></div>
+
+  <!-- VIEWER MODAL -->
+  <div id="viewer-modal" style="display: none; position: fixed; inset: 0; background: rgba(10, 10, 10, 0.98); backdrop-filter: blur(10px); z-index: 99999; align-items: center; justify-content: center; font-family: 'Inter', sans-serif;">
+    <button id="viewer-close" style="position: absolute; top: 2rem; right: 2rem; background: none; border: 1px solid rgba(255,255,255,0.2); color: #fff; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; letter-spacing: 0.1em; padding: 0.6rem 1.2rem; border-radius: 50px; cursor: pointer; transition: all 0.3s; z-index: 100001;" onmouseover="this.style.borderColor='#fff'" onmouseout="this.style.borderColor='rgba(255,255,255,0.2)'">CLOSE ✕</button>
+    <div id="viewer-header" style="position: absolute; top: 2.2rem; left: 50%; transform: translateX(-50%); text-align: center; z-index: 100001;">
+      <span id="viewer-title" style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: #C8A96E; letter-spacing: 0.2em; text-transform: uppercase; display: block; margin-bottom: 0.2rem; white-space: nowrap;">Loading...</span>
+      <span id="viewer-counter" style="font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; color: #666; letter-spacing: 0.1em;">1 OF 8</span>
+    </div>
+    <button id="viewer-prev" style="position: absolute; left: 3rem; top: 50%; transform: translateY(-50%); background: rgba(20,20,20,0.8); border: 1px solid rgba(255,255,255,0.1); color: #fff; font-size: 1.5rem; width: 3.5rem; height: 3.5rem; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s; z-index: 100001;" onmouseover="this.style.borderColor='#C8A96E'; this.style.color='#C8A96E';" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'; this.style.color='#fff';">←</button>
+    <button id="viewer-next" style="position: absolute; right: 3rem; top: 50%; transform: translateY(-50%); background: rgba(20,20,20,0.8); border: 1px solid rgba(255,255,255,0.1); color: #fff; font-size: 1.5rem; width: 3.5rem; height: 3.5rem; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s; z-index: 100001;" onmouseover="this.style.borderColor='#C8A96E'; this.style.color='#C8A96E';" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'; this.style.color='#fff';">→</button>
+    <div id="viewer-container" style="background: #000; border: 1px solid #1f1f1f; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; border-radius: 4px; cursor: grab;">
+      <div id="viewer-loading" style="position: absolute; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #666; letter-spacing: 0.1em; z-index: 100002;">LOADING...</div>
+      <img id="viewer-image" style="transform-origin: center; position: absolute; display: block; border: none; will-change: transform; max-width: none; max-height: none;" draggable="false">
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+  <script src="../../js/next-project.js"></script>
+  <script>
+    // Drag-to-scroll gallery
+    const track = document.getElementById('gallery-track');
+    if (track) { let isDown=false,startX,scrollLeft; track.addEventListener('mousedown',e=>{isDown=true;track.style.cursor='grabbing';startX=e.pageX-track.offsetLeft;scrollLeft=track.scrollLeft;}); track.addEventListener('mouseleave',()=>{isDown=false;track.style.cursor='grab';}); track.addEventListener('mouseup',()=>{isDown=false;track.style.cursor='grab';}); track.addEventListener('mousemove',e=>{if(!isDown)return;e.preventDefault();const x=e.pageX-track.offsetLeft;track.scrollLeft=scrollLeft-(x-startX)*1.5;}); }
+  </script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Asset data
+      const assets = [
+        { name: 'WALLS',                                    file: '../../assets/projects/harris-office/harris-1.webp' },
+        { name: 'CEILING & LIGHTS',                         file: '../../assets/projects/harris-office/harris-2.webp' },
+        { name: 'ELECTRICAL',                               file: '../../assets/projects/harris-office/harris-3.webp' },
+        { name: 'FLOORS',                                   file: '../../assets/projects/harris-office/harris-4.webp' },
+        { name: 'ALUMINIUM AND DOOR & WINDOW SCHEDULE',     file: '../../assets/projects/harris-office/harris-5.webp' },
+        { name: 'WATER',                                    file: '../../assets/projects/harris-office/harris-6.webp' },
+        { name: 'STAIRS',                                   file: '../../assets/projects/harris-office/harris-7.webp' },
+        { name: 'JOINERY',                                  file: '../../assets/projects/harris-office/harris-8.webp' }
+      ];
+
+      let currentIndex = 0;
+      let zoomScale = 1.0;
+      let panX = 0, panY = 0;
+      let isPanning = false, panStartX = 0, panStartY = 0, panOriginX = 0, panOriginY = 0;
+      let imgNaturalW = 0, imgNaturalH = 0;
+
+      const modal     = document.getElementById('viewer-modal');
+      const container = document.getElementById('viewer-container');
+      const image     = document.getElementById('viewer-image');
+      const loadingEl = document.getElementById('viewer-loading');
+      const titleEl   = document.getElementById('viewer-title');
+      const counterEl = document.getElementById('viewer-counter');
+      const closeBtn  = document.getElementById('viewer-close');
+      const prevBtn   = document.getElementById('viewer-prev');
+      const nextBtn   = document.getElementById('viewer-next');
+
+      // Trigger clicks
+      document.querySelectorAll('.viewer-trigger').forEach(el => {
+        el.addEventListener('click', () => {
+          const idx = parseInt(el.getAttribute('data-index'), 10);
+          if (!isNaN(idx)) openViewer(idx);
+        });
+      });
+
+      function openViewer(index) {
+        currentIndex = index;
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+        loadAsset(currentIndex);
+      }
+
+      function closeViewer() {
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+        image.src = '';
+        resetZoom();
+      }
+
+      function resetZoom() {
+        zoomScale = 1.0;
+        panX = 0;
+        panY = 0;
+        applyTransform();
+        container.style.cursor = 'grab';
+      }
+
+      function applyTransform() {
+        image.style.transform = `translate(${panX}px, ${panY}px) scale(${zoomScale})`;
+      }
+
+      function resizeContainer() {
+        if (modal.style.display !== 'flex' || !imgNaturalW) return;
+        const maxW = window.innerWidth * 0.90;
+        const maxH = window.innerHeight * 0.90;
+        const ratio = imgNaturalW / imgNaturalH;
+        let cW = maxW;
+        let cH = cW / ratio;
+        if (cH > maxH) { cH = maxH; cW = cH * ratio; }
+        container.style.width = cW + 'px';
+        container.style.height = cH + 'px';
+        image.style.width = cW + 'px';
+        image.style.height = cH + 'px';
+      }
+
+      function loadAsset(index) {
+        const asset = assets[index];
+        loadingEl.style.display = 'block';
+        image.style.opacity = '0';
+        titleEl.textContent = asset.name;
+        counterEl.textContent = `${index + 1} OF ${assets.length}`;
+        resetZoom();
+
+        const img = new Image();
+        img.onload = () => {
+          imgNaturalW = img.naturalWidth;
+          imgNaturalH = img.naturalHeight;
+          image.src = asset.file;
+          image.style.opacity = '1';
+          loadingEl.style.display = 'none';
+          resizeContainer();
+        };
+        img.src = asset.file;
+      }
+
+      // Arrow buttons ONLY for navigation
+      prevBtn.addEventListener('click', () => {
+        currentIndex = (currentIndex - 1 + assets.length) % assets.length;
+        loadAsset(currentIndex);
+      });
+      nextBtn.addEventListener('click', () => {
+        currentIndex = (currentIndex + 1) % assets.length;
+        loadAsset(currentIndex);
+      });
+
+      // Close
+      closeBtn.addEventListener('click', closeViewer);
+      modal.addEventListener('click', (e) => { if (e.target === modal) closeViewer(); });
+      document.addEventListener('keydown', (e) => {
+        if (modal.style.display === 'flex' && e.key === 'Escape') closeViewer();
+      });
+
+      // Zoom with mouse wheel on container
+      container.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        const delta = e.deltaY > 0 ? -0.15 : 0.15;
+        zoomScale = Math.max(0.5, Math.min(5, zoomScale + delta));
+        if (zoomScale <= 1.0) { panX = 0; panY = 0; }
+        applyTransform();
+        container.style.cursor = zoomScale > 1.0 ? 'grab' : 'default';
+      }, { passive: false });
+
+      // Pan with click-and-drag when zoomed
+      container.addEventListener('mousedown', (e) => {
+        if (zoomScale <= 1.0) return;
+        isPanning = true;
+        panStartX = e.clientX;
+        panStartY = e.clientY;
+        panOriginX = panX;
+        panOriginY = panY;
+        container.style.cursor = 'grabbing';
+        e.preventDefault();
+      });
+      window.addEventListener('mousemove', (e) => {
+        if (!isPanning) return;
+        panX = panOriginX + (e.clientX - panStartX);
+        panY = panOriginY + (e.clientY - panStartY);
+        applyTransform();
+      });
+      window.addEventListener('mouseup', () => {
+        if (isPanning) {
+          isPanning = false;
+          container.style.cursor = zoomScale > 1.0 ? 'grab' : 'default';
+        }
+      });
+
+      window.addEventListener('resize', resizeContainer);
+    });
+  </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+        gsap.registerPlugin(ScrollTrigger);
+
+        // 1. Text Entrance Animation
+        gsap.from(".hero-text-anim", {
+          y: 40,
+          opacity: 0,
+          duration: 1.5,
+          stagger: 0.15,
+          ease: "power3.out",
+          delay: 0.1
+        });
+
+        // 2. Cinematic Pin & Scale
+        ScrollTrigger.create({
+          trigger: ".cinematic-hero-section",
+          start: "top top",
+          end: "+=100%", // Pin for 100vh of scroll distance
+          pin: true,
+          pinSpacing: false, // Critical: allows the <main> block below to slide up over the pinned hero
+          animation: gsap.to(".cinematic-hero-img", { scale: 1.08, ease: "none" }),
+          scrub: 1 // Smooth scrub
+        });
+      }
+    });
+  </script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const indicator = document.getElementById('scroll-indicator');
+      if (indicator) {
+        window.addEventListener('scroll', () => {
+          let opacity = 1 - Math.min(window.scrollY / 150, 1);
+          indicator.style.opacity = opacity;
+        }, { passive: true });
+      }
+    });
+  </script>
+</body>
+</html>

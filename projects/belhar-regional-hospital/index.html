@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Belhar Regional Hospital Case Study — Bradley Brits</title>
+  <meta name="description" content="Technical BIM coordination and spatial layout case study of Belhar Regional Hospital by Senior Architectural Technologist Bradley Brits.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/project.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --void: #0a0a0a;
+      --carbon: #141414;
+      --surface: #1a1a1a;
+      --border: #1f1f1f;
+      --border-light: #2a2a2a;
+      --text: #f5f5f5;
+      --text-muted: #888888;
+      --text-dim: #666666;
+      --gold: #C8A96E;
+      --gold-dim: rgba(200,169,110,0.15);
+      --gold-border: rgba(200,169,110,0.25);
+      --ff-display: 'Instrument Serif', serif;
+      --ff-body: 'Inter', sans-serif;
+      --ff-mono: 'JetBrains Mono', monospace;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--void);
+      color: var(--text);
+      font-family: var(--ff-body);
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+      padding: 0;
+    }
+
+    /* NAV */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 2rem 4rem;
+      border-bottom: 1px solid var(--border);
+      background: var(--carbon);
+    }
+    .nav-logo {
+      font-family: var(--ff-display);
+      font-size: 1.4rem;
+      letter-spacing: 0.12em;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--gold); }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 400;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-cta {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.55rem 1.4rem;
+      border: 1px solid var(--gold-border);
+      color: var(--gold);
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+    }
+    .nav-cta:hover { background: var(--gold); color: var(--void); }
+
+    /* EDITORIAL HEADER */
+    header {
+      padding: 6rem 4rem 3rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .eyebrow {
+      font-family: var(--ff-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    h1 {
+      font-family: var(--ff-display);
+      font-size: clamp(3.5rem, 8vw, 6.5rem);
+      line-height: 0.92;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+      font-style: italic;
+      font-weight: 400;
+    }
+    .subtitle {
+      font-size: 1.25rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      max-width: 900px;
+    }
+
+    /* PENTAGRAM STYLE METADATA TABLE */
+    .metadata-block {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 4rem 4rem;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .meta-label {
+      font-family: var(--ff-mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.15em;
+      color: var(--text-dim);
+      text-transform: uppercase;
+    }
+    .meta-value {
+      font-size: 0.85rem;
+      color: var(--text);
+      font-weight: 400;
+    }
+
+    /* HERO ARCHIVE STILL */
+    .hero-still-section {
+      max-width: 1200px;
+      margin: 4rem auto;
+      padding: 0 4rem;
+    }
+    .hero-image-wrapper {
+      position: relative;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16/9;
+      background: var(--carbon);
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .hero-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .hero-caption {
+      margin-top: 1.5rem;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .hero-intro {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+    }
+    .role-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .chip {
+      font-family: var(--ff-mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.1em;
+      padding: 0.3rem 0.7rem;
+      border: 1px solid var(--gold-border);
+      color: var(--gold);
+      text-transform: uppercase;
+      background: var(--gold-dim);
+    }
+
+    /* PROOF MODULES SECTION */
+    .proof-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem;
+      border-top: 1px solid var(--border);
+    }
+    .module-header {
+      margin-bottom: 2rem;
+    }
+    .module-num {
+      font-family: var(--ff-mono);
+      font-size: 0.65rem;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+    .module-title {
+      font-family: var(--ff-display);
+      font-size: 3rem;
+      letter-spacing: -0.01em;
+      font-style: italic;
+      font-weight: 400;
+      line-height: 1.1;
+    }
+    .proof-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .proof-media {
+      background: var(--carbon);
+      border: 1px solid var(--border);
+      position: relative;
+    }
+    .proof-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+    .img-placeholder {
+      aspect-ratio: 4/3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      color: var(--text-dim);
+    }
+    .placeholder-icon { font-size: 2.5rem; opacity: 0.2; }
+    .placeholder-label {
+      font-family: var(--ff-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-align: center;
+      padding: 0 1rem;
+    }
+    .proof-narrative {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .proof-caption {
+      font-size: 1rem;
+      color: var(--text);
+      font-weight: 400;
+      line-height: 1.6;
+    }
+    .proof-details {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+    }
+    .process-note {
+      border-left: 2px solid var(--gold-border);
+      padding-left: 1.5rem;
+      margin-top: 1rem;
+      font-size: 0.82rem;
+      font-style: italic;
+      color: var(--text-muted);
+    }
+
+    /* double image layout for side-by-side comparison */
+    .media-comparison {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+    }
+
+    /* APPENDIX SECTION */
+    .appendix-section {
+      background: var(--carbon);
+      border-top: 1px solid var(--border);
+      padding: 6rem 4rem;
+    }
+    .appendix-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .appendix-title {
+      font-family: var(--ff-display);
+      font-size: 3.5rem;
+      margin-bottom: 2rem;
+      letter-spacing: -0.02em;
+      font-style: italic;
+      font-weight: 400;
+    }
+    .appendix-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+    .appendix-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      text-decoration: none;
+      color: var(--text);
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .appendix-card:hover {
+      border-color: var(--gold-border);
+      background: var(--carbon);
+    }
+    .appendix-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .appendix-type {
+      font-family: var(--ff-mono);
+      font-size: 0.55rem;
+      letter-spacing: 0.15em;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+    .appendix-name {
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+    .appendix-size {
+      font-family: var(--ff-mono);
+      font-size: 0.6rem;
+      color: var(--text-dim);
+    }
+    .appendix-icon {
+      font-size: 1.5rem;
+      color: var(--text-dim);
+      transition: color 0.2s;
+    }
+    .appendix-card:hover .appendix-icon {
+      color: var(--gold);
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 3rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--void);
+    }
+    footer p {
+      font-family: var(--ff-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      color: var(--text-dim);
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 1024px) {
+      nav { padding: 1.5rem 2rem; }
+      header { padding: 4rem 2rem 2rem; }
+      .metadata-block { padding: 0 2rem 3rem; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+      .hero-still-section { padding: 0 2rem; margin: 2rem auto; }
+      .hero-caption { grid-template-columns: 1fr; gap: 2rem; }
+      .proof-section { padding: 3rem 2rem; }
+      .proof-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .appendix-section { padding: 4rem 2rem; }
+      .appendix-grid { grid-template-columns: 1fr; }
+      footer { padding: 2rem; flex-direction: column; gap: 1rem; text-align: center; }
+    }
+    /* ── CINEMATIC HERO OVERRIDE ─────────────────────────────── */
+    .hero-cinematic {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .hero-bg-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .hero-gradient-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0) 70%);
+    }
+    .hero-content-bottom {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 3rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+    .hero-left .eyebrow {
+      font-family: var(--ff-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .hero-cinematic h1 {
+      font-family: var(--ff-display);
+      font-size: clamp(4rem, 10vw, 8rem);
+      line-height: 0.9;
+      letter-spacing: -0.02em;
+      font-style: italic;
+      font-weight: 400;
+      color: var(--text);
+      margin: 0;
+    }
+    .hero-meta-hud {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      align-items: flex-end;
+      text-align: right;
+    }
+    .hud-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+    .hud-label {
+      font-family: var(--ff-mono);
+      font-size: 0.55rem;
+      letter-spacing: 0.2em;
+      color: rgba(200,169,110,0.6);
+      text-transform: uppercase;
+    }
+    .hud-value {
+      font-family: var(--ff-mono);
+      font-size: 0.75rem;
+      color: var(--text);
+      letter-spacing: 0.05em;
+    }
+    @media (max-width: 768px) {
+      .hero-content-bottom { flex-direction: column; gap: 2rem; padding: 2rem; }
+      .hero-meta-hud { align-items: flex-start; text-align: left; }
+    }
+    .proof-media-slider {
+      transition: transform 12s ease-in-out;
+    }
+    .group:hover .proof-media-slider {
+      transform: translateX(-83.3333%);
+    }
+  </style>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3PV9G8CCTQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-3PV9G8CCTQ');
+  </script>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="fixed top-0 left-0 right-0 z-50 flex justify-between items-center p-6 bg-gradient-to-b from-black/90 to-transparent pointer-events-none" style="border-bottom: none;">
+      <a href="../../index.html#projects" class="inline-flex items-center gap-2 pointer-events-auto backdrop-blur-md border border-white/10 bg-[#141414]/80 text-xs text-white uppercase tracking-wider rounded-full px-5 py-2 hover:border-white transition-all duration-300" style="text-decoration: none; font-family: 'Inter', sans-serif;">
+          ← BACK TO PORTFOLIO
+      </a>
+      <a id="next-project-btn" href="../berkshire/index.html" class="inline-flex items-center gap-2 pointer-events-auto backdrop-blur-md border border-white/10 bg-[#141414]/80 text-xs text-white uppercase tracking-wider rounded-full px-5 py-2 hover:border-white transition-all duration-300" style="text-decoration: none; font-family: 'Inter', sans-serif;">
+          NEXT CASE STUDY →
+      </a>
+  </nav>
+
+  <!-- CINEMATIC HERO -->
+  <section class="hero-cinematic">
+    <img src="media/belhar-hospital-cover.webp" alt="Belhar Regional Hospital" class="hero-bg-img" loading="eager" fetchpriority="high">
+    <div class="hero-gradient-overlay"></div>
+    <div class="hero-content-bottom">
+      <div class="hero-left">
+        <div class="eyebrow">Case Study · BIM Coordination</div>
+        <h1>BELHAR REGIONAL HOSPITAL</h1>
+        <p class="subtitle !text-sm md:!text-base !max-w-xl text-white/80" style="font-family: var(--ff-body); margin-top: 1.5rem;">
+          Operating as a Senior Architectural Technologist under 2K20 Architects, I managed the multi-block technical coordination, BIM alignment, and consultant layer integration for the Belhar Regional Hospital development.
+        </p>
+      </div>
+      <div class="hero-meta-hud">
+        <div class="hud-item">
+          <span class="hud-label">Client</span>
+          <span class="hud-value">Western Cape Government (WCG)</span>
+        </div>
+        <div class="hud-item">
+          <span class="hud-label">Sector</span>
+          <span class="hud-value">Public Healthcare · 642-Bed Facility</span>
+        </div>
+        <div class="hud-item">
+          <span class="hud-label">Stage</span>
+          <span class="hud-value">IDMS Stage 2 · Concept Design</span>
+        </div>
+        <div class="hud-item">
+          <span class="hud-label">Key Scope</span>
+          <span class="hud-value">BIM Coordination &amp; Clash Resolution</span>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Scroll Indicator -->
+    <div id="scroll-indicator" class="scroll-indicator">
+      <span class="scroll-indicator__text">SCROLL TO EXPLORE</span>
+      <div class="scroll-indicator__line"></div>
+    </div>
+</section>
+
+  <!-- PROOF MODULE 1: HOSPITAL CONTEXT -->
+  <section class="proof-section">
+    <div class="module-header">
+      <span class="module-num">Proof Module 01</span>
+      <h2 class="module-title">Hospital-Scale Context & Multi-Block Architecture</h2>
+    </div>
+    <div class="proof-grid">
+      <div class="proof-media">
+        <picture>
+          <source srcset="floorplans/roof-level.png" type="image/png">
+          <img id="floorplan-trigger" src="floorplans/roof-level.png" alt="Belhar Multi-Block Context Plan" class="proof-img" loading="lazy" width="960" height="720" style="cursor: pointer; transition: filter 0.3s;" onmouseover="this.style.filter='brightness(0.9)'" onmouseout="this.style.filter='brightness(1)'">
+        </picture>
+      </div>
+      <div class="proof-narrative">
+        <p class="proof-caption">
+          Directed comprehensive technical coordination across multiple blocks, integrating structural lift cores, escape stairs, public circulation, and docking yards with critical site and building entrance elevations.
+        </p>
+        <p class="proof-details">
+          By utilizing the multi-block level plans, my coordination workflow linked structural cores, vertical risers, and primary circulation pathways across blocks A through G. My specific contribution focused on ensuring that the horizontal circulation widths, firewall splits, and structural junctions were systematically updated and aligned across the BIM model as layout changes occurred.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROOF MODULE 2: WORKSHOPS PLANNING UNDER CONSTRAINT -->
+  <section class="proof-section">
+    <div class="module-header">
+      <span class="module-num">Proof Module 02</span>
+      <h2 class="module-title">Workshops Layout & Constraints Handling</h2>
+    </div>
+    <div class="proof-grid">
+      <div class="proof-media">
+        <picture>
+          <source srcset="media/belhar-workshops-960.webp" type="image/webp">
+          <img id="workshops-trigger" src="media/belhar-workshops-960.webp" alt="Belhar Workshops Planning and Layout Revisions" class="proof-img" loading="lazy" width="960" height="720" style="cursor: pointer; transition: filter 0.3s;" onmouseover="this.style.filter='brightness(0.9)'" onmouseout="this.style.filter='brightness(1)'">
+        </picture>
+      </div>
+      <div class="proof-narrative">
+        <p class="proof-caption">
+          Site boundaries and underground service yard constraints dictated a split-workshop layout that required extensive departmental planning.
+        </p>
+        <p class="proof-details">
+          Due to site yard limitations and a buried diesel storage tank, the workshops were split: the Maintenance Workshop was placed in Block B (Level 0) and the Clinical Engineering Workshop in Block C (Level 1). This separation created immediate challenges with circulation, staff facilities distribution, and dispatch splits.
+        </p>
+        <div class="process-note">
+          <strong>Process Note:</strong> The layout progressed from Proposal 1 through multiple client review cycles to Rev 03. Feedback focused on corridor efficiency, natural light distribution, access control, and fire safety compliance in proximity to the diesel tank.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROOF MODULE 3: LEVEL 4 COORDINATION & CLASH VISIBILITY -->
+  <section class="proof-section">
+    <div class="module-header">
+      <span class="module-num">Proof Module 03</span>
+      <h2 class="module-title">Level 4 Orthopaedics Coordination & 3D Clash Resolution</h2>
+    </div>
+    <div class="proof-grid">
+      <div class="proof-media">
+        <picture>
+          <source srcset="media/belhar-orthopaedics-960.webp" type="image/webp">
+          <img id="orthopaedics-trigger" src="media/belhar-orthopaedics-960.webp" alt="Level 4 Orthopaedics 2D & 3D Clash Coordination" class="proof-img" loading="lazy" width="960" height="720" style="cursor: pointer; transition: filter 0.3s;" onmouseover="this.style.filter='brightness(0.9)'" onmouseout="this.style.filter='brightness(1)'">
+        </picture>
+      </div>
+      <div class="proof-narrative">
+        <p class="proof-caption">
+          Resolving conflicts between heavy mechanical services and structural grids in the ceiling void of a typical hospital ward layout.
+        </p>
+        <p class="proof-details">
+          The orthopaedics package required coordinating technical interfaces in high-density areas. Using 2D coordination cuts (at 50mm, 1200mm and 3700mm above FFL) in tandem with Revit 3D clash views, I identified and documented coordination clashes between all consultants. Finding these conflicts in the virtual stage avoided costly redesigns and delays during the on-site build.
+        </p>
+      </div>
+    </div>
+  </section>
+  <!-- PROOF MODULE 4: CIRCULATION LOGIC -->
+  <section class="proof-section">
+    <div class="module-header">
+      <span class="module-num">Proof Module 04</span>
+      <h2 class="module-title">Circulation Logic & Multi-Block Connectivity</h2>
+    </div>
+    <div class="proof-grid">
+      <div class="proof-media overflow-hidden group cursor-ew-resize relative rounded-xl border border-[#1f1f1f] bg-white">
+        <div class="proof-media-slider flex w-[600%] h-full">
+          <picture class="w-1/6 h-full relative flex">
+            <source srcset="media/belhar-circulation-plan-960.webp" type="image/webp">
+            <img src="media/belhar-circulation-plan-960.webp" alt="Belhar Circulation Plan View" class="w-full h-full object-contain bg-white slider-trigger" style="cursor: pointer;" data-index="9" loading="lazy">
+          </picture>
+          <picture class="w-1/6 h-full relative flex border-l border-[#f5f5f5]">
+            <source srcset="media/belhar-circulation-iso-960.webp" type="image/webp">
+            <img src="media/belhar-circulation-iso-960.webp" alt="Belhar Circulation Isometric View 1" class="w-full h-full object-contain bg-white slider-trigger" style="cursor: pointer;" data-index="10" loading="lazy">
+          </picture>
+          <picture class="w-1/6 h-full relative flex border-l border-[#f5f5f5]">
+            <source srcset="media/belhar-circulation-iso-02-960.webp" type="image/webp">
+            <img src="media/belhar-circulation-iso-02-960.webp" alt="Belhar Circulation Isometric View 2" class="w-full h-full object-contain bg-white slider-trigger" style="cursor: pointer;" data-index="11" loading="lazy">
+          </picture>
+          <picture class="w-1/6 h-full relative flex border-l border-[#f5f5f5]">
+            <source srcset="media/structural-block-a.webp" type="image/webp">
+            <img src="media/structural-block-a.webp" alt="Structural View of Block A" class="w-full h-full object-contain bg-white slider-trigger" style="cursor: pointer;" data-index="12" loading="lazy">
+          </picture>
+          <picture class="w-1/6 h-full relative flex border-l border-[#f5f5f5]">
+            <source srcset="media/structural-block-b.webp" type="image/webp">
+            <img src="media/structural-block-b.webp" alt="Structural View of Block B" class="w-full h-full object-contain bg-white slider-trigger" style="cursor: pointer;" data-index="13" loading="lazy">
+          </picture>
+          <picture class="w-1/6 h-full relative flex border-l border-[#f5f5f5]">
+            <source srcset="media/structural-core-d.webp" type="image/webp">
+            <img src="media/structural-core-d.webp" alt="Structural View of Core D" class="w-full h-full object-contain bg-white slider-trigger" style="cursor: pointer;" data-index="14" loading="lazy">
+          </picture>
+        </div>
+        <div class="absolute inset-x-0 bottom-0 py-3 bg-gradient-to-t from-[#080808]/90 to-transparent flex justify-center opacity-100 group-hover:opacity-0 transition-opacity duration-300 pointer-events-none">
+          <span class="text-[9px] uppercase tracking-[0.2em] text-[#C8A96E] font-mono">Hover to explore ↔</span>
+        </div>
+      </div>
+      <div class="proof-narrative">
+        <p class="proof-caption">
+          Linking structural cores and primary circulation pathways across blocks A through G.
+        </p>
+        <p class="proof-details">
+          The scale of Belhar Regional Hospital required a robust circulation logic to handle high-traffic patient transport, staff movement, and service flows. My contribution focused on mapping out and verifying these multi-block circulation strategies. By linking the structural cores with primary horizontal pathways, we ensured that the massive scale of the hospital remained functional, navigable, and compliant with critical fire safety and egress constraints.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS APPENDIX -->
+  <section class="appendix-section">
+    <div class="appendix-container">
+      <h2 class="appendix-title">Process Archive</h2>
+      <div class="appendix-grid">
+        <a href="appendix/workshops-rev03.pdf" class="appendix-card" target="_blank">
+          <div class="appendix-info">
+            <span class="appendix-type">Dossier PDF</span>
+            <span class="appendix-name">Workshops Package Rev 03</span>
+            <span class="appendix-size">Includes Bubble Diagrams, Proposals 1 & 2, Deviations & Feedback</span>
+          </div>
+          <span class="appendix-icon">→</span>
+        </a>
+        <a href="appendix/orthopaedics-level4.pdf" class="appendix-card" target="_blank">
+          <div class="appendix-info">
+            <span class="appendix-type">Drawings PDF</span>
+            <span class="appendix-name">Level 4 Orthopaedics & 3D Clash Sheets</span>
+            <span class="appendix-size">Includes Coordination cuts, 2-bed ward layout, and HVAC clashes</span>
+          </div>
+          <span class="appendix-icon">→</span>
+        </a>
+        <a href="appendix/stage2-deliverable.pdf" class="appendix-card" target="_blank">
+          <div class="appendix-info">
+            <span class="appendix-type">Deliverable PDF</span>
+            <span class="appendix-name">Stage 2 Deliverable</span>
+            <span class="appendix-size">Milestone 14 Comprehensive Coordination Report &amp; Architecture layouts</span>
+          </div>
+          <span class="appendix-icon">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <section class="bg-[#060606] py-32 border-t border-[#1f1f1f] text-center relative z-20" style="font-family: 'Inter', sans-serif;">
+      <div class="max-w-xl mx-auto px-6">
+          <span class="text-xs font-mono text-[#888888] tracking-[0.3em] block mb-4 uppercase">REDUCING PIPELINE UNCERTAINTY</span>
+          <h2 class="text-4xl md:text-6xl font-display italic text-white mb-8" style="font-family: 'Instrument Serif', serif; font-weight: 400; line-height: 1.1;">Ready to secure design accountability?</h2>
+          <a href="../../cv/index.html" class="inline-flex bg-white text-black font-medium uppercase tracking-wider text-xs px-8 py-4 rounded-full border border-white hover:bg-transparent hover:text-white transition-all duration-300" style="text-decoration: none;">
+              DISCUSS A PROJECT ↗
+          </a>
+      </div>
+  </section>
+
+
+  <!-- FLOOR PLAN VIEWER STYLE -->
+  <!-- FLOOR PLAN VIEWER STYLE -->
+  <style>
+    #floorplan-container {
+      background: #000;
+      border: 1px solid #1f1f1f;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+      border-radius: 4px;
+    }
+    @media (max-width: 768px) {
+      #floorplan-prev { left: 1rem !important; width: 2.8rem !important; height: 2.8rem !important; font-size: 1rem !important; }
+      #floorplan-next { right: 1rem !important; width: 2.8rem !important; height: 2.8rem !important; font-size: 1rem !important; }
+      #floorplan-close { top: 1rem !important; right: 1rem !important; padding: 0.4rem 0.8rem !important; }
+      #floorplan-header { top: 1.2rem !important; }
+    }
+  </style>
+
+  <!-- FLOOR PLAN VIEWER MODAL -->
+  <div id="floorplan-modal" style="display: none; position: fixed; inset: 0; background: rgba(10, 10, 10, 0.98); backdrop-filter: blur(10px); z-index: 99999; align-items: center; justify-content: center; font-family: 'Inter', sans-serif;">
+    <!-- Close button -->
+    <button id="floorplan-close" style="position: absolute; top: 2rem; right: 2rem; background: none; border: 1px solid rgba(255,255,255,0.2); color: #fff; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; letter-spacing: 0.1em; padding: 0.6rem 1.2rem; border-radius: 50px; cursor: pointer; transition: all 0.3s; z-index: 100001;" onmouseover="this.style.borderColor='#fff'" onmouseout="this.style.borderColor='rgba(255,255,255,0.2)'">CLOSE ✕</button>
+    
+    <!-- Title / Indicator -->
+    <div id="floorplan-header" style="position: absolute; top: 2.2rem; left: 50%; transform: translateX(-50%); text-align: center; z-index: 100001;">
+      <span id="floorplan-title" style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: #C8A96E; letter-spacing: 0.2em; text-transform: uppercase; display: block; margin-bottom: 0.2rem; white-space: nowrap;">0 Parking Level</span>
+      <span id="floorplan-counter" style="font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; color: #666; letter-spacing: 0.1em;">1 OF 6</span>
+    </div>
+
+    <!-- Navigation Arrows -->
+    <button id="floorplan-prev" style="position: absolute; left: 3rem; top: 50%; transform: translateY(-50%); background: rgba(20,20,20,0.8); border: 1px solid rgba(255,255,255,0.1); color: #fff; font-size: 1.5rem; width: 3.5rem; height: 3.5rem; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s; z-index: 100001;" onmouseover="this.style.borderColor='#C8A96E'; this.style.color='#C8A96E';" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'; this.style.color='#fff';">←</button>
+    
+    <button id="floorplan-next" style="position: absolute; right: 3rem; top: 50%; transform: translateY(-50%); background: rgba(20,20,20,0.8); border: 1px solid rgba(255,255,255,0.1); color: #fff; font-size: 1.5rem; width: 3.5rem; height: 3.5rem; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s; z-index: 100001;" onmouseover="this.style.borderColor='#C8A96E'; this.style.color='#C8A96E';" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'; this.style.color='#fff';">→</button>
+
+    <!-- Bounding Viewport Container (Sized to the rotated plan aspect ratio) -->
+    <div id="floorplan-container">
+      <div id="floorplan-loading" style="position: absolute; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #666; letter-spacing: 0.1em; z-index: 100002;">LOADING PLAN...</div>
+      <!-- Rotated Canvas (dimensions swapped dynamically in JS to fit parent ratio on 90deg rotation) -->
+      <canvas id="floorplan-canvas" style="transform-origin: center; position: absolute; background: #000; display: block; border: none; will-change: transform;"></canvas>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+  <script src="../../js/next-project.js"></script>
+  <!-- PDFJS library for client-side pixel-perfect PDF rendering -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+  <script>
+    // Specify the workerSrc location pointing to CDN
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const plans = [
+        // Floor plans (0 to 6) - PNG image assets
+        { type: 'image', name: '0 - Master Plan - Level 0', file: 'floorplans/ground-floor.png', rotate: false },
+        { type: 'image', name: '1 - Master Plan - Level 1', file: 'floorplans/level-01.png', rotate: false },
+        { type: 'image', name: '2 - Master Plan - Level 2', file: 'floorplans/level-02.png', rotate: false },
+        { type: 'image', name: '3 - Master Plan - Level 3', file: 'floorplans/level-03.png', rotate: false },
+        { type: 'image', name: '4 - Master Plan - Level 4', file: 'floorplans/level-04.png', rotate: false },
+        { type: 'image', name: '5 - Master Plan - Level 5', file: 'floorplans/level-05.png', rotate: false },
+        { type: 'image', name: '6 - Master Plan - Level Roof', file: 'floorplans/roof-level.png', rotate: false },
+        // Module 2
+        { type: 'image', name: 'Module 02: Workshops Layout', file: 'media/belhar-workshops-960.webp', rotate: false },
+        // Module 3
+        { type: 'image', name: 'Module 03: Orthopaedics Layout', file: 'media/belhar-orthopaedics-960.webp', rotate: false },
+        // Module 4
+        { type: 'image', name: 'Module 04: Circulation Plan', file: 'media/belhar-circulation-plan-960.webp', rotate: false },
+        { type: 'image', name: 'Module 04: Circulation Iso 01', file: 'media/belhar-circulation-iso-960.webp', rotate: false },
+        { type: 'image', name: 'Module 04: Circulation Iso 02', file: 'media/belhar-circulation-iso-02-960.webp', rotate: false },
+        { type: 'image', name: 'Module 04: Structural Block A', file: 'media/structural-block-a.webp', rotate: false },
+        { type: 'image', name: 'Module 04: Structural Block B', file: 'media/structural-block-b.webp', rotate: false },
+        { type: 'image', name: 'Module 04: Structural Core D', file: 'media/structural-core-d.webp', rotate: false }
+      ];
+      let currentIndex = 0;
+      let currentRenderTask = null;
+      let currentViewport = null;
+      let prevPlan = null;
+
+      // Floorplan preloading cache for stacking layers
+      const floorplanImages = [];
+      let floorplansPreloaded = false;
+      let isPreloading = false;
+      let preloadingPromise = null;
+
+      function preloadFloorplans() {
+        if (floorplansPreloaded) return Promise.resolve();
+        if (isPreloading) return preloadingPromise;
+
+        isPreloading = true;
+        preloadingPromise = new Promise((resolve) => {
+          let loadedCount = 0;
+          const totalFloorplans = 7; // indices 0 to 6
+          for (let i = 0; i < totalFloorplans; i++) {
+            const img = new Image();
+            img.src = plans[i].file;
+            img.onload = () => {
+              loadedCount++;
+              if (loadedCount === totalFloorplans) {
+                floorplansPreloaded = true;
+                isPreloading = false;
+                resolve();
+              }
+            };
+            img.onerror = () => {
+              loadedCount++;
+              if (loadedCount === totalFloorplans) {
+                floorplansPreloaded = true;
+                isPreloading = false;
+                resolve();
+              }
+            };
+            floorplanImages[i] = img;
+          }
+        });
+        return preloadingPromise;
+      }
+
+      // Start preloading in background immediately on load
+      preloadFloorplans();
+
+      // ── Zoom and Pan State ─────────────────────────────────────────────────
+      let zoomScale = 1.0;
+      let panX = 0;
+      let panY = 0;
+      let isDragging = false;
+      let startX = 0;
+      let startY = 0;
+      let transformNeedsUpdate = false;
+
+      const modal = document.getElementById('floorplan-modal');
+      const container = document.getElementById('floorplan-container');
+      const canvas = document.getElementById('floorplan-canvas');
+      const loadingEl = document.getElementById('floorplan-loading');
+      const titleEl = document.getElementById('floorplan-title');
+      const counterEl = document.getElementById('floorplan-counter');
+      const closeBtn = document.getElementById('floorplan-close');
+      const prevBtn = document.getElementById('floorplan-prev');
+      const nextBtn = document.getElementById('floorplan-next');
+      
+      const trigger = document.getElementById('floorplan-trigger');
+      const workshopsTrigger = document.getElementById('workshops-trigger');
+      const orthopaedicsTrigger = document.getElementById('orthopaedics-trigger');
+      const sliderTriggers = document.querySelectorAll('.slider-trigger');
+
+      if (trigger) {
+        trigger.addEventListener('click', () => openModal(0));
+      }
+      if (workshopsTrigger) {
+        workshopsTrigger.addEventListener('click', () => openModal(7));
+      }
+      if (orthopaedicsTrigger) {
+        orthopaedicsTrigger.addEventListener('click', () => openModal(8));
+      }
+      sliderTriggers.forEach(el => {
+        el.addEventListener('click', () => {
+          const idx = parseInt(el.getAttribute('data-index'), 10);
+          if (!isNaN(idx)) {
+            openModal(idx);
+          }
+        });
+      });
+
+      function openModal(index) {
+        currentIndex = index;
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+        loadPlan(currentIndex);
+      }
+
+      function closeModal() {
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+        if (currentRenderTask) {
+          currentRenderTask.cancel();
+          currentRenderTask = null;
+        }
+        const ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        currentViewport = null;
+        prevPlan = null;
+        resetZoom();
+      }
+
+      function resetZoom() {
+        zoomScale = 1.0;
+        panX = 0;
+        panY = 0;
+        container.style.cursor = 'default';
+        requestTransformUpdate();
+      }
+
+      function requestTransformUpdate() {
+        if (!transformNeedsUpdate) {
+          transformNeedsUpdate = true;
+          requestAnimationFrame(applyTransform);
+        }
+      }
+
+      function applyTransform() {
+        if (!transformNeedsUpdate) return;
+        
+        if (currentViewport) {
+          const w = container.clientWidth;
+          const h = container.clientHeight;
+          const maxPanX = Math.max(0, ((zoomScale - 1) * w) / 2);
+          const maxPanY = Math.max(0, ((zoomScale - 1) * h) / 2);
+          panX = Math.max(-maxPanX, Math.min(maxPanX, panX));
+          panY = Math.max(-maxPanY, Math.min(maxPanY, panY));
+        }
+
+        const rotateStr = plans[currentIndex].rotate ? ' rotate(-90deg)' : '';
+        canvas.style.transform = `translate(${panX}px, ${panY}px)${rotateStr} scale(${zoomScale})`;
+        transformNeedsUpdate = false;
+      }
+
+      function resizeCanvas() {
+        if (modal.style.display === 'flex' && currentViewport) {
+          const maxW = window.innerWidth * 0.80;
+          const maxH = window.innerHeight * 0.80;
+
+          const isRotated = plans[currentIndex].rotate;
+          const planRatio = isRotated ? 
+            currentViewport.height / currentViewport.width : 
+            currentViewport.width / currentViewport.height;
+
+          let containerW = maxW;
+          let containerH = containerW / planRatio;
+
+          if (containerH > maxH) {
+            containerH = maxH;
+            containerW = containerH * planRatio;
+          }
+
+          container.style.width = containerW + 'px';
+          container.style.height = containerH + 'px';
+
+          if (isRotated) {
+            canvas.style.width = containerH + 'px';
+            canvas.style.height = containerW + 'px';
+          } else {
+            canvas.style.width = containerW + 'px';
+            canvas.style.height = containerH + 'px';
+          }
+
+          requestTransformUpdate();
+        }
+      }
+
+      function loadPlan(index) {
+        const plan = plans[index];
+        
+        if (prevPlan && prevPlan.rotate !== plan.rotate) {
+          resetZoom();
+        }
+        prevPlan = plan;
+
+        loadingEl.style.display = 'block';
+        titleEl.textContent = plan.name;
+        counterEl.textContent = `${index + 1} OF ${plans.length}`;
+
+        if (currentRenderTask) {
+          currentRenderTask.cancel();
+          currentRenderTask = null;
+        }
+
+        if (index <= 6) {
+          // Stacking transparent PNG floorplans sequentially
+          preloadFloorplans().then(() => {
+            const firstImg = floorplanImages[0];
+            const mockViewport = {
+              width: firstImg.naturalWidth,
+              height: firstImg.naturalHeight
+            };
+            currentViewport = mockViewport;
+
+            const ctx = canvas.getContext('2d');
+            canvas.width = firstImg.naturalWidth;
+            canvas.height = firstImg.naturalHeight;
+            
+            // Draw levels 0 up to current index on top of each other
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i <= index; i++) {
+              ctx.drawImage(floorplanImages[i], 0, 0);
+            }
+
+            loadingEl.style.display = 'none';
+            resizeCanvas();
+          });
+        } else {
+          // Regular single plans
+          if (plan.type === 'pdf') {
+            pdfjsLib.getDocument(plan.file).promise.then(pdf => {
+              pdf.getPage(1).then(page => {
+                const viewport = page.getViewport({ scale: 2.5 });
+                currentViewport = viewport;
+
+                const ctx = canvas.getContext('2d');
+                canvas.width = viewport.width;
+                canvas.height = viewport.height;
+
+                const renderContext = {
+                  canvasContext: ctx,
+                  viewport: viewport
+                };
+
+                currentRenderTask = page.render(renderContext);
+                currentRenderTask.promise.then(() => {
+                  loadingEl.style.display = 'none';
+                  resizeCanvas();
+                  currentRenderTask = null;
+                }).catch(err => {
+                  if (err.name !== 'RenderingCancelledException') {
+                    console.error(err);
+                  }
+                });
+              });
+            }).catch(err => {
+              console.error('Error loading PDF:', err);
+            });
+          } else if (plan.type === 'image') {
+            const img = new Image();
+            img.onload = () => {
+              const mockViewport = {
+                width: img.naturalWidth,
+                height: img.naturalHeight
+              };
+              currentViewport = mockViewport;
+
+              const ctx = canvas.getContext('2d');
+              canvas.width = img.naturalWidth;
+              canvas.height = img.naturalHeight;
+              ctx.clearRect(0, 0, canvas.width, canvas.height);
+              ctx.drawImage(img, 0, 0);
+
+              loadingEl.style.display = 'none';
+              resizeCanvas();
+            };
+            img.onerror = (err) => {
+              console.error('Error loading image:', err);
+            };
+            img.src = plan.file;
+          }
+        }
+      }
+
+      closeBtn.addEventListener('click', closeModal);
+      
+      prevBtn.addEventListener('click', () => {
+        currentIndex = (currentIndex - 1 + plans.length) % plans.length;
+        loadPlan(currentIndex);
+      });
+
+      nextBtn.addEventListener('click', () => {
+        currentIndex = (currentIndex + 1) % plans.length;
+        loadPlan(currentIndex);
+      });
+
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          closeModal();
+        }
+      });
+
+      window.addEventListener('resize', resizeCanvas);
+
+      container.addEventListener('wheel', (e) => {
+        if (!currentViewport) return;
+        e.preventDefault();
+
+        const zoomSensitivity = 0.0015;
+        const delta = -e.deltaY * zoomSensitivity;
+        
+        zoomScale = Math.max(1.0, Math.min(5.0, zoomScale + delta));
+        
+        if (zoomScale === 1.0) {
+          panX = 0;
+          panY = 0;
+          container.style.cursor = 'default';
+        } else {
+          container.style.cursor = 'grab';
+        }
+
+        requestTransformUpdate();
+      }, { passive: false });
+
+      container.addEventListener('mousedown', (e) => {
+        if (e.button !== 0 || zoomScale <= 1.0) return;
+        isDragging = true;
+        container.style.cursor = 'grabbing';
+        startX = e.clientX - panX;
+        startY = e.clientY - panY;
+      });
+
+      window.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        
+        panX = e.clientX - startX;
+        panY = e.clientY - startY;
+
+        requestTransformUpdate();
+      });
+
+      window.addEventListener('mouseup', () => {
+        if (isDragging) {
+          isDragging = false;
+          container.style.cursor = zoomScale > 1.0 ? 'grab' : 'default';
+        }
+      });
+
+      container.addEventListener('dblclick', () => {
+        if (zoomScale > 1.0) {
+          resetZoom();
+        } else {
+          zoomScale = 2.5;
+          container.style.cursor = 'grab';
+          requestTransformUpdate();
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (modal.style.display === 'flex') {
+          if (e.key === 'ArrowLeft') {
+            prevBtn.click();
+          } else if (e.key === 'ArrowRight') {
+            nextBtn.click();
+          } else if (e.key === 'Escape') {
+            closeModal();
+          }
+        }
+      });
+
+      // ── Custom Cursor Overrides ──────────────────────────────────────────
+      const cursorDot = document.querySelector('.cursor-dot');
+      const cursorOutline = document.querySelector('.cursor-outline');
+
+      modal.addEventListener('mouseover', (e) => {
+        if (e.target === modal) {
+          document.body.classList.add('cursor-hover');
+          if (cursorDot) cursorDot.style.opacity = '1';
+          if (cursorOutline) cursorOutline.style.opacity = '1';
+        }
+      });
+
+      modal.addEventListener('mouseout', (e) => {
+        if (e.target === modal) {
+          document.body.classList.remove('cursor-hover');
+        }
+      });
+
+      container.addEventListener('mouseenter', () => {
+        if (cursorDot) cursorDot.style.opacity = '0';
+        if (cursorOutline) cursorOutline.style.opacity = '0';
+        document.body.classList.remove('cursor-hover');
+      });
+
+      container.addEventListener('mouseleave', () => {
+        if (cursorDot) cursorDot.style.opacity = '1';
+        if (cursorOutline) cursorOutline.style.opacity = '1';
+      });
+
+      // Helper function to bind cursor hover classes to triggers
+      function bindTriggerCursor(el) {
+        if (el) {
+          el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+          el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+        }
+      }
+
+      bindTriggerCursor(trigger);
+      bindTriggerCursor(workshopsTrigger);
+      bindTriggerCursor(orthopaedicsTrigger);
+      sliderTriggers.forEach(bindTriggerCursor);
+    });
+  </script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const indicator = document.getElementById('scroll-indicator');
+      if (indicator) {
+        window.addEventListener('scroll', () => {
+          let opacity = 1 - Math.min(window.scrollY / 150, 1);
+          indicator.style.opacity = opacity;
+        }, { passive: true });
+      }
+    });
+  </script>
+</body>
+</html>

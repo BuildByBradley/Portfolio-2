@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>House Pather — Bradley Brits</title>
+  <meta name="description" content="Residential renovation and extension for a private client in Bloubergstrand.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/project.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --void: #0a0a0a; --carbon: #141414; --surface: #1a1a1a; --border: #1f1f1f; --border-light: #2a2a2a;
+      --text: #f5f5f5; --text-muted: #888888; --text-dim: #666666;
+      --gold: #C8A96E; --gold-dim: rgba(200,169,110,0.15); --gold-border: rgba(200,169,110,0.25);
+      --ff-display: 'Instrument Serif', serif; --ff-body: 'Inter', sans-serif; --ff-mono: 'JetBrains Mono', monospace;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--void); color: var(--text); font-family: var(--ff-body); font-weight: 300; line-height: 1.7; overflow-x: hidden; }
+    .eyebrow { font-family: var(--ff-mono); font-size: 0.65rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; margin-bottom: 1rem; }
+    h1 { font-family: var(--ff-display); font-size: clamp(3.5rem, 8vw, 6.5rem); line-height: 0.92; letter-spacing: -0.02em; margin-bottom: 1.5rem; font-style: italic; font-weight: 400; }
+    .subtitle { font-size: 1.25rem; color: var(--text-muted); line-height: 1.7; max-width: 900px; }
+    .metadata-block { max-width: 1200px; margin: 0 auto; padding: 0 4rem 4rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 2rem; border-bottom: 1px solid var(--border); }
+    .meta-item { display: flex; flex-direction: column; gap: 0.5rem; }
+    .meta-label { font-family: var(--ff-mono); font-size: 0.58rem; letter-spacing: 0.15em; color: var(--text-dim); text-transform: uppercase; }
+    .meta-value { font-size: 0.85rem; color: var(--text); font-weight: 400; }
+    .hero-still-section { max-width: 1200px; margin: 4rem auto; padding: 0 4rem; }
+    .hero-image-wrapper { position: relative; width: 100%; height: auto; aspect-ratio: 16/9; background: var(--carbon); border: 1px solid var(--border); overflow: hidden; }
+    .hero-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .hero-caption { margin-top: 1.5rem; display: grid; grid-template-columns: 2fr 1fr; gap: 4rem; align-items: start; }
+    .hero-intro { font-size: 0.95rem; color: var(--text-muted); line-height: 1.8; }
+    .role-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .chip { font-family: var(--ff-mono); font-size: 0.58rem; letter-spacing: 0.1em; padding: 0.3rem 0.7rem; border: 1px solid var(--gold-border); color: var(--gold); text-transform: uppercase; background: var(--gold-dim); }
+    .proof-section { max-width: 1200px; margin: 0 auto; padding: 4rem; border-top: 1px solid var(--border); }
+    .module-header { margin-bottom: 2rem; }
+    .module-num { font-family: var(--ff-mono); font-size: 0.65rem; color: var(--gold); text-transform: uppercase; margin-bottom: 0.5rem; display: block; }
+    .module-title { font-family: var(--ff-display); font-size: 3rem; letter-spacing: -0.01em; font-style: italic; font-weight: 400; line-height: 1.1; }
+    .proof-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .proof-media { background: var(--carbon); border: 1px solid var(--border); position: relative; }
+    .proof-img { width: 100%; height: auto; display: block; object-fit: cover; }
+    .proof-narrative { display: flex; flex-direction: column; gap: 1.5rem; }
+    .proof-caption { font-size: 1rem; color: var(--text); font-weight: 400; line-height: 1.6; }
+    .proof-details { font-size: 0.85rem; color: var(--text-muted); line-height: 1.8; }
+    .gallery-section { padding: 4rem 0; border-top: 1px solid var(--border); overflow: hidden; }
+    .gallery-section-label { font-family: var(--ff-mono); font-size: 0.65rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; padding: 0 4rem; margin-bottom: 2rem; display: block; }
+    .gallery-scroll-track { display: flex; gap: 1.5rem; padding: 0 4rem; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; cursor: grab; }
+    .gallery-scroll-track::-webkit-scrollbar { display: none; }
+    .gallery-scroll-item { flex: 0 0 70vw; scroll-snap-align: start; height: 55vh; overflow: hidden; border: 1px solid var(--border); }
+    .gallery-scroll-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: opacity 0.6s ease; }
+    .cta-footer { background: #060606; padding: 8rem 4rem; border-top: 1px solid var(--border); text-align: center; }
+    .cta-label { font-family: var(--ff-mono); font-size: 0.65rem; letter-spacing: 0.3em; color: var(--text-dim); text-transform: uppercase; display: block; margin-bottom: 1.5rem; }
+    .cta-heading { font-family: var(--ff-display); font-size: clamp(2.5rem, 5vw, 4rem); font-style: italic; font-weight: 400; line-height: 1.1; color: var(--text); margin-bottom: 2.5rem; max-width: 600px; margin-left: auto; margin-right: auto; }
+    .cta-btn { display: inline-flex; background: #fff; color: #000; font-family: var(--ff-body); font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.75rem; padding: 1rem 2.5rem; border-radius: 50px; text-decoration: none; border: 1px solid #fff; transition: all 0.3s; }
+    .cta-btn:hover { background: transparent; color: #fff; }
+    @media (max-width: 1024px) {
+      header { padding: 4rem 2rem 2rem !important; }
+      .metadata-block { padding: 0 2rem 3rem; }
+      .hero-still-section { padding: 0 2rem; }
+      .hero-caption { grid-template-columns: 1fr; gap: 2rem; }
+      .proof-section { padding: 3rem 2rem; }
+      .proof-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .gallery-scroll-item { flex: 0 0 90vw; }
+      .gallery-section-label, .gallery-scroll-track { padding-left: 2rem; padding-right: 2rem; }
+      .cta-footer { padding: 5rem 2rem; }
+    }
+  </style>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3PV9G8CCTQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-3PV9G8CCTQ');
+  </script>
+</head>
+<body>
+  <nav class="fixed top-0 left-0 right-0 z-50 flex justify-between items-center p-6 bg-gradient-to-b from-black/90 to-transparent pointer-events-none">
+    <a href="../../index.html#projects" class="inline-flex items-center gap-2 pointer-events-auto backdrop-blur-md border border-white/10 bg-[#141414]/80 text-xs text-white uppercase tracking-wider rounded-full px-5 py-2 hover:border-white transition-all duration-300" style="text-decoration:none;font-family:'Inter',sans-serif;">← BACK TO PORTFOLIO</a>
+    <a href="../newlands-cricket/index.html" class="inline-flex items-center gap-2 pointer-events-auto backdrop-blur-md border border-white/10 bg-[#141414]/80 text-xs text-white uppercase tracking-wider rounded-full px-5 py-2 hover:border-white transition-all duration-300" style="text-decoration:none;font-family:'Inter',sans-serif;">NEXT CASE STUDY →</a>
+  </nav>
+    <section class="cinematic-hero-section relative w-screen h-screen overflow-hidden bg-black z-0">
+    <img src="../../assets/projects/house-pather/img-0.webp" alt="house-pather Hero" class="cinematic-hero-img absolute inset-0 w-full h-full object-cover" loading="eager">
+    
+    <!-- Gradient Overlay -->
+    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" style="background: linear-gradient(to top, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.4) 25%, transparent 50%);"></div>
+    
+    <!-- Title Area (Bottom Left) -->
+    <div class="absolute bottom-12 left-6 md:bottom-16 md:left-12 z-10 max-w-2xl hero-text-anim">
+      <div class="eyebrow mb-2 text-gold tracking-widest text-xs uppercase" style="font-family: var(--ff-mono);">Case Study · Residential Architecture</div>
+      <h1 class="!mb-4 !text-6xl md:!text-[7rem] leading-none" style="font-family: var(--ff-display); font-style: italic;">HOUSE PATHER</h1>
+      <p class="subtitle !text-sm md:!text-base !max-w-xl text-white/80" style="font-family: var(--ff-body);">
+        Residential renovation and extension for a private client in Bloubergstrand, completed in 2023. Architect: JAKUPA Architects and Urban Designers.
+      </p>
+    </div>
+
+    <!-- HUD Metadata (Bottom Right) -->
+    <div class="absolute bottom-12 right-6 md:bottom-16 md:right-12 z-10 hidden md:flex flex-col gap-6 text-right hero-text-anim">
+      <div class="flex flex-col gap-1">
+        <span class="meta-label !text-[0.55rem] text-white/50 tracking-widest uppercase" style="font-family: var(--ff-mono);">Client</span>
+        <span class="meta-value !text-sm text-white/90" style="font-family: var(--ff-body);">Private</span>
+      </div>
+      <div class="flex flex-col gap-1">
+        <span class="meta-label !text-[0.55rem] text-white/50 tracking-widest uppercase" style="font-family: var(--ff-mono);">Type</span>
+        <span class="meta-value !text-sm text-white/90" style="font-family: var(--ff-body);">Architecture</span>
+      </div>
+      <div class="flex flex-col gap-1">
+        <span class="meta-label !text-[0.55rem] text-white/50 tracking-widest uppercase" style="font-family: var(--ff-mono);">Phase</span>
+        <span class="meta-value !text-sm text-white/90" style="font-family: var(--ff-body);">Completed</span>
+      </div>
+      <div class="flex flex-col gap-1">
+        <span class="meta-label !text-[0.55rem] text-white/50 tracking-widest uppercase" style="font-family: var(--ff-mono);">Key Scope</span>
+        <span class="meta-value !text-sm text-white/90" style="font-family: var(--ff-body);">Design</span>
+      </div>
+    </div>
+  
+    <!-- Scroll Indicator -->
+    <div id="scroll-indicator" class="scroll-indicator">
+      <span class="scroll-indicator__text">SCROLL TO EXPLORE</span>
+      <div class="scroll-indicator__line"></div>
+    </div>
+</section>
+
+  <!-- Wrapping the rest of the page so it can slide over the pinned hero -->
+  <main class="relative z-10" style="background-color: var(--void);">
+
+  <section class="proof-section">
+    <div class="module-header">
+      <span class="module-num">Proof Module 01</span>
+      <h2 class="module-title">Architectural Renders & Design Intent</h2>
+    </div>
+    <div class="proof-grid">
+      <div class="proof-media">
+        <img id="pather-trigger-m1" src="../../assets/projects/house-pather/01_1 - Photo.webp" class="proof-img" loading="lazy" style="cursor: pointer; transition: filter 0.3s;" onmouseover="this.style.filter='brightness(0.9)'" onmouseout="this.style.filter='brightness(1)'">
+      </div>
+      <div class="proof-narrative">
+        <p class="proof-caption">Exterior renders communicating the design intent and materiality of the proposed renovation.</p>
+        <p class="proof-details">All renders were produced to communicate the final design to the client and relevant stakeholders. The visualisations focused on the relationship between the new addition and the existing structure, with particular attention to material contrast, landscaping, and the coastal context of the Bloubergstrand setting.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="proof-section">
+    <div class="module-header">
+      <span class="module-num">Proof Module 02</span>
+      <h2 class="module-title">Construction Documentation</h2>
+    </div>
+    <div class="proof-grid">
+      <div class="proof-media" style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; border: none; background: transparent;">
+        <div style="background: var(--carbon); border: 1px solid var(--border); overflow: hidden;"><img id="pather-trigger-m2-1" src="../../assets/projects/house-pather/House Pather Architects Drawings Rev 1_page-0001.webp" class="proof-img" loading="lazy" style="cursor: pointer; transition: filter 0.3s;" onmouseover="this.style.filter='brightness(0.9)'" onmouseout="this.style.filter='brightness(1)'"></div>
+        <div style="background: var(--carbon); border: 1px solid var(--border); overflow: hidden;"><img id="pather-trigger-m2-2" src="../../assets/projects/house-pather/House Pather Architects Drawings Rev 1_page-0002.webp" class="proof-img" loading="lazy" style="cursor: pointer; transition: filter 0.3s;" onmouseover="this.style.filter='brightness(0.9)'" onmouseout="this.style.filter='brightness(1)'"></div>
+      </div>
+      <div class="proof-narrative">
+        <p class="proof-caption">Architectural drawing set produced to support the planning and construction phases of the project.</p>
+        <p class="proof-details">The technical documentation package covered all required plans, sections, and elevations — drafted in accordance with JAKUPA's design intent and coordinated for submission and construction-readiness. Revision 1 of the drawing set incorporated client and planning feedback.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="proof-section">
+    <div class="module-header">
+      <span class="module-num">Proof Module 03</span>
+      <h2 class="module-title">Interior & Detail Studies</h2>
+    </div>
+    <div class="proof-grid">
+      <div class="proof-media">
+        <img id="pather-trigger-m3" src="../../assets/projects/house-pather/01_3 - Photo.webp" class="proof-img" loading="lazy" style="cursor: pointer; transition: filter 0.3s;" onmouseover="this.style.filter='brightness(0.9)'" onmouseout="this.style.filter='brightness(1)'">
+      </div>
+      <div class="proof-narrative">
+        <p class="proof-caption">Interior renders and detail studies developed to resolve spatial and material questions.</p>
+        <p class="proof-details">Interior visualisations were produced to allow the client to evaluate finish selections, spatial proportions, and the relationship between interior and exterior. These studies informed final specification decisions prior to construction commencement.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="gallery-section">
+    <span class="gallery-section-label">Project Archive</span>
+    <div class="gallery-scroll-track" id="gallery-track">
+      <div class="gallery-scroll-item"><img src="../../assets/projects/house-pather/01_2 - Photo.webp" class="archive-trigger" style="cursor: pointer;" data-index="4" loading="lazy"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/house-pather/01_4 - Photo.webp" class="archive-trigger" style="cursor: pointer;" data-index="5" loading="lazy"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/house-pather/img-1.webp" class="archive-trigger" style="cursor: pointer;" data-index="6" loading="lazy"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/house-pather/img-2.webp" class="archive-trigger" style="cursor: pointer;" data-index="7" loading="lazy"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/house-pather/img-3.webp" class="archive-trigger" style="cursor: pointer;" data-index="8" loading="lazy"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/house-pather/img-4.webp" class="archive-trigger" style="cursor: pointer;" data-index="9" loading="lazy"></div>
+    </div>
+  </section>
+
+  <section class="cta-footer">
+    <span class="cta-label">Reducing Pipeline Uncertainty</span>
+    <h2 class="cta-heading">Ready to secure design accountability?</h2>
+    <a href="../../cv/index.html" class="cta-btn">Discuss a Project ↗</a>
+  </section>
+  </main>
+
+  <!-- FLOOR PLAN VIEWER STYLE -->
+  <style>
+    #floorplan-container {
+      background: #000;
+      border: 1px solid #1f1f1f;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+      border-radius: 4px;
+    }
+    @media (max-width: 768px) {
+      #floorplan-prev { left: 1rem !important; width: 2.8rem !important; height: 2.8rem !important; font-size: 1rem !important; }
+      #floorplan-next { right: 1rem !important; width: 2.8rem !important; height: 2.8rem !important; font-size: 1rem !important; }
+      #floorplan-close { top: 1rem !important; right: 1rem !important; padding: 0.4rem 0.8rem !important; }
+    }
+  </style>
+
+  <!-- FLOOR PLAN VIEWER MODAL -->
+  <div id="floorplan-modal" style="display: none; position: fixed; inset: 0; background: rgba(10, 10, 10, 0.98); backdrop-filter: blur(10px); z-index: 99999; align-items: center; justify-content: center; font-family: 'Inter', sans-serif;">
+    <!-- Close button -->
+    <button id="floorplan-close" style="position: absolute; top: 2rem; right: 2rem; background: none; border: 1px solid rgba(255,255,255,0.2); color: #fff; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; letter-spacing: 0.1em; padding: 0.6rem 1.2rem; border-radius: 50px; cursor: pointer; transition: all 0.3s; z-index: 100001;" onmouseover="this.style.borderColor='#fff'" onmouseout="this.style.borderColor='rgba(255,255,255,0.2)'">CLOSE ✕</button>
+    
+    <!-- Title / Indicator -->
+    <div id="floorplan-header" style="position: absolute; top: 2.2rem; left: 50%; transform: translateX(-50%); text-align: center; z-index: 100001;">
+      <span id="floorplan-title" style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: #C8A96E; letter-spacing: 0.2em; text-transform: uppercase; display: block; margin-bottom: 0.2rem; white-space: nowrap;">Loading...</span>
+      <span id="floorplan-counter" style="font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; color: #666; letter-spacing: 0.1em;">1 OF 10</span>
+    </div>
+
+    <!-- Navigation Arrows -->
+    <button id="floorplan-prev" style="position: absolute; left: 3rem; top: 50%; transform: translateY(-50%); background: rgba(20,20,20,0.8); border: 1px solid rgba(255,255,255,0.1); color: #fff; font-size: 1.5rem; width: 3.5rem; height: 3.5rem; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s; z-index: 100001;" onmouseover="this.style.borderColor='#C8A96E'; this.style.color='#C8A96E';" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'; this.style.color='#fff';">←</button>
+    
+    <button id="floorplan-next" style="position: absolute; right: 3rem; top: 50%; transform: translateY(-50%); background: rgba(20,20,20,0.8); border: 1px solid rgba(255,255,255,0.1); color: #fff; font-size: 1.5rem; width: 3.5rem; height: 3.5rem; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s; z-index: 100001;" onmouseover="this.style.borderColor='#C8A96E'; this.style.color='#C8A96E';" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'; this.style.color='#fff';">→</button>
+
+    <!-- Bounding Viewport Container -->
+    <div id="floorplan-container">
+      <div id="floorplan-loading" style="position: absolute; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #666; letter-spacing: 0.1em; z-index: 100002;">LOADING IMAGE...</div>
+      <!-- Canvas -->
+      <canvas id="floorplan-canvas" style="transform-origin: center; position: absolute; background: #000; display: block; border: none; will-change: transform;"></canvas>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const plans = [
+        { type: 'image', isPlan: false, name: 'Proof Module 01: Exterior Render 01', file: '../../assets/projects/house-pather/01_1 - Photo.webp' },
+        { type: 'image', isPlan: true,  name: 'Proof Module 02: Construction Drawing 01', file: '../../assets/projects/house-pather/House Pather Architects Drawings Rev 1_page-0001.webp' },
+        { type: 'image', isPlan: true,  name: 'Proof Module 02: Construction Drawing 02', file: '../../assets/projects/house-pather/House Pather Architects Drawings Rev 1_page-0002.webp' },
+        { type: 'image', isPlan: false, name: 'Proof Module 03: Interior Study', file: '../../assets/projects/house-pather/01_3 - Photo.webp' },
+        { type: 'image', isPlan: false, name: 'Archive: Exterior Render 02', file: '../../assets/projects/house-pather/01_2 - Photo.webp' },
+        { type: 'image', isPlan: false, name: 'Archive: Details Study 02', file: '../../assets/projects/house-pather/01_4 - Photo.webp' },
+        { type: 'image', isPlan: false, name: 'Archive: Render 03', file: '../../assets/projects/house-pather/img-1.webp' },
+        { type: 'image', isPlan: false, name: 'Archive: Render 04', file: '../../assets/projects/house-pather/img-2.webp' },
+        { type: 'image', isPlan: false, name: 'Archive: Render 05', file: '../../assets/projects/house-pather/img-3.webp' },
+        { type: 'image', isPlan: false, name: 'Archive: Render 06', file: '../../assets/projects/house-pather/img-4.webp' }
+      ];
+      let currentIndex = 0;
+      let currentViewport = null;
+      let prevPlan = null;
+      let lastWheelTime = 0;
+
+      // Mouse position tracking for custom cursor visibility checks
+      let mouseX = 0;
+      let mouseY = 0;
+      window.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+      });
+
+      // ── Zoom and Pan State ─────────────────────────────────────────────────
+      let zoomScale = 1.0;
+      let panX = 0;
+      let panY = 0;
+      let isDragging = false;
+      let startX = 0;
+      let startY = 0;
+      let transformNeedsUpdate = false;
+
+      const modal = document.getElementById('floorplan-modal');
+      const container = document.getElementById('floorplan-container');
+      const canvas = document.getElementById('floorplan-canvas');
+      const loadingEl = document.getElementById('floorplan-loading');
+      const titleEl = document.getElementById('floorplan-title');
+      const counterEl = document.getElementById('floorplan-counter');
+      const closeBtn = document.getElementById('floorplan-close');
+      const prevBtn = document.getElementById('floorplan-prev');
+      const nextBtn = document.getElementById('floorplan-next');
+      
+      const m1Trigger = document.getElementById('pather-trigger-m1');
+      const m2Trigger1 = document.getElementById('pather-trigger-m2-1');
+      const m2Trigger2 = document.getElementById('pather-trigger-m2-2');
+      const m3Trigger = document.getElementById('pather-trigger-m3');
+      const archiveTriggers = document.querySelectorAll('.archive-trigger');
+
+      if (m1Trigger) {
+        m1Trigger.addEventListener('click', () => openModal(0));
+      }
+      if (m2Trigger1) {
+        m2Trigger1.addEventListener('click', () => openModal(1));
+      }
+      if (m2Trigger2) {
+        m2Trigger2.addEventListener('click', () => openModal(2));
+      }
+      if (m3Trigger) {
+        m3Trigger.addEventListener('click', () => openModal(3));
+      }
+      archiveTriggers.forEach(el => {
+        el.addEventListener('click', () => {
+          const idx = parseInt(el.getAttribute('data-index'), 10);
+          if (!isNaN(idx)) {
+            openModal(idx);
+          }
+        });
+      });
+
+      function openModal(index) {
+        currentIndex = index;
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+        loadPlan(currentIndex);
+      }
+
+      function closeModal() {
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+        const ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        currentViewport = null;
+        prevPlan = null;
+        resetZoom();
+      }
+
+      function resetZoom() {
+        zoomScale = 1.0;
+        panX = 0;
+        panY = 0;
+        container.style.cursor = 'default';
+        requestTransformUpdate();
+      }
+
+      function requestTransformUpdate() {
+        if (!transformNeedsUpdate) {
+          transformNeedsUpdate = true;
+          requestAnimationFrame(applyTransform);
+        }
+      }
+
+      function applyTransform() {
+        if (!transformNeedsUpdate) return;
+        
+        if (currentViewport) {
+          const w = container.clientWidth;
+          const h = container.clientHeight;
+          const maxPanX = Math.max(0, ((zoomScale - 1) * w) / 2);
+          const maxPanY = Math.max(0, ((zoomScale - 1) * h) / 2);
+          panX = Math.max(-maxPanX, Math.min(maxPanX, panX));
+          panY = Math.max(-maxPanY, Math.min(maxPanY, panY));
+        }
+
+        canvas.style.transform = `translate(${panX}px, ${panY}px) scale(${zoomScale})`;
+        transformNeedsUpdate = false;
+      }
+
+      function resizeCanvas() {
+        if (modal.style.display === 'flex' && currentViewport) {
+          const maxW = window.innerWidth * 0.75;
+          const maxH = window.innerHeight * 0.75;
+
+          const planRatio = currentViewport.width / currentViewport.height;
+
+          let containerW = maxW;
+          let containerH = containerW / planRatio;
+
+          if (containerH > maxH) {
+            containerH = maxH;
+            containerW = containerH * planRatio;
+          }
+
+          container.style.width = containerW + 'px';
+          container.style.height = containerH + 'px';
+
+          canvas.style.width = containerW + 'px';
+          canvas.style.height = containerH + 'px';
+
+          requestTransformUpdate();
+        }
+      }
+
+      function loadPlan(index) {
+        const plan = plans[index];
+        
+        // Reset zoom if switching layouts vs normal renders
+        if (prevPlan && prevPlan.isPlan !== plan.isPlan) {
+          resetZoom();
+        }
+        prevPlan = plan;
+
+        loadingEl.style.display = 'block';
+        titleEl.textContent = plan.name;
+        counterEl.textContent = `${index + 1} OF ${plans.length}`;
+
+        const img = new Image();
+        img.onload = () => {
+          const mockViewport = {
+            width: img.naturalWidth,
+            height: img.naturalHeight
+          };
+          currentViewport = mockViewport;
+
+          const ctx = canvas.getContext('2d');
+          canvas.width = img.naturalWidth;
+          canvas.height = img.naturalHeight;
+          ctx.drawImage(img, 0, 0);
+
+          loadingEl.style.display = 'none';
+          resizeCanvas();
+          updateCursorOverViewport();
+        };
+        img.onerror = (err) => {
+          console.error('Error loading image:', err);
+        };
+        img.src = plan.file;
+      }
+
+      closeBtn.addEventListener('click', closeModal);
+      
+      prevBtn.addEventListener('click', () => {
+        currentIndex = (currentIndex - 1 + plans.length) % plans.length;
+        loadPlan(currentIndex);
+      });
+
+      nextBtn.addEventListener('click', () => {
+        currentIndex = (currentIndex + 1) % plans.length;
+        loadPlan(currentIndex);
+      });
+
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          closeModal();
+        }
+      });
+
+      window.addEventListener('resize', resizeCanvas);
+
+      // ── Zoom and Pan Event Listeners ───────────────────────────────────────
+      
+      container.addEventListener('wheel', (e) => {
+        if (!currentViewport) return;
+        e.preventDefault();
+
+        const currentPlan = plans[currentIndex];
+        
+        if (currentPlan.isPlan) {
+          // Zoom on plans
+          const zoomSensitivity = 0.0015;
+          const delta = -e.deltaY * zoomSensitivity;
+          zoomScale = Math.max(1.0, Math.min(5.0, zoomScale + delta));
+          
+          if (zoomScale === 1.0) {
+            panX = 0;
+            panY = 0;
+            container.style.cursor = 'default';
+          } else {
+            container.style.cursor = 'grab';
+          }
+          requestTransformUpdate();
+        } else {
+          // Scroll next/prev on normal renders
+          const now = Date.now();
+          if (now - lastWheelTime > 800) {
+            if (e.deltaY > 20) {
+              nextBtn.click();
+              lastWheelTime = now;
+            } else if (e.deltaY < -20) {
+              prevBtn.click();
+              lastWheelTime = now;
+            }
+          }
+        }
+      }, { passive: false });
+
+      container.addEventListener('mousedown', (e) => {
+        if (e.button !== 0 || zoomScale <= 1.0) return;
+        isDragging = true;
+        container.style.cursor = 'grabbing';
+        startX = e.clientX - panX;
+        startY = e.clientY - panY;
+      });
+
+      window.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        
+        panX = e.clientX - startX;
+        panY = e.clientY - startY;
+
+        requestTransformUpdate();
+      });
+
+      window.addEventListener('mouseup', () => {
+        if (isDragging) {
+          isDragging = false;
+          container.style.cursor = zoomScale > 1.0 ? 'grab' : 'default';
+        }
+      });
+
+      container.addEventListener('dblclick', () => {
+        const currentPlan = plans[currentIndex];
+        if (!currentPlan.isPlan) return;
+
+        if (zoomScale > 1.0) {
+          resetZoom();
+        } else {
+          zoomScale = 2.5;
+          container.style.cursor = 'grab';
+          requestTransformUpdate();
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (modal.style.display === 'flex') {
+          if (e.key === 'ArrowLeft') {
+            prevBtn.click();
+          } else if (e.key === 'ArrowRight') {
+            nextBtn.click();
+          } else if (e.key === 'Escape') {
+            closeModal();
+          }
+        }
+      });
+
+      // ── Custom Cursor Overrides ──────────────────────────────────────────
+      const cursorDot = document.querySelector('.cursor-dot');
+      const cursorOutline = document.querySelector('.cursor-outline');
+
+      function updateCursorOverViewport() {
+        const currentPlan = plans[currentIndex];
+        const rect = container.getBoundingClientRect();
+        const inside = (mouseX >= rect.left && mouseX <= rect.right && mouseY >= rect.top && mouseY <= rect.bottom);
+        if (inside) {
+          if (currentPlan.isPlan) {
+            if (cursorDot) cursorDot.style.opacity = '0';
+            if (cursorOutline) cursorOutline.style.opacity = '0';
+          } else {
+            if (cursorDot) cursorDot.style.opacity = '1';
+            if (cursorOutline) cursorOutline.style.opacity = '1';
+          }
+        }
+      }
+
+      modal.addEventListener('mouseover', (e) => {
+        if (e.target === modal) {
+          document.body.classList.add('cursor-hover');
+          if (cursorDot) cursorDot.style.opacity = '1';
+          if (cursorOutline) cursorOutline.style.opacity = '1';
+        }
+      });
+
+      modal.addEventListener('mouseout', (e) => {
+        if (e.target === modal) {
+          document.body.classList.remove('cursor-hover');
+        }
+      });
+
+      container.addEventListener('mouseenter', () => {
+        updateCursorOverViewport();
+        document.body.classList.remove('cursor-hover');
+      });
+
+      container.addEventListener('mouseleave', () => {
+        if (cursorDot) cursorDot.style.opacity = '1';
+        if (cursorOutline) cursorOutline.style.opacity = '1';
+      });
+
+      // Helper function to bind cursor hover classes to triggers
+      function bindTriggerCursor(el) {
+        if (el) {
+          el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+          el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+        }
+      }
+
+      bindTriggerCursor(m1Trigger);
+      bindTriggerCursor(m2Trigger1);
+      bindTriggerCursor(m2Trigger2);
+      bindTriggerCursor(m3Trigger);
+      archiveTriggers.forEach(bindTriggerCursor);
+    });
+  </script>
+
+  <!-- NPT Container (Will be injected by next-project.js) -->
+  <div id="next-project-transition"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+  <script src="../../js/next-project.js"></script>
+  <script>
+    const track = document.getElementById('gallery-track');
+    if (track) { let isDown=false,startX,scrollLeft; track.addEventListener('mousedown',e=>{isDown=true;track.style.cursor='grabbing';startX=e.pageX-track.offsetLeft;scrollLeft=track.scrollLeft;}); track.addEventListener('mouseleave',()=>{isDown=false;track.style.cursor='grab';}); track.addEventListener('mouseup',()=>{isDown=false;track.style.cursor='grab';}); track.addEventListener('mousemove',e=>{if(!isDown)return;e.preventDefault();const x=e.pageX-track.offsetLeft;track.scrollLeft=scrollLeft-(x-startX)*1.5;}); }
+  </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+        gsap.registerPlugin(ScrollTrigger);
+
+        // 1. Text Entrance Animation
+        gsap.from(".hero-text-anim", {
+          y: 40,
+          opacity: 0,
+          duration: 1.5,
+          stagger: 0.15,
+          ease: "power3.out",
+          delay: 0.1
+        });
+
+        // 2. Cinematic Pin & Scale
+        ScrollTrigger.create({
+          trigger: ".cinematic-hero-section",
+          start: "top top",
+          end: "+=100%", // Pin for 100vh of scroll distance
+          pin: true,
+          pinSpacing: false, // Critical: allows the <main> block below to slide up over the pinned hero
+          animation: gsap.to(".cinematic-hero-img", { scale: 1.08, ease: "none" }),
+          scrub: 1 // Smooth scrub
+        });
+      }
+    });
+  </script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const indicator = document.getElementById('scroll-indicator');
+      if (indicator) {
+        window.addEventListener('scroll', () => {
+          let opacity = 1 - Math.min(window.scrollY / 150, 1);
+          indicator.style.opacity = opacity;
+        }, { passive: true });
+      }
+    });
+  </script>
+</body>
+</html>

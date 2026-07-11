@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stud HQ Rollout — Bradley Brits</title>
+  <meta name="description" content="National interior design and 3D visualisation rollout for Stud HQ.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/project.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --void: #0a0a0a; --carbon: #141414; --surface: #1a1a1a; --border: #1f1f1f; --border-light: #2a2a2a;
+      --text: #f5f5f5; --text-muted: #888888; --text-dim: #666666;
+      --gold: #C8A96E; --gold-dim: rgba(200,169,110,0.15); --gold-border: rgba(200,169,110,0.25);
+      --ff-display: 'Instrument Serif', serif; --ff-body: 'Inter', sans-serif; --ff-mono: 'JetBrains Mono', monospace;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--void); color: var(--text); font-family: var(--ff-body); font-weight: 300; line-height: 1.7; overflow-x: hidden; }
+    .eyebrow { font-family: var(--ff-mono); font-size: 0.65rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; margin-bottom: 1rem; }
+    h1 { font-family: var(--ff-display); font-size: clamp(3.5rem, 8vw, 6.5rem); line-height: 0.92; letter-spacing: -0.02em; margin-bottom: 1.5rem; font-style: italic; font-weight: 400; }
+    .subtitle { font-size: 1.25rem; color: var(--text-muted); line-height: 1.7; max-width: 900px; }
+    .metadata-block { max-width: 1200px; margin: 0 auto; padding: 0 4rem 4rem; display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; border-bottom: 1px solid var(--border); }
+    .meta-item { display: flex; flex-direction: column; gap: 0.5rem; }
+    .meta-label { font-family: var(--ff-mono); font-size: 0.58rem; letter-spacing: 0.15em; color: var(--text-dim); text-transform: uppercase; }
+    .meta-value { font-size: 0.85rem; color: var(--text); font-weight: 400; }
+    .hero-still-section { max-width: 1200px; margin: 4rem auto; padding: 0 4rem; }
+    .hero-image-wrapper { position: relative; width: 100%; height: auto; aspect-ratio: 16/9; background: var(--carbon); border: 1px solid var(--border); overflow: hidden; }
+    .hero-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .hero-caption { margin-top: 1.5rem; display: grid; grid-template-columns: 2fr 1fr; gap: 4rem; align-items: start; }
+    .hero-intro { font-size: 0.95rem; color: var(--text-muted); line-height: 1.8; }
+    .role-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .chip { font-family: var(--ff-mono); font-size: 0.58rem; letter-spacing: 0.1em; padding: 0.3rem 0.7rem; border: 1px solid var(--gold-border); color: var(--gold); text-transform: uppercase; background: var(--gold-dim); }
+    
+    .proof-section { max-width: 1200px; margin: 0 auto; padding: 4rem; border-top: 1px solid var(--border); }
+    .module-header { margin-bottom: 2rem; }
+    .module-num { font-family: var(--ff-mono); font-size: 0.65rem; color: var(--gold); text-transform: uppercase; margin-bottom: 0.5rem; display: block; }
+    .module-title { font-family: var(--ff-display); font-size: 3rem; letter-spacing: -0.01em; font-style: italic; font-weight: 400; line-height: 1.1; }
+    
+    .proof-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .proof-media { background: var(--carbon); border: 1px solid var(--border); position: relative; width: 100%; }
+    .proof-img { width: 100%; height: auto; display: block; object-fit: cover; }
+    
+    .proof-narrative { display: flex; flex-direction: column; gap: 1.5rem; position: sticky; top: 8rem; }
+    .proof-caption { font-size: 1rem; color: var(--text); font-weight: 400; line-height: 1.6; }
+    .proof-details { font-size: 0.85rem; color: var(--text-muted); line-height: 1.8; }
+    
+    .gallery-section { padding: 4rem 0; border-top: 1px solid var(--border); overflow: hidden; }
+    .gallery-section-label { font-family: var(--ff-mono); font-size: 0.65rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; padding: 0 4rem; margin-bottom: 2rem; display: block; }
+    .gallery-scroll-track { display: flex; gap: 1.5rem; padding: 0 4rem; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; cursor: grab; }
+    .gallery-scroll-track::-webkit-scrollbar { display: none; }
+    .gallery-scroll-item { flex: 0 0 70vw; scroll-snap-align: start; height: 55vh; overflow: hidden; border: 1px solid var(--border); }
+    .gallery-scroll-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .cta-footer { background: #060606; padding: 8rem 4rem; border-top: 1px solid var(--border); text-align: center; }
+    .cta-label { font-family: var(--ff-mono); font-size: 0.65rem; letter-spacing: 0.3em; color: var(--text-dim); text-transform: uppercase; display: block; margin-bottom: 1.5rem; }
+    .cta-heading { font-family: var(--ff-display); font-size: clamp(2.5rem, 5vw, 4rem); font-style: italic; font-weight: 400; line-height: 1.1; color: var(--text); margin-bottom: 2.5rem; max-width: 600px; margin-left: auto; margin-right: auto; }
+    .cta-btn { display: inline-flex; background: #fff; color: #000; font-family: var(--ff-body); font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.75rem; padding: 1rem 2.5rem; border-radius: 50px; text-decoration: none; border: 1px solid #fff; transition: all 0.3s; }
+    .cta-btn:hover { background: transparent; color: #fff; }
+    
+    #floorplan-container {
+      background: #000;
+      border: 1px solid #1f1f1f;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+      border-radius: 4px;
+    }
+
+    /* ── CINEMATIC HERO OVERRIDE ── */
+    .hero-cinematic {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .hero-bg-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .hero-gradient-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0) 70%);
+    }
+    .hero-content-bottom {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 3rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      z-index: 10;
+    }
+    .hero-left .eyebrow {
+      font-family: var(--ff-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .hero-cinematic h1 {
+      font-family: var(--ff-display);
+      font-size: clamp(4rem, 10vw, 8rem);
+      line-height: 0.9;
+      letter-spacing: -0.02em;
+      font-style: italic;
+      font-weight: 400;
+      color: var(--text);
+      margin: 0;
+    }
+    .hero-meta-hud {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      align-items: flex-end;
+      text-align: right;
+    }
+    .hud-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+    .hud-label {
+      font-family: var(--ff-mono);
+      font-size: 0.55rem;
+      letter-spacing: 0.2em;
+      color: rgba(200,169,110,0.6);
+      text-transform: uppercase;
+    }
+    .hud-value {
+      font-family: var(--ff-mono);
+      font-size: 0.75rem;
+      color: var(--text);
+      letter-spacing: 0.05em;
+    }
+
+    /* APPENDIX STYLES */
+    .appendix-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem;
+      border-top: 1px solid var(--border);
+    }
+    .appendix-title {
+      font-family: var(--ff-display);
+      font-size: 3.5rem;
+      margin-bottom: 2rem;
+      letter-spacing: -0.02em;
+      font-style: italic;
+      font-weight: 400;
+    }
+    .appendix-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+    .appendix-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      text-decoration: none;
+      color: var(--text);
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .appendix-card:hover {
+      border-color: var(--gold-border);
+      background: var(--carbon);
+    }
+    .appendix-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .appendix-type {
+      font-family: var(--ff-mono);
+      font-size: 0.55rem;
+      letter-spacing: 0.15em;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+    .appendix-name {
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+    .appendix-size {
+      font-family: var(--ff-mono);
+      font-size: 0.6rem;
+      color: var(--text-dim);
+    }
+    .appendix-icon {
+      font-size: 1.5rem;
+      color: var(--text-dim);
+      transition: color 0.2s;
+    }
+    .appendix-card:hover .appendix-icon {
+      color: var(--gold);
+    }
+
+    @media (max-width: 1024px) {
+      header { padding: 4rem 2rem 2rem !important; }
+      .metadata-block { padding: 0 2rem 3rem; grid-template-columns: repeat(2, 1fr); }
+      .hero-still-section { padding: 0 2rem; }
+      .hero-caption { grid-template-columns: 1fr; gap: 2rem; }
+      .proof-section { padding: 3rem 2rem; }
+      .proof-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .proof-narrative { position: static; }
+      .gallery-scroll-item { flex: 0 0 90vw; }
+      .gallery-section-label, .gallery-scroll-track { padding-left: 2rem; padding-right: 2rem; }
+      .cta-footer { padding: 5rem 2rem; }
+      .appendix-section { padding: 4rem 2rem; }
+      .appendix-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      .hero-content-bottom { flex-direction: column; gap: 2rem; padding: 2rem; }
+      .hero-meta-hud { align-items: flex-start; text-align: left; }
+      #floorplan-prev { left: 1rem !important; width: 2.8rem !important; height: 2.8rem !important; font-size: 1rem !important; }
+      #floorplan-next { right: 1rem !important; width: 2.8rem !important; height: 2.8rem !important; font-size: 1rem !important; }
+      #floorplan-close { top: 1rem !important; right: 1rem !important; padding: 0.4rem 0.8rem !important; }
+    }
+  </style>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3PV9G8CCTQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-3PV9G8CCTQ');
+  </script>
+</head>
+<body>
+  <nav class="fixed top-0 left-0 right-0 z-50 flex justify-between items-center p-6 bg-gradient-to-b from-black/90 to-transparent pointer-events-none" style="border-bottom: none;">
+    <a href="../../index.html#projects" class="inline-flex items-center gap-2 pointer-events-auto backdrop-blur-md border border-white/10 bg-[#141414]/80 text-xs text-white uppercase tracking-wider rounded-full px-5 py-2 hover:border-white transition-all duration-300" style="text-decoration:none;font-family:'Inter',sans-serif;">← BACK TO PORTFOLIO</a>
+    <a href="../zimbali/index.html" class="inline-flex items-center gap-2 pointer-events-auto backdrop-blur-md border border-white/10 bg-[#141414]/80 text-xs text-white uppercase tracking-wider rounded-full px-5 py-2 hover:border-white transition-all duration-300" style="text-decoration:none;font-family:'Inter',sans-serif;">NEXT CASE STUDY →</a>
+  </nav>
+
+  <!-- CINEMATIC HERO (BELHAR FORMAT) -->
+  <section class="hero-cinematic">
+    <video src="../../assets/projects/stud-hq/stud-video-2.mp4" autoplay loop muted playsinline class="hero-bg-video"></video>
+    <div class="hero-gradient-overlay"></div>
+    <div class="hero-content-bottom">
+      <div class="hero-left">
+        <div class="eyebrow">Case Study · Interior Design Rollout</div>
+        <h1>STUD HQ</h1>
+      </div>
+      <div class="hero-meta-hud">
+        <div class="hud-item">
+          <span class="hud-label">Client</span>
+          <span class="hud-value">Stud HQ</span>
+        </div>
+        <div class="hud-item">
+          <span class="hud-label">Type</span>
+          <span class="hud-value">Interior Design Rollout</span>
+        </div>
+        <div class="hud-item">
+          <span class="hud-label">Phase</span>
+          <span class="hud-value">Rollout · Multi-Site</span>
+        </div>
+        <div class="hud-item">
+          <span class="hud-label">Key Scope</span>
+          <span class="hud-value">3D Visualisation + Interior Design</span>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Scroll Indicator -->
+    <div id="scroll-indicator" class="scroll-indicator">
+      <span class="scroll-indicator__text">SCROLL TO EXPLORE</span>
+      <div class="scroll-indicator__line"></div>
+    </div>
+</section>
+
+  <!-- CONTENT SECTION (NO FULLSCREEN PINNING SCROLL OVERRIDE) -->
+  <main class="relative z-10" style="background-color: var(--void);">
+    <section class="hero-still-section">
+      <div class="hero-caption" style="margin-top: 0;">
+        <div class="hero-intro">As Designer and 3D Artist on the Stud HQ rollout, my scope covered the development and production of interior design proposals and 3D visualisations across multiple South African locations. Each site required adapting the brand's spatial language to unique floor plans and tenancy conditions — maintaining visual consistency while accommodating site-specific constraints.</div>
+        <div class="role-chips">
+          <span class="chip">Designer</span>
+          <span class="chip">3D Artist</span>
+          <span class="chip">Interior Rollout</span>
+          <span class="chip">Multi-Site</span>
+          <span class="chip">Visualisation</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROOF MODULE 01: BLOEMFONTEIN -->
+    <section class="proof-section">
+      <div class="module-header">
+        <span class="module-num">Proof Module 01</span>
+        <h2 class="module-title">Bloemfontein — Flagship Proposal</h2>
+      </div>
+      <div class="proof-grid">
+        <div>
+<div class="proof-media mb-4"><img src="../../assets/projects/stud-hq/Bloemfontein/1_1 - Photo.webp" class="proof-img archive-trigger" style="cursor: pointer;" data-index="0" loading="lazy"></div>
+<div class="proof-media mb-4"><img src="../../assets/projects/stud-hq/Bloemfontein/1_4 - Photo.webp" class="proof-img archive-trigger" style="cursor: pointer;" data-index="1" loading="lazy"></div>
+<div class="proof-media mb-4"><img src="../../assets/projects/stud-hq/Bloemfontein/11.webp" class="proof-img archive-trigger" style="cursor: pointer;" data-index="2" loading="lazy"></div>
+<div class="proof-media mb-4"><img src="../../assets/projects/stud-hq/Bloemfontein/12.webp" class="proof-img archive-trigger" style="cursor: pointer;" data-index="3" loading="lazy"></div>
+<div class="proof-media mb-4"><img src="../../assets/projects/stud-hq/Bloemfontein/13.webp" class="proof-img archive-trigger" style="cursor: pointer;" data-index="4" loading="lazy"></div>
+<div class="proof-media mb-4"><img src="../../assets/projects/stud-hq/Bloemfontein/14.webp" class="proof-img archive-trigger" style="cursor: pointer;" data-index="5" loading="lazy"></div>
+<div class="proof-media mb-4"><img src="../../assets/projects/stud-hq/Bloemfontein/15.webp" class="proof-img archive-trigger" style="cursor: pointer;" data-index="6" loading="lazy"></div>
+<div class="proof-media mb-4"><img src="../../assets/projects/stud-hq/Bloemfontein/17_24 - Photo.webp" class="proof-img archive-trigger" style="cursor: pointer;" data-index="7" loading="lazy"></div>
+<div class="proof-media mb-4"><img src="../../assets/projects/stud-hq/Bloemfontein/17_25 - Photo.webp" class="proof-img archive-trigger" style="cursor: pointer;" data-index="8" loading="lazy"></div>
+
+        </div>
+        <div class="proof-narrative">
+          <p class="proof-caption">Interior design proposal for the Bloemfontein flagship — establishing the visual language for the national rollout.</p>
+          <p class="proof-details">The Bloemfontein location served as the visual benchmark for the brand rollout. The design concept focused on a strong identity wall, curated material palette, and strategic lighting to create a premium barbershop environment that would translate consistently across all subsequent sites.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROOF MODULE 02: HAZELWOOD PRETORIA -->
+    <section class="proof-section">
+      <div class="module-header">
+        <span class="module-num">Proof Module 02</span>
+        <h2 class="module-title">Hazelwood Pretoria — Spatial Adaptations</h2>
+      </div>
+      <div class="proof-grid">
+        <div>
+<div class="proof-media mb-4"><img src="../../assets/projects/stud-hq/Hazelwood/1_1 - Photo.webp" class="proof-img archive-trigger" style="cursor: pointer;" data-index="9" loading="lazy"></div>
+<div class="proof-media mb-4"><img src="../../assets/projects/stud-hq/Hazelwood/1_2 - Photo.webp" class="proof-img archive-trigger" style="cursor: pointer;" data-index="10" loading="lazy"></div>
+<div class="proof-media mb-4"><img src="../../assets/projects/stud-hq/Hazelwood/1_5 - Photo.webp" class="proof-img archive-trigger" style="cursor: pointer;" data-index="11" loading="lazy"></div>
+<div class="proof-media mb-4"><img src="../../assets/projects/stud-hq/Hazelwood/1_6 - Photo.webp" class="proof-img archive-trigger" style="cursor: pointer;" data-index="12" loading="lazy"></div>
+
+        </div>
+        <div class="proof-narrative">
+          <p class="proof-caption">Developing the branding and fit-out language for the Hazelwood Pretoria location.</p>
+          <p class="proof-details">Hazelwood adapted the brand's primary spatial components to a Pretoria context. Renders tested light penetration, floor finish thresholds, and custom signage details to ensure site delivery aligned with the client's premium visual standard.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROOF MODULE 03: KLOOF STREET -->
+    <section class="proof-section">
+      <div class="module-header">
+        <span class="module-num">Proof Module 03</span>
+        <h2 class="module-title">Kloof Street — Technical Coordination</h2>
+      </div>
+      <div class="proof-grid">
+        <div>
+<div class="proof-media mb-4"><img src="../../assets/projects/stud-hq/Kloof street/01_3 - Photo.webp" class="proof-img archive-trigger" style="cursor: pointer;" data-index="13" loading="lazy"></div>
+<div class="proof-media mb-4"><img src="../../assets/projects/stud-hq/Kloof street/01_4 - Photo.webp" class="proof-img archive-trigger" style="cursor: pointer;" data-index="14" loading="lazy"></div>
+<div class="proof-media mb-4"><img src="../../assets/projects/stud-hq/Kloof street/01_6 - Pho hgto.webp" class="proof-img archive-trigger" style="cursor: pointer;" data-index="15" loading="lazy"></div>
+<div class="proof-media mb-4"><img src="../../assets/projects/stud-hq/Kloof street/01_6 - Photo.webp" class="proof-img archive-trigger" style="cursor: pointer;" data-index="16" loading="lazy"></div>
+<div class="proof-media mb-4"><img src="../../assets/projects/stud-hq/Kloof street/1_6 - Photo.webp" class="proof-img archive-trigger" style="cursor: pointer;" data-index="17" loading="lazy"></div>
+<div class="proof-media mb-4"><img src="../../assets/projects/stud-hq/Kloof street/2_11 - Photo.webp" class="proof-img archive-trigger" style="cursor: pointer;" data-index="18" loading="lazy"></div>
+<div class="proof-media mb-4"><img src="../../assets/projects/stud-hq/Kloof street/2_12 - Photo.webp" class="proof-img archive-trigger" style="cursor: pointer;" data-index="19" loading="lazy"></div>
+
+        </div>
+        <div class="proof-narrative">
+          <p class="proof-caption">Technical drawing set and finish coordination for the Kloof Street tenancy.</p>
+          <p class="proof-details">Kloof Street required detailed plan sets, elevation studies, and coordinated interior finishes. All spatial dimensions were resolved in response to the specific commercial shell conditions, delivering a clear blueprint for construction-readiness.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROOF MODULE 04: SEA POINT -->
+    <section class="proof-section">
+      <div class="module-header">
+        <span class="module-num">Proof Module 04</span>
+        <h2 class="module-title">Sea Point — Equipment Layouts</h2>
+      </div>
+      <div class="proof-grid">
+        <div>
+<div class="proof-media mb-4"><img src="../../assets/projects/stud-hq/Sea point/12.webp" class="proof-img archive-trigger" style="cursor: pointer;" data-index="20" loading="lazy"></div>
+<div class="proof-media mb-4"><img src="../../assets/projects/stud-hq/Sea point/13.webp" class="proof-img archive-trigger" style="cursor: pointer;" data-index="21" loading="lazy"></div>
+<div class="proof-media mb-4"><img src="../../assets/projects/stud-hq/Sea point/14.webp" class="proof-img archive-trigger" style="cursor: pointer;" data-index="22" loading="lazy"></div>
+<div class="proof-media mb-4"><video src="../../assets/projects/stud-hq/Sea point/Menu Screen.mp4" autoplay loop muted playsinline class="proof-img" style="aspect-ratio: 16/9; object-fit: cover;"></video></div>
+
+        </div>
+        <div class="proof-narrative">
+          <p class="proof-caption">Equipment layout, plumbing, and visual design adaptations for Sea Point.</p>
+          <p class="proof-details">The Sea Point branch presented a complex site layout. Deliverables included equipment placements, lighting coordinates, plumbing drops, and finish details. Dynamic digital screens were coordinated to elevate the customer experience inside the store.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROOF MODULE 05: CAVENDISH -->
+    <section class="proof-section">
+      <div class="module-header">
+        <span class="module-num">Proof Module 05</span>
+        <h2 class="module-title">Cavendish Proposals — Spatial Walkthrough</h2>
+      </div>
+      <div class="proof-grid">
+        <div>
+<div class="proof-media mb-4"><video src="../../assets/projects/stud-hq/Cavendish proposals/001.mp4" autoplay loop muted playsinline class="proof-img" style="aspect-ratio: 16/9; object-fit: cover;"></video></div>
+<div class="proof-media mb-4"><video src="../../assets/projects/stud-hq/Cavendish proposals/02.mp4" autoplay loop muted playsinline class="proof-img" style="aspect-ratio: 16/9; object-fit: cover;"></video></div>
+
+        </div>
+        <div class="proof-narrative">
+          <p class="proof-caption">Virtual walkthroughs and conceptual spatial massing for the Cavendish site.</p>
+          <p class="proof-details">The Cavendish site required detailed dynamic walkthroughs to convey spatial massing, circulation routes, and customer experience. These videos present the sequence of interior experiences tailored specifically for this retail footprint.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCESS ARCHIVE (BELHAR DOWNLOAD CARD FORMAT) -->
+    <section class="appendix-section">
+      <h2 class="appendix-title">Process Archive</h2>
+      <div class="appendix-grid">
+        <a href="../../assets/projects/stud-hq/Cavendish proposals/Concept.pdf" target="_blank" rel="noopener" class="appendix-card">
+          <div class="appendix-info">
+            <span class="appendix-type">PDF Document</span>
+            <span class="appendix-name">Cavendish Concept Pack</span>
+            <span class="appendix-size">Conceptual Visualisation &amp; Feasibility pack</span>
+          </div>
+          <span class="appendix-icon">↗</span>
+        </a>
+        <a href="../../assets/projects/stud-hq/Hazelwood/Signage Hazelwood Pretoria.pdf" target="_blank" rel="noopener" class="appendix-card">
+          <div class="appendix-info">
+            <span class="appendix-type">PDF Document</span>
+            <span class="appendix-name">Hazelwood Signage Detail</span>
+            <span class="appendix-size">Branding &amp; exterior signage specifications</span>
+          </div>
+          <span class="appendix-icon">↗</span>
+        </a>
+        <a href="../../assets/projects/stud-hq/Kloof street/Stud HQ Kloof Street.pdf" target="_blank" rel="noopener" class="appendix-card">
+          <div class="appendix-info">
+            <span class="appendix-type">PDF Document</span>
+            <span class="appendix-name">Kloof Street Plan Set</span>
+            <span class="appendix-size">Technical layout &amp; spatial layout drawings</span>
+          </div>
+          <span class="appendix-icon">↗</span>
+        </a>
+        <a href="../../assets/projects/stud-hq/Sea point/STUD HQ - Sea Point-Combined Layouts.pdf" target="_blank" rel="noopener" class="appendix-card">
+          <div class="appendix-info">
+            <span class="appendix-type">PDF Drawing Pack</span>
+            <span class="appendix-name">Sea Point Layouts</span>
+            <span class="appendix-size">Combined layouts, finishes &amp; equipment plan</span>
+          </div>
+          <span class="appendix-icon">↗</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- HORIZONTAL SCROLL GALLERY -->
+    <section class="gallery-section">
+      <span class="gallery-section-label">Project Archive</span>
+      <div class="gallery-scroll-track" id="gallery-track">
+      <div class="gallery-scroll-item"><img src="../../assets/projects/stud-hq/Bloemfontein/1_1 - Photo.webp" class="archive-trigger" style="cursor: pointer;" data-index="0" loading="lazy"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/stud-hq/Bloemfontein/1_4 - Photo.webp" class="archive-trigger" style="cursor: pointer;" data-index="1" loading="lazy"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/stud-hq/Bloemfontein/11.webp" class="archive-trigger" style="cursor: pointer;" data-index="2" loading="lazy"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/stud-hq/Bloemfontein/12.webp" class="archive-trigger" style="cursor: pointer;" data-index="3" loading="lazy"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/stud-hq/Bloemfontein/13.webp" class="archive-trigger" style="cursor: pointer;" data-index="4" loading="lazy"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/stud-hq/Bloemfontein/14.webp" class="archive-trigger" style="cursor: pointer;" data-index="5" loading="lazy"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/stud-hq/Bloemfontein/15.webp" class="archive-trigger" style="cursor: pointer;" data-index="6" loading="lazy"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/stud-hq/Bloemfontein/17_24 - Photo.webp" class="archive-trigger" style="cursor: pointer;" data-index="7" loading="lazy"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/stud-hq/Bloemfontein/17_25 - Photo.webp" class="archive-trigger" style="cursor: pointer;" data-index="8" loading="lazy"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/stud-hq/Hazelwood/1_1 - Photo.webp" class="archive-trigger" style="cursor: pointer;" data-index="9" loading="lazy"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/stud-hq/Hazelwood/1_2 - Photo.webp" class="archive-trigger" style="cursor: pointer;" data-index="10" loading="lazy"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/stud-hq/Hazelwood/1_5 - Photo.webp" class="archive-trigger" style="cursor: pointer;" data-index="11" loading="lazy"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/stud-hq/Hazelwood/1_6 - Photo.webp" class="archive-trigger" style="cursor: pointer;" data-index="12" loading="lazy"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/stud-hq/Kloof street/01_3 - Photo.webp" class="archive-trigger" style="cursor: pointer;" data-index="13" loading="lazy"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/stud-hq/Kloof street/01_4 - Photo.webp" class="archive-trigger" style="cursor: pointer;" data-index="14" loading="lazy"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/stud-hq/Kloof street/01_6 - Pho hgto.webp" class="archive-trigger" style="cursor: pointer;" data-index="15" loading="lazy"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/stud-hq/Kloof street/01_6 - Photo.webp" class="archive-trigger" style="cursor: pointer;" data-index="16" loading="lazy"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/stud-hq/Kloof street/1_6 - Photo.webp" class="archive-trigger" style="cursor: pointer;" data-index="17" loading="lazy"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/stud-hq/Kloof street/2_11 - Photo.webp" class="archive-trigger" style="cursor: pointer;" data-index="18" loading="lazy"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/stud-hq/Kloof street/2_12 - Photo.webp" class="archive-trigger" style="cursor: pointer;" data-index="19" loading="lazy"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/stud-hq/Sea point/12.webp" class="archive-trigger" style="cursor: pointer;" data-index="20" loading="lazy"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/stud-hq/Sea point/13.webp" class="archive-trigger" style="cursor: pointer;" data-index="21" loading="lazy"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/stud-hq/Sea point/14.webp" class="archive-trigger" style="cursor: pointer;" data-index="22" loading="lazy"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/stud-hq/stud-bloemfontein-1.webp" class="archive-trigger" style="cursor: pointer;" data-index="23" loading="lazy"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/stud-hq/stud-bloemfontein-2.webp" class="archive-trigger" style="cursor: pointer;" data-index="24" loading="lazy"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/stud-hq/stud-bryanston-1.webp" class="archive-trigger" style="cursor: pointer;" data-index="25" loading="lazy"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/stud-hq/stud-bryanston-2.webp" class="archive-trigger" style="cursor: pointer;" data-index="26" loading="lazy"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/stud-hq/stud-kloof-1.webp" class="archive-trigger" style="cursor: pointer;" data-index="27" loading="lazy"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/stud-hq/stud-kloof-2.webp" class="archive-trigger" style="cursor: pointer;" data-index="28" loading="lazy"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/stud-hq/stud-nelspruit-1.webp" class="archive-trigger" style="cursor: pointer;" data-index="29" loading="lazy"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/stud-hq/stud-nelspruit-2.webp" class="archive-trigger" style="cursor: pointer;" data-index="30" loading="lazy"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/stud-hq/stud-pretoria-1.webp" class="archive-trigger" style="cursor: pointer;" data-index="31" loading="lazy"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/stud-hq/stud-pretoria-2.webp" class="archive-trigger" style="cursor: pointer;" data-index="32" loading="lazy"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/stud-hq/stud-sea_point-1.webp" class="archive-trigger" style="cursor: pointer;" data-index="33" loading="lazy"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/stud-hq/stud-sea_point-2.webp" class="archive-trigger" style="cursor: pointer;" data-index="34" loading="lazy"></div>
+      </div>
+    </section>
+
+    <section class="cta-footer">
+      <span class="cta-label">Reducing Pipeline Uncertainty</span>
+      <h2 class="cta-heading">Ready to secure design accountability?</h2>
+      <a href="../../cv/index.html" class="cta-btn">Discuss a Project ↗</a>
+    </section>
+  </main>
+
+  <!-- FLOOR PLAN VIEWER MODAL -->
+  <div id="floorplan-modal" style="display: none; position: fixed; inset: 0; background: rgba(10, 10, 10, 0.98); backdrop-filter: blur(10px); z-index: 99999; align-items: center; justify-content: center; font-family: 'Inter', sans-serif;">
+    <button id="floorplan-close" style="position: absolute; top: 2rem; right: 2rem; background: none; border: 1px solid rgba(255,255,255,0.2); color: #fff; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; letter-spacing: 0.1em; padding: 0.6rem 1.2rem; border-radius: 50px; cursor: pointer; transition: all 0.3s; z-index: 100001;" onmouseover="this.style.borderColor='#fff'" onmouseout="this.style.borderColor='rgba(255,255,255,0.2)'">CLOSE ✕</button>
+    <div id="floorplan-header" style="position: absolute; top: 2.2rem; left: 50%; transform: translateX(-50%); text-align: center; z-index: 100001;">
+      <span id="floorplan-title" style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: #C8A96E; letter-spacing: 0.2em; text-transform: uppercase; display: block; margin-bottom: 0.2rem; white-space: nowrap;">Loading...</span>
+      <span id="floorplan-counter" style="font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; color: #666; letter-spacing: 0.1em;">1 OF 22</span>
+    </div>
+    <button id="floorplan-prev" style="position: absolute; left: 3rem; top: 50%; transform: translateY(-50%); background: rgba(20,20,20,0.8); border: 1px solid rgba(255,255,255,0.1); color: #fff; font-size: 1.5rem; width: 3.5rem; height: 3.5rem; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s; z-index: 100001;" onmouseover="this.style.borderColor='#C8A96E'; this.style.color='#C8A96E';" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'; this.style.color='#fff';">←</button>
+    <button id="floorplan-next" style="position: absolute; right: 3rem; top: 50%; transform: translateY(-50%); background: rgba(20,20,20,0.8); border: 1px solid rgba(255,255,255,0.1); color: #fff; font-size: 1.5rem; width: 3.5rem; height: 3.5rem; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s; z-index: 100001;" onmouseover="this.style.borderColor='#C8A96E'; this.style.color='#C8A96E';" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'; this.style.color='#fff';">→</button>
+    <div id="floorplan-container">
+      <div id="floorplan-loading" style="position: absolute; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #666; letter-spacing: 0.1em; z-index: 100002;">LOADING IMAGE...</div>
+      <canvas id="floorplan-canvas" style="transform-origin: center; position: absolute; background: #000; display: block; border: none; will-change: transform;"></canvas>
+    </div>
+  </div>
+
+  <div id="next-project-transition"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+  <script src="../../js/next-project.js"></script>
+  <script>
+    const track = document.getElementById('gallery-track');
+    if (track) {
+      let isDown = false, startX, scrollLeft;
+      track.addEventListener('mousedown', e => { isDown = true; track.style.cursor = 'grabbing'; startX = e.pageX - track.offsetLeft; scrollLeft = track.scrollLeft; });
+      track.addEventListener('mouseleave', () => { isDown = false; track.style.cursor = 'grab'; });
+      track.addEventListener('mouseup', () => { isDown = false; track.style.cursor = 'grab'; });
+      track.addEventListener('mousemove', e => { if (!isDown) return; e.preventDefault(); const x = e.pageX - track.offsetLeft; track.scrollLeft = scrollLeft - (x - startX) * 1.5; });
+    }
+  </script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const plans = [
+        { type: 'image', isPlan: false, name: 'Bloemfontein · 1_1 - Photo', file: '../../assets/projects/stud-hq/Bloemfontein/1_1 - Photo.webp' },
+        { type: 'image', isPlan: false, name: 'Bloemfontein · 1_4 - Photo', file: '../../assets/projects/stud-hq/Bloemfontein/1_4 - Photo.webp' },
+        { type: 'image', isPlan: false, name: 'Bloemfontein · 11', file: '../../assets/projects/stud-hq/Bloemfontein/11.webp' },
+        { type: 'image', isPlan: false, name: 'Bloemfontein · 12', file: '../../assets/projects/stud-hq/Bloemfontein/12.webp' },
+        { type: 'image', isPlan: false, name: 'Bloemfontein · 13', file: '../../assets/projects/stud-hq/Bloemfontein/13.webp' },
+        { type: 'image', isPlan: false, name: 'Bloemfontein · 14', file: '../../assets/projects/stud-hq/Bloemfontein/14.webp' },
+        { type: 'image', isPlan: false, name: 'Bloemfontein · 15', file: '../../assets/projects/stud-hq/Bloemfontein/15.webp' },
+        { type: 'image', isPlan: false, name: 'Bloemfontein · 17_24 - Photo', file: '../../assets/projects/stud-hq/Bloemfontein/17_24 - Photo.webp' },
+        { type: 'image', isPlan: false, name: 'Bloemfontein · 17_25 - Photo', file: '../../assets/projects/stud-hq/Bloemfontein/17_25 - Photo.webp' },
+        { type: 'image', isPlan: false, name: 'Hazelwood · 1_1 - Photo', file: '../../assets/projects/stud-hq/Hazelwood/1_1 - Photo.webp' },
+        { type: 'image', isPlan: false, name: 'Hazelwood · 1_2 - Photo', file: '../../assets/projects/stud-hq/Hazelwood/1_2 - Photo.webp' },
+        { type: 'image', isPlan: false, name: 'Hazelwood · 1_5 - Photo', file: '../../assets/projects/stud-hq/Hazelwood/1_5 - Photo.webp' },
+        { type: 'image', isPlan: false, name: 'Hazelwood · 1_6 - Photo', file: '../../assets/projects/stud-hq/Hazelwood/1_6 - Photo.webp' },
+        { type: 'image', isPlan: false, name: 'Kloof street · 01_3 - Photo', file: '../../assets/projects/stud-hq/Kloof street/01_3 - Photo.webp' },
+        { type: 'image', isPlan: false, name: 'Kloof street · 01_4 - Photo', file: '../../assets/projects/stud-hq/Kloof street/01_4 - Photo.webp' },
+        { type: 'image', isPlan: false, name: 'Kloof street · 01_6 - Pho hgto', file: '../../assets/projects/stud-hq/Kloof street/01_6 - Pho hgto.webp' },
+        { type: 'image', isPlan: false, name: 'Kloof street · 01_6 - Photo', file: '../../assets/projects/stud-hq/Kloof street/01_6 - Photo.webp' },
+        { type: 'image', isPlan: false, name: 'Kloof street · 1_6 - Photo', file: '../../assets/projects/stud-hq/Kloof street/1_6 - Photo.webp' },
+        { type: 'image', isPlan: false, name: 'Kloof street · 2_11 - Photo', file: '../../assets/projects/stud-hq/Kloof street/2_11 - Photo.webp' },
+        { type: 'image', isPlan: false, name: 'Kloof street · 2_12 - Photo', file: '../../assets/projects/stud-hq/Kloof street/2_12 - Photo.webp' },
+        { type: 'image', isPlan: false, name: 'Sea point · 12', file: '../../assets/projects/stud-hq/Sea point/12.webp' },
+        { type: 'image', isPlan: false, name: 'Sea point · 13', file: '../../assets/projects/stud-hq/Sea point/13.webp' },
+        { type: 'image', isPlan: false, name: 'Sea point · 14', file: '../../assets/projects/stud-hq/Sea point/14.webp' },
+        { type: 'image', isPlan: false, name: 'Archive · Bloemfontein Ext 1', file: '../../assets/projects/stud-hq/stud-bloemfontein-1.webp' },
+        { type: 'image', isPlan: false, name: 'Archive · Bloemfontein Ext 2', file: '../../assets/projects/stud-hq/stud-bloemfontein-2.webp' },
+        { type: 'image', isPlan: false, name: 'Archive · Bryanston Proposal 1', file: '../../assets/projects/stud-hq/stud-bryanston-1.webp' },
+        { type: 'image', isPlan: false, name: 'Archive · Bryanston Proposal 2', file: '../../assets/projects/stud-hq/stud-bryanston-2.webp' },
+        { type: 'image', isPlan: false, name: 'Archive · Kloof Adaptation 1', file: '../../assets/projects/stud-hq/stud-kloof-1.webp' },
+        { type: 'image', isPlan: false, name: 'Archive · Kloof Adaptation 2', file: '../../assets/projects/stud-hq/stud-kloof-2.webp' },
+        { type: 'image', isPlan: false, name: 'Archive · Nelspruit Concept 1', file: '../../assets/projects/stud-hq/stud-nelspruit-1.webp' },
+        { type: 'image', isPlan: false, name: 'Archive · Nelspruit Concept 2', file: '../../assets/projects/stud-hq/stud-nelspruit-2.webp' },
+        { type: 'image', isPlan: false, name: 'Archive · Pretoria Proposal 1', file: '../../assets/projects/stud-hq/stud-pretoria-1.webp' },
+        { type: 'image', isPlan: false, name: 'Archive · Pretoria Proposal 2', file: '../../assets/projects/stud-hq/stud-pretoria-2.webp' },
+        { type: 'image', isPlan: false, name: 'Archive · Sea Point Concept 1', file: '../../assets/projects/stud-hq/stud-sea_point-1.webp' },
+        { type: 'image', isPlan: false, name: 'Archive · Sea Point Concept 2', file: '../../assets/projects/stud-hq/stud-sea_point-2.webp' }
+      ];
+      let currentIndex = 0;
+      let currentViewport = null;
+      let prevPlan = null;
+      let lastWheelTime = 0;
+
+      let mouseX = 0;
+      let mouseY = 0;
+      window.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+      });
+
+      let zoomScale = 1.0;
+      let panX = 0;
+      let panY = 0;
+      let transformNeedsUpdate = false;
+
+      const modal = document.getElementById('floorplan-modal');
+      const container = document.getElementById('floorplan-container');
+      const canvas = document.getElementById('floorplan-canvas');
+      const loadingEl = document.getElementById('floorplan-loading');
+      const titleEl = document.getElementById('floorplan-title');
+      const counterEl = document.getElementById('floorplan-counter');
+      const closeBtn = document.getElementById('floorplan-close');
+      const prevBtn = document.getElementById('floorplan-prev');
+      const nextBtn = document.getElementById('floorplan-next');
+      
+      const archiveTriggers = document.querySelectorAll('.archive-trigger');
+
+      archiveTriggers.forEach(el => {
+        el.addEventListener('click', () => {
+          const idx = parseInt(el.getAttribute('data-index'), 10);
+          if (!isNaN(idx)) {
+            openModal(idx);
+          }
+        });
+      });
+
+      function openModal(index) {
+        currentIndex = index;
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+        loadPlan(currentIndex);
+      }
+
+      function closeModal() {
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+        const ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        currentViewport = null;
+        prevPlan = null;
+        resetZoom();
+      }
+
+      function resetZoom() {
+        zoomScale = 1.0;
+        panX = 0;
+        panY = 0;
+        container.style.cursor = 'default';
+        requestTransformUpdate();
+      }
+
+      function requestTransformUpdate() {
+        if (!transformNeedsUpdate) {
+          transformNeedsUpdate = true;
+          requestAnimationFrame(applyTransform);
+        }
+      }
+
+      function applyTransform() {
+        if (!transformNeedsUpdate) return;
+        
+        if (currentViewport) {
+          const w = container.clientWidth;
+          const h = container.clientHeight;
+          const maxPanX = Math.max(0, ((zoomScale - 1) * w) / 2);
+          const maxPanY = Math.max(0, ((zoomScale - 1) * h) / 2);
+          panX = Math.max(-maxPanX, Math.min(maxPanX, panX));
+          panY = Math.max(-maxPanY, Math.min(maxPanY, panY));
+        }
+
+        canvas.style.transform = `translate(${panX}px, ${panY}px) scale(${zoomScale})`;
+        transformNeedsUpdate = false;
+      }
+
+      function resizeCanvas() {
+        if (modal.style.display === 'flex' && currentViewport) {
+          const maxW = window.innerWidth * 0.75;
+          const maxH = window.innerHeight * 0.75;
+
+          const planRatio = currentViewport.width / currentViewport.height;
+
+          let containerW = maxW;
+          let containerH = containerW / planRatio;
+
+          if (containerH > maxH) {
+            containerH = maxH;
+            containerW = containerH * planRatio;
+          }
+
+          container.style.width = containerW + 'px';
+          container.style.height = containerH + 'px';
+
+          canvas.style.width = containerW + 'px';
+          canvas.style.height = containerH + 'px';
+
+          requestTransformUpdate();
+        }
+      }
+
+      function loadPlan(index) {
+        const plan = plans[index];
+        prevPlan = plan;
+
+        loadingEl.style.display = 'block';
+        titleEl.textContent = plan.name;
+        counterEl.textContent = `${index + 1} OF ${plans.length}`;
+
+        const img = new Image();
+        img.onload = () => {
+          const mockViewport = {
+            width: img.naturalWidth,
+            height: img.naturalHeight
+          };
+          currentViewport = mockViewport;
+
+          const ctx = canvas.getContext('2d');
+          canvas.width = img.naturalWidth;
+          canvas.height = img.naturalHeight;
+          ctx.drawImage(img, 0, 0);
+
+          loadingEl.style.display = 'none';
+          resizeCanvas();
+          updateCursorOverViewport();
+        };
+        img.src = plan.file;
+      }
+
+      closeBtn.addEventListener('click', closeModal);
+      
+      prevBtn.addEventListener('click', () => {
+        currentIndex = (currentIndex - 1 + plans.length) % plans.length;
+        loadPlan(currentIndex);
+      });
+
+      nextBtn.addEventListener('click', () => {
+        currentIndex = (currentIndex + 1) % plans.length;
+        loadPlan(currentIndex);
+      });
+
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          closeModal();
+        }
+      });
+
+      window.addEventListener('resize', resizeCanvas);
+
+      container.addEventListener('wheel', (e) => {
+        if (!currentViewport) return;
+        e.preventDefault();
+
+        const now = Date.now();
+        if (now - lastWheelTime > 800) {
+          if (e.deltaY > 20) {
+            nextBtn.click();
+            lastWheelTime = now;
+          } else if (e.deltaY < -20) {
+            prevBtn.click();
+            lastWheelTime = now;
+          }
+        }
+      }, { passive: false });
+
+      document.addEventListener('keydown', (e) => {
+        if (modal.style.display === 'flex') {
+          if (e.key === 'ArrowLeft') {
+            prevBtn.click();
+          } else if (e.key === 'ArrowRight') {
+            nextBtn.click();
+          } else if (e.key === 'Escape') {
+            closeModal();
+          }
+        }
+      });
+
+      const cursorDot = document.querySelector('.cursor-dot');
+      const cursorOutline = document.querySelector('.cursor-outline');
+
+      function updateCursorOverViewport() {
+        const rect = container.getBoundingClientRect();
+        const inside = (mouseX >= rect.left && mouseX <= rect.right && mouseY >= rect.top && mouseY <= rect.bottom);
+        if (inside) {
+          if (cursorDot) cursorDot.style.opacity = '1';
+          if (cursorOutline) cursorOutline.style.opacity = '1';
+        }
+      }
+
+      modal.addEventListener('mouseover', (e) => {
+        if (e.target === modal) {
+          document.body.classList.add('cursor-hover');
+          if (cursorDot) cursorDot.style.opacity = '1';
+          if (cursorOutline) cursorOutline.style.opacity = '1';
+        }
+      });
+
+      modal.addEventListener('mouseout', (e) => {
+        if (e.target === modal) {
+          document.body.classList.remove('cursor-hover');
+        }
+      });
+
+      container.addEventListener('mouseenter', () => {
+        updateCursorOverViewport();
+        document.body.classList.remove('cursor-hover');
+      });
+
+      container.addEventListener('mouseleave', () => {
+        if (cursorDot) cursorDot.style.opacity = '1';
+        if (cursorOutline) cursorOutline.style.opacity = '1';
+      });
+
+      function bindTriggerCursor(el) {
+        if (el) {
+          el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+          el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+        }
+      }
+      archiveTriggers.forEach(bindTriggerCursor);
+    });
+  </script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const indicator = document.getElementById('scroll-indicator');
+      if (indicator) {
+        window.addEventListener('scroll', () => {
+          let opacity = 1 - Math.min(window.scrollY / 150, 1);
+          indicator.style.opacity = opacity;
+        }, { passive: true });
+      }
+    });
+  </script>
+</body>
+</html>

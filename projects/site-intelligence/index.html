@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Niewoudsville — Bradley Brits</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/index.css">
+    <link rel="stylesheet" href="../../css/project.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <style>
+        :root {
+            --void: #0a0a0a;
+            --carbon: #141414;
+            --surface: #1a1a1a;
+            --border: #1f1f1f;
+            --border-light: #2a2a2a;
+            --text: #f5f5f5;
+            --text-muted: #888888;
+            --text-dim: #666666;
+            --gold: #C8A96E;
+            --gold-dim: rgba(200,169,110,0.15);
+            --gold-border: rgba(200,169,110,0.25);
+            --ff-display: 'Instrument Serif', serif;
+            --ff-body: 'Inter', sans-serif;
+            --ff-mono: 'JetBrains Mono', monospace;
+        }
+        
+        /* APPENDIX STYLES */
+        .appendix-section {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 2rem 0;
+        }
+        .appendix-title {
+          font-family: var(--ff-display);
+          font-size: 3.5rem;
+          margin-bottom: 2rem;
+          letter-spacing: -0.02em;
+          font-style: italic;
+          font-weight: 400;
+        }
+        .appendix-card {
+          background: var(--surface);
+          border: 1px solid var(--border);
+          padding: 2rem;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          text-decoration: none;
+          color: var(--text);
+          transition: border-color 0.2s, background 0.2s;
+        }
+        .appendix-card:hover {
+          border-color: var(--gold-border);
+          background: var(--carbon);
+        }
+        .appendix-info {
+          display: flex;
+          flex-direction: column;
+          gap: 0.4rem;
+        }
+        .appendix-type {
+          font-family: var(--ff-mono);
+          font-size: 0.55rem;
+          letter-spacing: 0.15em;
+          color: var(--gold);
+          text-transform: uppercase;
+        }
+        .appendix-name {
+          font-size: 0.95rem;
+          font-weight: 500;
+        }
+        .appendix-size {
+          font-family: var(--ff-mono);
+          font-size: 0.6rem;
+          color: var(--text-dim);
+        }
+        .appendix-icon {
+          font-size: 1.5rem;
+          color: var(--text-dim);
+          transition: color 0.2s;
+        }
+        .appendix-card:hover .appendix-icon {
+          color: var(--gold);
+        }
+    </style>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3PV9G8CCTQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-3PV9G8CCTQ');
+  </script>
+</head>
+<body class="project-detail-page bg-[#0a0a0a] text-white">
+
+  <!-- NAV -->
+  <nav class="fixed top-0 left-0 right-0 z-50 flex justify-between items-center p-6 bg-gradient-to-b from-black/90 to-transparent pointer-events-none" style="border-bottom: none;">
+      <a href="../../index.html#projects" class="inline-flex items-center gap-2 pointer-events-auto backdrop-blur-md border border-white/10 bg-[#141414]/80 text-xs text-white uppercase tracking-wider rounded-full px-5 py-2 hover:border-white transition-all duration-300" style="text-decoration: none; font-family: 'Inter', sans-serif;">
+          ← BACK TO PORTFOLIO
+      </a>
+      <a id="next-project-btn" href="../stud-hq/index.html" class="inline-flex items-center gap-2 pointer-events-auto backdrop-blur-md border border-white/10 bg-[#141414]/80 text-xs text-white uppercase tracking-wider rounded-full px-5 py-2 hover:border-white transition-all duration-300" style="text-decoration: none; font-family: 'Inter', sans-serif;">
+          NEXT CASE STUDY →
+      </a>
+  </nav>
+
+  <header class="project-hero relative w-full h-[60vh] lg:h-screen">
+      <div class="hero-canvas-container" style="height: 100vh; position: relative;">
+          <canvas id="project-hero-canvas" style="width:100%; height:100%; object-fit:cover; opacity: 0.8;"></canvas>
+          <script>
+              document.addEventListener("DOMContentLoaded", () => {
+                  if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+                      gsap.registerPlugin(ScrollTrigger);
+                  } else {
+                      console.warn("GSAP or ScrollTrigger not loaded");
+                      return;
+                  }
+
+                  const canvas = document.getElementById('project-hero-canvas');
+                  if (!canvas) return;
+                  const ctx = canvas.getContext('2d', { alpha: false });
+                  canvas.width = 1920;
+                  canvas.height = 1080;
+
+                  const totalFrames = 1081;
+                  const images = [];
+
+                  const getFramePath = (index) => {
+                      return `../../assets/projects/site-intelligence/hero-sequence/frame_${String(index).padStart(4, '0')}.webp`;
+                  };
+
+                  // Preload all frames
+                  for (let i = 1; i <= totalFrames; i++) {
+                      const img = new Image();
+                      img.src = getFramePath(i);
+                      images.push(img);
+                  }
+
+                  images[0].onload = () => {
+                      ctx.drawImage(images[0], 0, 0, canvas.width, canvas.height);
+                  };
+
+                  ScrollTrigger.create({
+                      trigger: '.project-hero',
+                      start: 'top top',
+                      end: '+=45000',
+                      pin: true,
+                      scrub: 0.1,
+                      onUpdate: (self) => {
+                          const frameIndex = Math.min(
+                              totalFrames - 1,
+                              Math.floor(self.progress * totalFrames)
+                          );
+                          const img = images[frameIndex];
+                          if (img && img.complete) {
+                              ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                          }
+                      }
+                  });
+
+                  // Text Entrance Animation
+                  gsap.from(".hero-text-anim", {
+                      y: 40,
+                      opacity: 0,
+                      duration: 1.5,
+                      stagger: 0.15,
+                      ease: "power3.out",
+                      delay: 0.1
+                  });
+              });
+          </script>
+      </div>
+
+      <!-- Gradient Overlay -->
+      <div class="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent pointer-events-none" style="background: linear-gradient(to top, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.4) 25%, transparent 50%); z-index: 5;"></div>
+
+      <!-- Title Area (Bottom Left) -->
+      <div class="absolute bottom-12 left-6 md:bottom-16 md:left-12 z-10 max-w-2xl hero-text-anim">
+          <div class="eyebrow mb-2 text-[#C8A96E] tracking-widest text-xs uppercase" style="font-family: var(--ff-mono);">Case Study · Site Intelligence</div>
+          <h1 class="!mb-4 !text-6xl md:!text-[7rem] leading-none" style="font-family: var(--ff-display); font-style: italic; color: #f5f5f5;">NIEWOUDSVILLE</h1>
+          <p class="subtitle !text-sm md:!text-base !max-w-xl text-white/80" style="font-family: var(--ff-body);">
+              Expedition glamping camp project.
+          </p>
+      </div>
+
+      <!-- HUD Metadata (Bottom Right) -->
+      <div class="absolute bottom-12 right-6 md:bottom-16 md:right-12 z-10 hidden md:flex flex-col gap-6 text-right hero-text-anim">
+          <div class="flex flex-col gap-1">
+              <span class="meta-label !text-[0.55rem] text-white/50 tracking-widest uppercase" style="font-family: var(--ff-mono);">Role</span>
+              <span class="meta-value !text-sm text-white/90" style="font-family: var(--ff-body);">Architecture</span>
+          </div>
+          <div class="flex flex-col gap-1">
+              <span class="meta-label !text-[0.55rem] text-white/50 tracking-widest uppercase" style="font-family: var(--ff-mono);">Phase</span>
+              <span class="meta-value !text-sm text-white/90" style="font-family: var(--ff-body);">Concept</span>
+          </div>
+      </div>
+  
+    <!-- Scroll Indicator -->
+    <div id="scroll-indicator" class="scroll-indicator">
+      <span class="scroll-indicator__text">SCROLL TO EXPLORE</span>
+      <div class="scroll-indicator__line"></div>
+    </div>
+</header>
+
+  <main class="project-content px-4 lg:px-12 py-20 flex flex-col gap-24 relative z-10 bg-[#0a0a0a]">
+
+      <section class="appendix-section">
+        <h2 class="appendix-title">Process Archive</h2>
+        <a href="../../assets/projects/site-intelligence/LA Colour Expedition Glamping - Council Submission Set.2025.11.18.pdf" target="_blank" rel="noopener" class="appendix-card">
+          <div class="appendix-info">
+            <span class="appendix-type">PDF Document</span>
+            <span class="appendix-name">Council Submission Set</span>
+            <span class="appendix-size">Complete expedition glamping drawing pack</span>
+          </div>
+          <span class="appendix-icon">↗</span>
+        </a>
+      </section>
+  </main>
+
+  <script src="../../js/project.js"></script>
+  <script src="../../js/next-project.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const indicator = document.getElementById('scroll-indicator');
+      if (indicator) {
+        window.addEventListener('scroll', () => {
+          let opacity = 1 - Math.min(window.scrollY / 150, 1);
+          indicator.style.opacity = opacity;
+        }, { passive: true });
+      }
+    });
+  </script>
+</body>
+</html>

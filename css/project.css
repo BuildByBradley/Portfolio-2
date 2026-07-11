@@ -1,0 +1,408 @@
+/* =========================================================
+   Project Detail Page Styles
+   Sohub Aeva Team Reference
+========================================================= */
+
+.project-detail-page {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    min-height: 100vh;
+}
+
+/* Navigation */
+.project-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 2rem 5vw;
+    z-index: 100;
+    mix-blend-mode: difference;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.back-link {
+    font-family: var(--font-body);
+    font-size: 1.125rem;
+    font-weight: 400;
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: opacity var(--transition-fast);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.back-link:hover {
+    opacity: 0.6;
+    color: var(--text-primary);
+}
+
+/* Hero Section */
+.project-hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.hero-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 0;
+}
+
+/* Gradient overlay to ensure text readability */
+.hero-image::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom, 
+        rgba(8, 8, 8, 0) 40%, 
+        rgba(8, 8, 8, 0.85) 100%
+    );
+    z-index: 1;
+}
+
+/* Hero HUD (Heads Up Display) */
+.hero-hud {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 3rem 5vw;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    z-index: 10;
+}
+
+.project-title {
+    font-family: var(--font-heading);
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--text-primary);
+    margin: 0;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    text-transform: none;
+}
+
+.hud-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.tag {
+    font-family: var(--font-body);
+    padding: 0.6rem 1.5rem;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 50px;
+    font-size: 0.85rem;
+    color: var(--text-primary);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+/* Main Content Area */
+.project-content {
+    padding: 6rem 5vw 10rem;
+    display: flex;
+    flex-direction: column;
+    gap: 8rem;
+    max-width: 1800px;
+    margin: 0 auto;
+}
+
+/* Intro Text */
+.intro-text {
+    max-width: 1000px;
+}
+
+.intro-text h2 {
+    font-family: var(--font-body);
+    font-size: clamp(1.75rem, 4vw, 3rem);
+    font-weight: 300;
+    line-height: 1.3;
+    color: var(--text-secondary);
+    letter-spacing: -0.01em;
+}
+
+/* Project Gallery */
+.project-gallery {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+.project-gallery img {
+    width: 100%;
+    height: 70vh;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+    background-color: var(--bg-surface);
+}
+
+/* Responsive adjustments */
+@media (min-width: 1024px) {
+    .project-gallery {
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+    }
+    
+    /* Make odd items span full width for dynamic layout, or just keep them grid */
+    .project-gallery img:nth-child(3n) {
+        grid-column: 1 / -1;
+        height: 90vh;
+    }
+}
+
+/* ============================================
+   NEXT PROJECT SCROLL TRANSITION
+   ============================================ */
+.next-project-transition {
+  position: relative;
+  width: 100%;
+  height: 400vh;
+  cursor: pointer;
+}
+
+.npt-sticky-container {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+.npt-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.npt-hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  will-change: transform;
+  transition: transform 0.1s linear;
+}
+
+.npt-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(10, 10, 10, 0.85) 0%,
+    rgba(10, 10, 10, 0.4) 40%,
+    rgba(10, 10, 10, 0.2) 100%
+  );
+  z-index: 2;
+}
+
+.npt-content {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 0.75rem;
+}
+
+.npt-label {
+  font-family: var(--ff-mono, 'JetBrains Mono', monospace);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold, #C8A96E);
+  opacity: 0.8;
+}
+
+.npt-title {
+  font-family: var(--ff-display, 'Instrument Serif', serif);
+  font-size: clamp(6rem, 12vw, 10rem);
+  font-style: italic;
+  font-weight: 400;
+  text-transform: none;
+  color: #f5f5f5;
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  will-change: transform;
+  cursor: pointer;
+  transform-origin: center center;
+}
+
+.npt-category {
+  font-family: var(--ff-body, 'Inter', sans-serif);
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.npt-counter {
+  font-family: var(--ff-mono, 'JetBrains Mono', monospace);
+  font-size: clamp(3.5rem, 8vw, 6rem);
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.92);
+  text-shadow:
+    0 0 40px rgba(200, 169, 110, 0.35),
+    0 2px 8px rgba(0, 0, 0, 0.6);
+  position: absolute;
+  top: 6rem;
+  right: 3rem;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+@media (max-width: 768px) {
+  .npt-counter {
+    font-size: 4rem;
+    top: 5rem;
+    right: 1.5rem;
+    bottom: auto;
+  }
+}
+
+/* Progress bar at bottom of next-project transition */
+.npt-progress-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: rgba(255,255,255,0.08);
+  z-index: 10;
+  overflow: hidden;
+}
+
+.npt-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #C8A96E 0%, #b8956a 50%, #C8A96E 100%);
+  transition: width 0.08s linear;
+  will-change: width;
+}
+
+/* Custom Cursor */
+body.custom-cursor-active, 
+body.custom-cursor-active a, 
+body.custom-cursor-active .project-card, 
+body.custom-cursor-active button {
+  cursor: none !important;
+}
+
+.cursor-dot {
+  width: 6px;
+  height: 6px;
+  background-color: #C8A96E;
+  position: fixed;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1000001;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1), transform 0.1s ease-out;
+}
+
+.cursor-outline {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #C8A96E;
+  position: fixed;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1000000;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s ease-out, width 0.2s, height 0.2s, background-color 0.2s;
+}
+
+/* Cursor Hover States */
+.cursor-hover .cursor-outline {
+  width: 60px;
+  height: 60px;
+  background-color: rgba(200, 169, 110, 0.1);
+  transform: translate(-50%, -50%) scale(1.1);
+}
+.cursor-hover .cursor-dot {
+  transform: translate(-50%, -50%) scale(0);
+}
+
+/* =========================================================
+   Scroll Indicator
+   ========================================================= */
+.scroll-indicator {
+  position: absolute;
+  bottom: 6rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+
+.scroll-indicator__text {
+  font-family: var(--ff-mono, 'JetBrains Mono', monospace);
+  font-size: 0.6rem;
+  letter-spacing: 0.25em;
+  color: var(--gold, #C8A96E) !important;
+  font-weight: 400;
+  opacity: 0.7;
+  white-space: nowrap;
+}
+
+.scroll-indicator__line {
+  width: 1px;
+  height: 135px;
+  background: rgba(200, 169, 110, 0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+.scroll-indicator__line::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 25px;
+  background: linear-gradient(to bottom, transparent, var(--gold, #C8A96E), transparent);
+  animation: scrollLineAnim 2.2s infinite cubic-bezier(0.15, 0.85, 0.35, 1);
+}
+
+@keyframes scrollLineAnim {
+  0% {
+    top: -25px;
+  }
+  100% {
+    top: 135px;
+  }
+}

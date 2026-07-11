@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rondebosch Golf Club — Bradley Brits</title>
+  <meta name="description" content="Architectural and interior design proposal for the Rondebosch Golf Club.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/project.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --void: #0a0a0a; --carbon: #141414; --surface: #1a1a1a; --border: #1f1f1f; --border-light: #2a2a2a;
+      --text: #f5f5f5; --text-muted: #888888; --text-dim: #666666;
+      --gold: #C8A96E; --gold-dim: rgba(200,169,110,0.15); --gold-border: rgba(200,169,110,0.25);
+      --ff-display: 'Instrument Serif', serif; --ff-body: 'Inter', sans-serif; --ff-mono: 'JetBrains Mono', monospace;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--void); color: var(--text); font-family: var(--ff-body); font-weight: 300; line-height: 1.7; overflow-x: hidden; }
+    .eyebrow { font-family: var(--ff-mono); font-size: 0.65rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; margin-bottom: 1rem; }
+    h1 { font-family: var(--ff-display); font-size: clamp(3.5rem, 8vw, 6.5rem); line-height: 0.92; letter-spacing: -0.02em; margin-bottom: 1.5rem; font-style: italic; font-weight: 400; }
+    .subtitle { font-size: 1.25rem; color: var(--text-muted); line-height: 1.7; max-width: 900px; }
+    .metadata-block { max-width: 1200px; margin: 0 auto; padding: 0 4rem 4rem; display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; border-bottom: 1px solid var(--border); }
+    .meta-item { display: flex; flex-direction: column; gap: 0.5rem; }
+    .meta-label { font-family: var(--ff-mono); font-size: 0.58rem; letter-spacing: 0.15em; color: var(--text-dim); text-transform: uppercase; }
+    .meta-value { font-size: 0.85rem; color: var(--text); font-weight: 400; }
+    .hero-still-section { max-width: 1200px; margin: 4rem auto; padding: 0 4rem; }
+    .hero-image-wrapper { position: relative; width: 100%; height: auto; aspect-ratio: 16/9; background: var(--carbon); border: 1px solid var(--border); overflow: hidden; }
+    .hero-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .hero-caption { margin-top: 1.5rem; display: grid; grid-template-columns: 2fr 1fr; gap: 4rem; align-items: start; }
+    .hero-intro { font-size: 0.95rem; color: var(--text-muted); line-height: 1.8; }
+    .role-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .chip { font-family: var(--ff-mono); font-size: 0.58rem; letter-spacing: 0.1em; padding: 0.3rem 0.7rem; border: 1px solid var(--gold-border); color: var(--gold); text-transform: uppercase; background: var(--gold-dim); }
+    
+    /* Cinematic Hero Styles */
+    .cinematic-hero-section {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .cinematic-hero-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      will-change: transform;
+    }
+    
+    .gallery-section { padding: 4rem 0; border-top: 1px solid var(--border); overflow: hidden; }
+    .gallery-section-label { font-family: var(--ff-mono); font-size: 0.65rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; padding: 0 4rem; margin-bottom: 2rem; display: block; }
+    .gallery-scroll-track { display: flex; gap: 1.5rem; padding: 0 4rem; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; cursor: grab; }
+    .gallery-scroll-track::-webkit-scrollbar { display: none; }
+    .gallery-scroll-item {
+      flex: 0 0 auto;
+      height: 100vh;
+      border-right: 1px solid var(--border);
+      border-left: none;
+      border-top: none;
+      border-bottom: none;
+      overflow: hidden;
+    }
+    .gallery-scroll-item img {
+      height: 100vh;
+      width: auto;
+      object-fit: cover;
+      max-width: 100vw;
+      display: block;
+    }
+    .cta-footer { background: #060606; padding: 8rem 4rem; border-top: 1px solid var(--border); text-align: center; }
+    .cta-label { font-family: var(--ff-mono); font-size: 0.65rem; letter-spacing: 0.3em; color: var(--text-dim); text-transform: uppercase; display: block; margin-bottom: 1.5rem; }
+    .cta-heading { font-family: var(--ff-display); font-size: clamp(2.5rem, 5vw, 4rem); font-style: italic; font-weight: 400; line-height: 1.1; color: var(--text); margin-bottom: 2.5rem; max-width: 600px; margin-left: auto; margin-right: auto; }
+    .cta-btn { display: inline-flex; background: #fff; color: #000; font-family: var(--ff-body); font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.75rem; padding: 1rem 2.5rem; border-radius: 50px; text-decoration: none; border: 1px solid #fff; transition: all 0.3s; }
+    .cta-btn:hover { background: transparent; color: #fff; }
+    
+    #floorplan-container {
+      background: #000;
+      border: 1px solid #1f1f1f;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+      border-radius: 4px;
+    }
+
+    @media (max-width: 1024px) {
+      header { padding: 4rem 2rem 2rem !important; }
+      .metadata-block { padding: 0 2rem 3rem; grid-template-columns: repeat(2, 1fr); }
+      .hero-still-section { padding: 0 2rem; }
+      .hero-caption { grid-template-columns: 1fr; gap: 2rem; }
+      .gallery-scroll-item { flex: 0 0 90vw; }
+      .gallery-section-label, .gallery-scroll-track { padding-left: 2rem; padding-right: 2rem; }
+      .cta-footer { padding: 5rem 2rem; }
+    }
+    @media (max-width: 768px) {
+      #floorplan-prev { left: 1rem !important; width: 2.8rem !important; height: 2.8rem !important; font-size: 1rem !important; }
+      #floorplan-next { right: 1rem !important; width: 2.8rem !important; height: 2.8rem !important; font-size: 1rem !important; }
+      #floorplan-close { top: 1rem !important; right: 1rem !important; padding: 0.4rem 0.8rem !important; }
+    }
+  </style>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3PV9G8CCTQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-3PV9G8CCTQ');
+  </script>
+</head>
+<body>
+   <nav class="fixed top-0 left-0 right-0 z-50 flex justify-between items-center p-6 bg-gradient-to-b from-black/90 to-transparent pointer-events-none">
+    <a href="../../index.html#projects" class="inline-flex items-center gap-2 pointer-events-auto backdrop-blur-md border border-white/10 bg-[#141414]/80 text-xs text-white uppercase tracking-wider rounded-full px-5 py-2 hover:border-white transition-all duration-300" style="text-decoration:none;font-family:'Inter',sans-serif;">← BACK TO PORTFOLIO</a>
+    <a id="next-project-btn" href="../zimbali/index.html" class="inline-flex items-center gap-2 pointer-events-auto backdrop-blur-md border border-white/10 bg-[#141414]/80 text-xs text-white uppercase tracking-wider rounded-full px-5 py-2 hover:border-white transition-all duration-300" style="text-decoration:none;font-family:'Inter',sans-serif;">NEXT CASE STUDY →</a>
+  </nav>
+
+  <section class="cinematic-hero-section relative w-screen h-screen overflow-hidden bg-black z-0">
+    <img src="../../assets/projects/rondebosch-golf/rbgc-28.webp" alt="Rondebosch Golf Hero" class="cinematic-hero-img absolute inset-0 w-full h-full object-cover" loading="eager">
+    
+    <!-- Gradient Overlay -->
+    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" style="background: linear-gradient(to top, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.4) 25%, transparent 50%);"></div>
+    
+    <!-- Title Area (Bottom Left) -->
+    <div class="absolute bottom-12 left-6 md:bottom-16 md:left-12 z-10 max-w-2xl hero-text-anim">
+      <div class="eyebrow mb-2 text-gold tracking-widest text-xs uppercase" style="font-family: var(--ff-mono);">Case Study · Hospitality</div>
+      <h1 class="!mb-4 !text-6xl md:!text-[7rem] leading-none" style="font-family: var(--ff-display); font-style: italic;">RONDEBOSCH GOLF</h1>
+      <p class="subtitle !text-sm md:!text-base !max-w-xl text-white/80" style="font-family: var(--ff-body);">
+        Architectural and interior design proposal for the Rondebosch Golf Club, integrating modern amenities with classic club aesthetics.
+      </p>
+    </div>
+
+    <!-- HUD Metadata (Bottom Right) -->
+    <div class="absolute bottom-12 right-6 md:bottom-16 md:right-12 z-10 hidden md:flex flex-col gap-6 text-right hero-text-anim">
+      <div class="flex flex-col gap-1">
+        <span class="meta-label !text-[0.55rem] text-white/50 tracking-widest uppercase" style="font-family: var(--ff-mono);">Client</span>
+        <span class="meta-value !text-sm text-white/90" style="font-family: var(--ff-body);">Rondebosch Golf Club</span>
+      </div>
+      <div class="flex flex-col gap-1">
+        <span class="meta-label !text-[0.55rem] text-white/50 tracking-widest uppercase" style="font-family: var(--ff-mono);">Type</span>
+        <span class="meta-value !text-sm text-white/90" style="font-family: var(--ff-body);">Hospitality / Commercial</span>
+      </div>
+      <div class="flex flex-col gap-1">
+        <span class="meta-label !text-[0.55rem] text-white/50 tracking-widest uppercase" style="font-family: var(--ff-mono);">Phase</span>
+        <span class="meta-value !text-sm text-white/90" style="font-family: var(--ff-body);">Proposal · 2024</span>
+      </div>
+      <div class="flex flex-col gap-1">
+        <span class="meta-label !text-[0.55rem] text-white/50 tracking-widest uppercase" style="font-family: var(--ff-mono);">Key Scope</span>
+        <span class="meta-value !text-sm text-white/90" style="font-family: var(--ff-body);">Concept Design</span>
+      </div>
+    </div>
+  
+    <!-- Scroll Indicator -->
+    <div id="scroll-indicator" class="scroll-indicator">
+      <span class="scroll-indicator__text">SCROLL TO EXPLORE</span>
+      <div class="scroll-indicator__line"></div>
+    </div>
+  </section>
+
+  <main class="relative z-10" style="background-color: var(--void);">
+    <!-- Intro Narrative Section -->
+    <section class="max-w-4xl mx-auto px-6 py-24 md:py-32 flex flex-col md:flex-row gap-8 items-start">
+      <div class="text-xl md:text-2xl text-[#888888] leading-relaxed md:w-2/3" style="font-family: var(--ff-body);">
+        The design proposal for Rondebosch Golf Club refines the classic club model with a sequence of modernized lounges, dining rooms, and spectator terraces. Focused on clean detailing and contextual materiality, the architectural intervention repositions the clubhouse to engage directly with the golf course landscapes.
+      </div>
+      <div class="flex flex-wrap gap-2 md:w-1/3">
+        <span class="chip">Concept Design</span>
+        <span class="chip">Hospitality</span>
+        <span class="chip">Interior Coordination</span>
+        <span class="chip">Visualisation</span>
+      </div>
+    </section>
+
+    <!-- HORIZONTAL SCROLL GALLERY -->
+    <section class="gallery-section" id="gallery-container" style="padding: 0; position: relative; height: 100vh; background: var(--carbon); border-top: 1px solid var(--border); overflow: hidden;">
+      <span class="gallery-section-label" style="position: absolute; top: 3rem; left: 4rem; z-index: 10; margin: 0; mix-blend-mode: difference; color: #fff;">Project Archive</span>
+      <div class="gallery-scroll-track" id="gallery-track" style="display: flex; padding: 0; gap: 0; height: 100vh; width: max-content;">
+      <div class="gallery-scroll-item"><img src="../../assets/projects/rondebosch-golf/img-1.webp" class="archive-trigger" style="cursor: pointer;" data-index="0" loading="eager"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/rondebosch-golf/img-2.webp" class="archive-trigger" style="cursor: pointer;" data-index="1" loading="eager"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/rondebosch-golf/img-3.webp" class="archive-trigger" style="cursor: pointer;" data-index="2" loading="eager"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/rondebosch-golf/img-4.webp" class="archive-trigger" style="cursor: pointer;" data-index="3" loading="eager"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/rondebosch-golf/img-5.webp" class="archive-trigger" style="cursor: pointer;" data-index="4" loading="eager"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/rondebosch-golf/rbgc-1.webp" class="archive-trigger" style="cursor: pointer;" data-index="5" loading="eager"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/rondebosch-golf/rbgc-2.webp" class="archive-trigger" style="cursor: pointer;" data-index="6" loading="eager"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/rondebosch-golf/rbgc-3.webp" class="archive-trigger" style="cursor: pointer;" data-index="7" loading="eager"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/rondebosch-golf/rbgc-4.webp" class="archive-trigger" style="cursor: pointer;" data-index="8" loading="eager"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/rondebosch-golf/rbgc-5.webp" class="archive-trigger" style="cursor: pointer;" data-index="9" loading="eager"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/rondebosch-golf/rbgc-6.webp" class="archive-trigger" style="cursor: pointer;" data-index="10" loading="eager"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/rondebosch-golf/rbgc-7.webp" class="archive-trigger" style="cursor: pointer;" data-index="11" loading="eager"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/rondebosch-golf/rbgc-8.webp" class="archive-trigger" style="cursor: pointer;" data-index="12" loading="eager"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/rondebosch-golf/rbgc-9.webp" class="archive-trigger" style="cursor: pointer;" data-index="13" loading="eager"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/rondebosch-golf/rbgc-10.webp" class="archive-trigger" style="cursor: pointer;" data-index="14" loading="eager"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/rondebosch-golf/rbgc-11.webp" class="archive-trigger" style="cursor: pointer;" data-index="15" loading="eager"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/rondebosch-golf/rbgc-12.webp" class="archive-trigger" style="cursor: pointer;" data-index="16" loading="eager"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/rondebosch-golf/rbgc-13.webp" class="archive-trigger" style="cursor: pointer;" data-index="17" loading="eager"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/rondebosch-golf/rbgc-14.webp" class="archive-trigger" style="cursor: pointer;" data-index="18" loading="eager"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/rondebosch-golf/rbgc-15.webp" class="archive-trigger" style="cursor: pointer;" data-index="19" loading="eager"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/rondebosch-golf/rbgc-16.webp" class="archive-trigger" style="cursor: pointer;" data-index="20" loading="eager"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/rondebosch-golf/rbgc-17.webp" class="archive-trigger" style="cursor: pointer;" data-index="21" loading="eager"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/rondebosch-golf/rbgc-18.webp" class="archive-trigger" style="cursor: pointer;" data-index="22" loading="eager"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/rondebosch-golf/rbgc-19.webp" class="archive-trigger" style="cursor: pointer;" data-index="23" loading="eager"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/rondebosch-golf/rbgc-20.webp" class="archive-trigger" style="cursor: pointer;" data-index="24" loading="eager"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/rondebosch-golf/rbgc-21.webp" class="archive-trigger" style="cursor: pointer;" data-index="25" loading="eager"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/rondebosch-golf/rbgc-22.webp" class="archive-trigger" style="cursor: pointer;" data-index="26" loading="eager"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/rondebosch-golf/rbgc-23.webp" class="archive-trigger" style="cursor: pointer;" data-index="27" loading="eager"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/rondebosch-golf/rbgc-24.webp" class="archive-trigger" style="cursor: pointer;" data-index="28" loading="eager"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/rondebosch-golf/rbgc-25.webp" class="archive-trigger" style="cursor: pointer;" data-index="29" loading="eager"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/rondebosch-golf/rbgc-26.webp" class="archive-trigger" style="cursor: pointer;" data-index="30" loading="eager"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/rondebosch-golf/rbgc-27.webp" class="archive-trigger" style="cursor: pointer;" data-index="31" loading="eager"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/rondebosch-golf/rbgc-28.webp" class="archive-trigger" style="cursor: pointer;" data-index="32" loading="eager"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/rondebosch-golf/rbgc-29.webp" class="archive-trigger" style="cursor: pointer;" data-index="33" loading="eager"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/rondebosch-golf/rbgc-30.webp" class="archive-trigger" style="cursor: pointer;" data-index="34" loading="eager"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/rondebosch-golf/rbgc-31.webp" class="archive-trigger" style="cursor: pointer;" data-index="35" loading="eager"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/rondebosch-golf/rbgc-32.webp" class="archive-trigger" style="cursor: pointer;" data-index="36" loading="eager"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/rondebosch-golf/rbgc-33.webp" class="archive-trigger" style="cursor: pointer;" data-index="37" loading="eager"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/rondebosch-golf/rbgc-34.webp" class="archive-trigger" style="cursor: pointer;" data-index="38" loading="eager"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/rondebosch-golf/rbgc-35.webp" class="archive-trigger" style="cursor: pointer;" data-index="39" loading="eager"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/rondebosch-golf/rbgc-36.webp" class="archive-trigger" style="cursor: pointer;" data-index="40" loading="eager"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/rondebosch-golf/rbgc-37.webp" class="archive-trigger" style="cursor: pointer;" data-index="41" loading="eager"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/rondebosch-golf/rbgc-38.webp" class="archive-trigger" style="cursor: pointer;" data-index="42" loading="eager"></div>
+      </div>
+    </section>
+
+    <section class="cta-footer">
+      <span class="cta-label">Reducing Pipeline Uncertainty</span>
+      <h2 class="cta-heading">Ready to secure design accountability?</h2>
+      <a href="../../cv/index.html" class="cta-btn">Discuss a Project ↗</a>
+    </section>
+  </main>
+
+  <!-- FLOOR PLAN VIEWER MODAL -->
+  <div id="floorplan-modal" style="display: none; position: fixed; inset: 0; background: rgba(10, 10, 10, 0.98); backdrop-filter: blur(10px); z-index: 99999; align-items: center; justify-content: center; font-family: 'Inter', sans-serif;">
+    <button id="floorplan-close" style="position: absolute; top: 2rem; right: 2rem; background: none; border: 1px solid rgba(255,255,255,0.2); color: #fff; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; letter-spacing: 0.1em; padding: 0.6rem 1.2rem; border-radius: 50px; cursor: pointer; transition: all 0.3s; z-index: 100001;" onmouseover="this.style.borderColor='#fff'" onmouseout="this.style.borderColor='rgba(255,255,255,0.2)'">CLOSE ✕</button>
+    <div id="floorplan-header" style="position: absolute; top: 2.2rem; left: 50%; transform: translateX(-50%); text-align: center; z-index: 100001;">
+      <span id="floorplan-title" style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: #C8A96E; letter-spacing: 0.2em; text-transform: uppercase; display: block; margin-bottom: 0.2rem; white-space: nowrap;">Loading...</span>
+      <span id="floorplan-counter" style="font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; color: #666; letter-spacing: 0.1em;">1 OF 43</span>
+    </div>
+    <button id="floorplan-prev" style="position: absolute; left: 3rem; top: 50%; transform: translateY(-50%); background: rgba(20,20,20,0.8); border: 1px solid rgba(255,255,255,0.1); color: #fff; font-size: 1.5rem; width: 3.5rem; height: 3.5rem; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s; z-index: 100001;" onmouseover="this.style.borderColor='#C8A96E'; this.style.color='#C8A96E';" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'; this.style.color='#fff';">←</button>
+    <button id="floorplan-next" style="position: absolute; right: 3rem; top: 50%; transform: translateY(-50%); background: rgba(20,20,20,0.8); border: 1px solid rgba(255,255,255,0.1); color: #fff; font-size: 1.5rem; width: 3.5rem; height: 3.5rem; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s; z-index: 100001;" onmouseover="this.style.borderColor='#C8A96E'; this.style.color='#C8A96E';" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'; this.style.color='#fff';">→</button>
+    <div id="floorplan-container">
+      <div id="floorplan-loading" style="position: absolute; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #666; letter-spacing: 0.1em; z-index: 100002;">LOADING IMAGE...</div>
+      <canvas id="floorplan-canvas" style="transform-origin: center; position: absolute; background: #000; display: block; border: none; will-change: transform;"></canvas>
+    </div>
+  </div>
+
+  <div id="next-project-transition"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+  <script src="../../js/next-project.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+        gsap.registerPlugin(ScrollTrigger);
+
+        // 1. Text Entrance Animation
+        gsap.from(".hero-text-anim", {
+          y: 40,
+          opacity: 0,
+          duration: 1.5,
+          stagger: 0.15,
+          ease: "power3.out",
+          delay: 0.1
+        });
+
+        // 2. Cinematic Pin & Scale
+        ScrollTrigger.create({
+          trigger: ".cinematic-hero-section",
+          start: "top top",
+          end: "+=100%", // Pin for 100vh of scroll distance
+          pin: true,
+          pinSpacing: false, // Critical: allows the <main> block below to slide up over the pinned hero
+          animation: gsap.to(".cinematic-hero-img", { scale: 1.08, ease: "none" }),
+          scrub: 1 // Smooth scrub
+        });
+
+        // 3. Project Archive Horizontal Scroll
+        const galleryContainer = document.getElementById("gallery-container");
+        const galleryTrack = document.getElementById("gallery-track");
+
+        if (galleryContainer && galleryTrack) {
+          function getGalleryScrollAmount() {
+            return galleryTrack.scrollWidth - window.innerWidth;
+          }
+
+          const galleryTween = gsap.to(galleryTrack, {
+            x: () => -getGalleryScrollAmount(),
+            ease: "none"
+          });
+
+          ScrollTrigger.create({
+            trigger: galleryContainer,
+            start: "top top",
+            end: () => `+=${getGalleryScrollAmount()}`,
+            pin: true,
+            animation: galleryTween,
+            scrub: 1, // Smooth scrolling
+            invalidateOnRefresh: true, // Recalculate widths on resize
+          });
+
+          // Dynamic refresh on image load to accurately calculate scrollable width
+          const galleryImages = galleryTrack.querySelectorAll("img");
+          galleryImages.forEach(img => {
+            if (img.complete) {
+              ScrollTrigger.refresh();
+            } else {
+              img.addEventListener("load", () => {
+                ScrollTrigger.refresh();
+              });
+            }
+          });
+        }
+      }
+    });
+
+    // Force ScrollTrigger to refresh after all images and layout calculations are complete
+    window.addEventListener("load", () => {
+      if (typeof ScrollTrigger !== 'undefined') {
+        ScrollTrigger.refresh();
+      }
+    });
+  </script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const plans = [
+        { type: 'image', isPlan: false, name: 'Rondebosch Golf Page 1', file: '../../assets/projects/rondebosch-golf/img-1.webp' },
+        { type: 'image', isPlan: false, name: 'Rondebosch Golf Page 2', file: '../../assets/projects/rondebosch-golf/img-2.webp' },
+        { type: 'image', isPlan: false, name: 'Rondebosch Golf Page 3', file: '../../assets/projects/rondebosch-golf/img-3.webp' },
+        { type: 'image', isPlan: false, name: 'Rondebosch Golf Page 4', file: '../../assets/projects/rondebosch-golf/img-4.webp' },
+        { type: 'image', isPlan: false, name: 'Rondebosch Golf Page 5', file: '../../assets/projects/rondebosch-golf/img-5.webp' },
+        { type: 'image', isPlan: false, name: 'Rondebosch Golf Plan 1', file: '../../assets/projects/rondebosch-golf/rbgc-1.webp' },
+        { type: 'image', isPlan: false, name: 'Rondebosch Golf Plan 2', file: '../../assets/projects/rondebosch-golf/rbgc-2.webp' },
+        { type: 'image', isPlan: false, name: 'Rondebosch Golf Plan 3', file: '../../assets/projects/rondebosch-golf/rbgc-3.webp' },
+        { type: 'image', isPlan: false, name: 'Rondebosch Golf Plan 4', file: '../../assets/projects/rondebosch-golf/rbgc-4.webp' },
+        { type: 'image', isPlan: false, name: 'Rondebosch Golf Plan 5', file: '../../assets/projects/rondebosch-golf/rbgc-5.webp' },
+        { type: 'image', isPlan: false, name: 'Rondebosch Golf Plan 6', file: '../../assets/projects/rondebosch-golf/rbgc-6.webp' },
+        { type: 'image', isPlan: false, name: 'Rondebosch Golf Plan 7', file: '../../assets/projects/rondebosch-golf/rbgc-7.webp' },
+        { type: 'image', isPlan: false, name: 'Rondebosch Golf Plan 8', file: '../../assets/projects/rondebosch-golf/rbgc-8.webp' },
+        { type: 'image', isPlan: false, name: 'Rondebosch Golf Plan 9', file: '../../assets/projects/rondebosch-golf/rbgc-9.webp' },
+        { type: 'image', isPlan: false, name: 'Rondebosch Golf Plan 10', file: '../../assets/projects/rondebosch-golf/rbgc-10.webp' },
+        { type: 'image', isPlan: false, name: 'Rondebosch Golf Plan 11', file: '../../assets/projects/rondebosch-golf/rbgc-11.webp' },
+        { type: 'image', isPlan: false, name: 'Rondebosch Golf Plan 12', file: '../../assets/projects/rondebosch-golf/rbgc-12.webp' },
+        { type: 'image', isPlan: false, name: 'Rondebosch Golf Plan 13', file: '../../assets/projects/rondebosch-golf/rbgc-13.webp' },
+        { type: 'image', isPlan: false, name: 'Rondebosch Golf Plan 14', file: '../../assets/projects/rondebosch-golf/rbgc-14.webp' },
+        { type: 'image', isPlan: false, name: 'Rondebosch Golf Plan 15', file: '../../assets/projects/rondebosch-golf/rbgc-15.webp' },
+        { type: 'image', isPlan: false, name: 'Rondebosch Golf Plan 16', file: '../../assets/projects/rondebosch-golf/rbgc-16.webp' },
+        { type: 'image', isPlan: false, name: 'Rondebosch Golf Plan 17', file: '../../assets/projects/rondebosch-golf/rbgc-17.webp' },
+        { type: 'image', isPlan: false, name: 'Rondebosch Golf Plan 18', file: '../../assets/projects/rondebosch-golf/rbgc-18.webp' },
+        { type: 'image', isPlan: false, name: 'Rondebosch Golf Plan 19', file: '../../assets/projects/rondebosch-golf/rbgc-19.webp' },
+        { type: 'image', isPlan: false, name: 'Rondebosch Golf Plan 20', file: '../../assets/projects/rondebosch-golf/rbgc-20.webp' },
+        { type: 'image', isPlan: false, name: 'Rondebosch Golf Plan 21', file: '../../assets/projects/rondebosch-golf/rbgc-21.webp' },
+        { type: 'image', isPlan: false, name: 'Rondebosch Golf Plan 22', file: '../../assets/projects/rondebosch-golf/rbgc-22.webp' },
+        { type: 'image', isPlan: false, name: 'Rondebosch Golf Plan 23', file: '../../assets/projects/rondebosch-golf/rbgc-23.webp' },
+        { type: 'image', isPlan: false, name: 'Rondebosch Golf Plan 24', file: '../../assets/projects/rondebosch-golf/rbgc-24.webp' },
+        { type: 'image', isPlan: false, name: 'Rondebosch Golf Plan 25', file: '../../assets/projects/rondebosch-golf/rbgc-25.webp' },
+        { type: 'image', isPlan: false, name: 'Rondebosch Golf Plan 26', file: '../../assets/projects/rondebosch-golf/rbgc-26.webp' },
+        { type: 'image', isPlan: false, name: 'Rondebosch Golf Plan 27', file: '../../assets/projects/rondebosch-golf/rbgc-27.webp' },
+        { type: 'image', isPlan: false, name: 'Rondebosch Golf Plan 28', file: '../../assets/projects/rondebosch-golf/rbgc-28.webp' },
+        { type: 'image', isPlan: false, name: 'Rondebosch Golf Plan 29', file: '../../assets/projects/rondebosch-golf/rbgc-29.webp' },
+        { type: 'image', isPlan: false, name: 'Rondebosch Golf Plan 30', file: '../../assets/projects/rondebosch-golf/rbgc-30.webp' },
+        { type: 'image', isPlan: false, name: 'Rondebosch Golf Plan 31', file: '../../assets/projects/rondebosch-golf/rbgc-31.webp' },
+        { type: 'image', isPlan: false, name: 'Rondebosch Golf Plan 32', file: '../../assets/projects/rondebosch-golf/rbgc-32.webp' },
+        { type: 'image', isPlan: false, name: 'Rondebosch Golf Plan 33', file: '../../assets/projects/rondebosch-golf/rbgc-33.webp' },
+        { type: 'image', isPlan: false, name: 'Rondebosch Golf Plan 34', file: '../../assets/projects/rondebosch-golf/rbgc-34.webp' },
+        { type: 'image', isPlan: false, name: 'Rondebosch Golf Plan 35', file: '../../assets/projects/rondebosch-golf/rbgc-35.webp' },
+        { type: 'image', isPlan: false, name: 'Rondebosch Golf Plan 36', file: '../../assets/projects/rondebosch-golf/rbgc-36.webp' },
+        { type: 'image', isPlan: false, name: 'Rondebosch Golf Plan 37', file: '../../assets/projects/rondebosch-golf/rbgc-37.webp' },
+        { type: 'image', isPlan: false, name: 'Rondebosch Golf Plan 38', file: '../../assets/projects/rondebosch-golf/rbgc-38.webp' }
+      ];
+      let currentIndex = 0;
+      let currentViewport = null;
+      let prevPlan = null;
+      let lastWheelTime = 0;
+
+      let mouseX = 0;
+      let mouseY = 0;
+      window.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+      });
+
+      let zoomScale = 1.0;
+      let panX = 0;
+      let panY = 0;
+      let isDragging = false;
+      let startX = 0;
+      let startY = 0;
+      let transformNeedsUpdate = false;
+
+      const modal = document.getElementById('floorplan-modal');
+      const container = document.getElementById('floorplan-container');
+      const canvas = document.getElementById('floorplan-canvas');
+      const loadingEl = document.getElementById('floorplan-loading');
+      const titleEl = document.getElementById('floorplan-title');
+      const counterEl = document.getElementById('floorplan-counter');
+      const closeBtn = document.getElementById('floorplan-close');
+      const prevBtn = document.getElementById('floorplan-prev');
+      const nextBtn = document.getElementById('floorplan-next');
+      
+      const archiveTriggers = document.querySelectorAll('.archive-trigger');
+
+      archiveTriggers.forEach(el => {
+        el.addEventListener('click', () => {
+          const idx = parseInt(el.getAttribute('data-index'), 10);
+          if (!isNaN(idx)) {
+            openModal(idx);
+          }
+        });
+      });
+
+      function openModal(index) {
+        currentIndex = index;
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+        loadPlan(currentIndex);
+      }
+
+      function closeModal() {
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+        const ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        currentViewport = null;
+        prevPlan = null;
+        resetZoom();
+      }
+
+      function resetZoom() {
+        zoomScale = 1.0;
+        panX = 0;
+        panY = 0;
+        container.style.cursor = 'default';
+        requestTransformUpdate();
+      }
+
+      function requestTransformUpdate() {
+        if (!transformNeedsUpdate) {
+          transformNeedsUpdate = true;
+          requestAnimationFrame(applyTransform);
+        }
+      }
+
+      function applyTransform() {
+        if (!transformNeedsUpdate) return;
+        
+        if (currentViewport) {
+          const w = container.clientWidth;
+          const h = container.clientHeight;
+          const maxPanX = Math.max(0, ((zoomScale - 1) * w) / 2);
+          const maxPanY = Math.max(0, ((zoomScale - 1) * h) / 2);
+          panX = Math.max(-maxPanX, Math.min(maxPanX, panX));
+          panY = Math.max(-maxPanY, Math.min(maxPanY, panY));
+        }
+
+        canvas.style.transform = `translate(${panX}px, ${panY}px) scale(${zoomScale})`;
+        transformNeedsUpdate = false;
+      }
+
+      function resizeCanvas() {
+        if (modal.style.display === 'flex' && currentViewport) {
+          const maxW = window.innerWidth * 0.75;
+          const maxH = window.innerHeight * 0.75;
+
+          const planRatio = currentViewport.width / currentViewport.height;
+
+          let containerW = maxW;
+          let containerH = containerW / planRatio;
+
+          if (containerH > maxH) {
+            containerH = maxH;
+            containerW = containerH * planRatio;
+          }
+
+          container.style.width = containerW + 'px';
+          container.style.height = containerH + 'px';
+
+          canvas.style.width = containerW + 'px';
+          canvas.style.height = containerH + 'px';
+
+          requestTransformUpdate();
+        }
+      }
+
+      function loadPlan(index) {
+        const plan = plans[index];
+        prevPlan = plan;
+
+        loadingEl.style.display = 'block';
+        titleEl.textContent = plan.name;
+        counterEl.textContent = `${index + 1} OF ${plans.length}`;
+
+        const img = new Image();
+        img.onload = () => {
+          const mockViewport = {
+            width: img.naturalWidth,
+            height: img.naturalHeight
+          };
+          currentViewport = mockViewport;
+
+          const ctx = canvas.getContext('2d');
+          canvas.width = img.naturalWidth;
+          canvas.height = img.naturalHeight;
+          ctx.drawImage(img, 0, 0);
+
+          loadingEl.style.display = 'none';
+          resizeCanvas();
+          updateCursorOverViewport();
+        };
+        img.onerror = (err) => {
+          console.error('Error loading image:', err);
+        };
+        img.src = plan.file;
+      }
+
+      closeBtn.addEventListener('click', closeModal);
+      
+      prevBtn.addEventListener('click', () => {
+        currentIndex = (currentIndex - 1 + plans.length) % plans.length;
+        loadPlan(currentIndex);
+      });
+
+      nextBtn.addEventListener('click', () => {
+        currentIndex = (currentIndex + 1) % plans.length;
+        loadPlan(currentIndex);
+      });
+
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          closeModal();
+        }
+      });
+
+      window.addEventListener('resize', resizeCanvas);
+
+      // ── Non-Zoom Wheel Scroll ──
+      container.addEventListener('wheel', (e) => {
+        if (!currentViewport) return;
+        e.preventDefault();
+
+        // Scroll next/prev on normal renders
+        const now = Date.now();
+        if (now - lastWheelTime > 800) {
+          if (e.deltaY > 20) {
+            nextBtn.click();
+            lastWheelTime = now;
+          } else if (e.deltaY < -20) {
+            prevBtn.click();
+            lastWheelTime = now;
+          }
+        }
+      }, { passive: false });
+
+      document.addEventListener('keydown', (e) => {
+        if (modal.style.display === 'flex') {
+          if (e.key === 'ArrowLeft') {
+            prevBtn.click();
+          } else if (e.key === 'ArrowRight') {
+            nextBtn.click();
+          } else if (e.key === 'Escape') {
+            closeModal();
+          }
+        }
+      });
+
+      // ── Custom Cursor Overrides ──
+      const cursorDot = document.querySelector('.cursor-dot');
+      const cursorOutline = document.querySelector('.cursor-outline');
+
+      function updateCursorOverViewport() {
+        const rect = container.getBoundingClientRect();
+        const inside = (mouseX >= rect.left && mouseX <= rect.right && mouseY >= rect.top && mouseY <= rect.bottom);
+        if (inside) {
+          // Keep custom cursor active on normal images
+          if (cursorDot) cursorDot.style.opacity = '1';
+          if (cursorOutline) cursorOutline.style.opacity = '1';
+        }
+      }
+
+      modal.addEventListener('mouseover', (e) => {
+        if (e.target === modal) {
+          document.body.classList.add('cursor-hover');
+          if (cursorDot) cursorDot.style.opacity = '1';
+          if (cursorOutline) cursorOutline.style.opacity = '1';
+        }
+      });
+
+      modal.addEventListener('mouseout', (e) => {
+        if (e.target === modal) {
+          document.body.classList.remove('cursor-hover');
+        }
+      });
+
+      container.addEventListener('mouseenter', () => {
+        updateCursorOverViewport();
+        document.body.classList.remove('cursor-hover');
+      });
+
+      container.addEventListener('mouseleave', () => {
+        if (cursorDot) cursorDot.style.opacity = '1';
+        if (cursorOutline) cursorOutline.style.opacity = '1';
+      });
+
+      function bindTriggerCursor(el) {
+        if (el) {
+          el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+          el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+        }
+      }
+
+      archiveTriggers.forEach(bindTriggerCursor);
+    });
+  </script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const indicator = document.getElementById('scroll-indicator');
+      if (indicator) {
+        window.addEventListener('scroll', () => {
+          let opacity = 1 - Math.min(window.scrollY / 150, 1);
+          indicator.style.opacity = opacity;
+        }, { passive: true });
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bradley Brits | Architectural Portfolio</title>
+  
+  <link rel="stylesheet" href="css/index.css?v=6" />
+  
+  <!-- GSAP CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3PV9G8CCTQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-3PV9G8CCTQ');
+  </script>
+</head>
+<body class="bg-black text-white">
+
+  <!-- Custom Cursor -->
+  <div class="cursor-dot"></div>
+  <div class="cursor-outline"></div>
+
+  <!-- Loading Screen -->
+  <div id="loading-screen" class="loading-screen">
+    <div class="loading-screen__header">
+      <span class="loading-screen__label">Portfolio // 2026</span>
+    </div>
+    <div class="loading-screen__body">
+      <div class="loading-screen__title-wrapper">
+        <h2 id="loading-text" class="loading-screen__title">Site to certainty.</h2>
+      </div>
+      <p class="loading-screen__description">
+        Technical visualisation · BIM coordination · spatial intelligence
+      </p>
+      <div class="loading-screen__location">
+        <span class="loading-screen__location-label">Available globally</span>
+        <span class="loading-screen__location-dot"></span>
+        <span class="loading-screen__location-text">Cape Town · Dubai · London</span>
+      </div>
+    </div>
+    <div class="loading-screen__footer">
+      <div class="loading-screen__counter-wrapper">
+        <span class="loading-screen__counter-label">Loading</span>
+        <span id="loading-counter" class="loading-screen__counter">000</span>
+      </div>
+      <div class="loading-screen__progress-wrapper">
+        <div id="loading-progress" class="loading-screen__progress"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <nav id="main-nav" class="nav-container">
+    <div class="nav-inner">
+      <div class="nav-logo" id="nav-logo">BB</div>
+      <div class="nav-links">
+        <a href="#" class="nav-link" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">Home</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#cv-section" class="nav-link">CV</a>
+      </div>
+      <a href="#cv-section" class="nav-contact">Contact</a>
+    </div>
+  </nav>
+  <!-- Invisible hover strip — reveals nav when user moves mouse to top of screen -->
+  <div id="nav-hover-zone" class="nav-hover-zone"></div>
+
+  <!-- Scroll-Scrub Video Hero Section -->
+  <section id="hero" class="hero-section">
+    <div id="hero-video-container" class="hero-video-container">
+      <!-- Canvas for Image Sequence -->
+      <canvas id="hero-canvas" class="hero-canvas" style="display: block; opacity: 0.6;"></canvas>
+    </div>
+    
+    <div class="hero-content-overlay" id="hero-content">
+      <h1 class="hero-title">Bradley Brits</h1>
+      <h2 class="hero-role">Senior Architectural Technologist</h2>
+      <div class="hero-details">
+        <span class="hero-phone">078 661 8090</span>
+        <span class="hero-location">Cape Town</span>
+        <span class="hero-email"><a href="mailto:ibradleyqbrits@gmail.com" style="color: inherit; text-decoration: none; transition: color 0.3s;">ibradleyqbrits@gmail.com</a></span>
+      </div>
+    </div>
+
+    <!-- Scroll Indicator (Option 3: Animated Line & Text) -->
+    <div id="scroll-indicator" class="scroll-indicator">
+      <span class="scroll-indicator__text">SCROLL TO EXPERIENCE PORTFOLIO</span>
+      <div class="scroll-indicator__line"></div>
+    </div>
+
+    <!-- HUD overlay layer -->
+    <div class="hero-hud">
+      <div class="hero-hud__top">
+      </div>
+      <div class="hero-hud__right">
+        <div id="audience-pane" class="hero-hud__audience-pane"></div>
+      </div>
+      <div class="hero-hud__bottom">
+        <div id="text-pane-left" class="hero-hud__text-pane-left">
+          <h2 id="overlay-headline" class="hero-hud__headline"></h2>
+          <p id="overlay-supporting" class="hero-hud__supporting"></p>
+        </div>
+        <div id="text-pane-right" class="hero-hud__text-pane-right">
+          <div id="proof-chips-container" class="hero-hud__proof-chips"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Horizontal Scroll Projects Section -->
+  <section id="projects" class="projects-section">
+    <div class="projects-container" id="projects-container">
+      <!-- The track that moves horizontally -->
+      <div class="projects-track" id="projects-track">
+
+        <article class="project-card" data-target="projects/site-intelligence/index.html">
+          <div class="project-media">
+            <div class="hover-gallery">
+              <img src="assets/projects/zimbali/img-2.webp" alt="Niewoudsville Main" class="gallery-image" loading="lazy" />
+            </div>
+          </div>
+          <div class="project-info">
+            <div class="project-info-left">
+              <h3 class="project-title">NIEWOUDSVILLE</h3>
+            </div>
+            <div class="project-info-right">
+              <span class="project-category">Context Modeling / 3D Render / Architecture</span>
+              <span class="project-type">Mixed Used - Hospitality</span>
+              <span class="project-stage">Stage 1 - 4.1</span>
+            </div>
+          </div>
+        </article>
+    
+        <article class="project-card" data-target="projects/belhar-regional-hospital/index.html">
+          <div class="project-media">
+            <div class="hover-gallery">
+              <img src="assets/projects/belhar-regional-hospital/belhar-hospital-cover.webp" alt="Belhar Regional Hospital Main" class="gallery-image" loading="lazy" />
+            </div>
+          </div>
+          <div class="project-info">
+            <div class="project-info-left">
+              <h3 class="project-title">BELHAR REGIONAL HOSPITAL</h3>
+            </div>
+            <div class="project-info-right">
+              <span class="project-category">Services Coordination / Architecture / Master Planning</span>
+              <span class="project-type">Health Care</span>
+              <span class="project-stage">Stage 2</span>
+            </div>
+          </div>
+        </article>
+    
+        <article class="project-card" data-target="projects/berkshire/index.html">
+          <div class="project-media">
+            <div class="hover-gallery">
+              <img src="assets/projects/berkshire/1_3 - Photo.webp" alt="Berkshire 1" class="gallery-image" loading="lazy" />
+              <img data-src="assets/projects/berkshire/1_4 - Photo.webp" alt="Berkshire 2" class="gallery-image" />
+              <img data-src="assets/projects/berkshire/1_5 - Photo.webp" alt="Berkshire 3" class="gallery-image" />
+            </div>
+          </div>
+          <div class="project-info">
+            <div class="project-info-left">
+              <h3 class="project-title">BERKSHIRE BOULEVARD</h3>
+            </div>
+            <div class="project-info-right">
+              <span class="project-category">3D Render / Council Submission</span>
+              <span class="project-type">Retail</span>
+              <span class="project-stage">Stage 1 & Stage 4.1</span>
+            </div>
+          </div>
+        </article>
+    
+        <article class="project-card" data-target="projects/die-laan/index.html">
+          <div class="project-media">
+            <div class="hover-gallery">
+              <img src="assets/projects/die-laan/img-0.webp" alt="Die Laan Main" class="gallery-image" loading="lazy" />
+            </div>
+          </div>
+          <div class="project-info">
+            <div class="project-info-left">
+              <h3 class="project-title">DIE LAAN</h3>
+            </div>
+            <div class="project-info-right">
+              <span class="project-category">Residential Proposal / 3D Render</span>
+              <span class="project-type">Residential</span>
+              <span class="project-stage">Stage 1</span>
+            </div>
+          </div>
+        </article>
+    
+        <article class="project-card" data-target="projects/granger-bay/index.html">
+          <div class="project-media">
+            <div class="hover-gallery gallery-6">
+              <img src="assets/projects/granger-bay/img-0.webp" alt="Granger Bay Render 0" class="gallery-image" loading="lazy" />
+              <img data-src="assets/projects/granger-bay/img-1.webp" alt="Granger Bay Render 1" class="gallery-image" />
+              <img data-src="assets/projects/granger-bay/img-2.webp" alt="Granger Bay Render 2" class="gallery-image" />
+              <img data-src="assets/projects/granger-bay/img-3.webp" alt="Granger Bay Render 3" class="gallery-image" />
+              <img data-src="assets/projects/granger-bay/img-4.webp" alt="Granger Bay Render 4" class="gallery-image" />
+              <img data-src="assets/projects/granger-bay/img-5.webp" alt="Granger Bay Render 5" class="gallery-image" />
+            </div>
+          </div>
+          <div class="project-info">
+            <div class="project-info-left">
+              <h3 class="project-title">GRANGER BAY</h3>
+            </div>
+            <div class="project-info-right">
+              <span class="project-category">3D Concept Renders</span>
+              <span class="project-type">Residential</span>
+              <span class="project-stage">Stage 1</span>
+            </div>
+          </div>
+        </article>
+    
+        <article class="project-card" data-target="projects/harris-office/index.html">
+          <div class="project-media">
+            <div class="hover-gallery">
+              <img src="assets/projects/harris-office/img-0.webp" alt="Harris Office Main" class="gallery-image" loading="lazy" />
+            </div>
+          </div>
+          <div class="project-info">
+            <div class="project-info-left">
+              <h3 class="project-title">HARRIS OFFICE</h3>
+            </div>
+            <div class="project-info-right">
+              <span class="project-category">Interior Renovation / Coordination / Council Submission</span>
+              <span class="project-type">Commercial</span>
+              <span class="project-stage">Stage 1 - Stage 4.2</span>
+            </div>
+          </div>
+        </article>
+    
+        <article id="pather-card" class="project-card" data-target="projects/house-pather/index.html">
+          <div class="project-media">
+            <div class="hover-gallery">
+              <video id="pather-video" data-src="assets/projects/house-pather/hero-video.mp4" poster="assets/projects/house-pather/img-0.webp" preload="none" muted playsinline class="gallery-video" style="width:100%; height:100%; object-fit:cover; position:absolute; inset:0;"></video>
+            </div>
+          </div>
+          <div class="project-info">
+            <div class="project-info-left">
+              <h3 class="project-title">HOUSE PATHER</h3>
+            </div>
+            <div class="project-info-right">
+              <span class="project-category">Residential Proposal / Council Submission / 3D Renders</span>
+              <span class="project-type">Residential</span>
+              <span class="project-stage">Stage 1 - Stage 4.1</span>
+            </div>
+          </div>
+        </article>
+    
+        <article class="project-card" data-target="projects/newlands-cricket/index.html">
+          <div class="project-media">
+            <div class="hover-gallery gallery-12">
+              <img src="assets/projects/newlands-cricket/dugouts/dugout-0.webp" alt="Newlands Cricket Dugout 0" class="gallery-image" loading="lazy" />
+              <img data-src="assets/projects/newlands-cricket/dugouts/dugout-1.webp" alt="Newlands Cricket Dugout 1" class="gallery-image" />
+              <img data-src="assets/projects/newlands-cricket/dugouts/dugout-2.webp" alt="Newlands Cricket Dugout 2" class="gallery-image" />
+              <img data-src="assets/projects/newlands-cricket/dugouts/dugout-3.webp" alt="Newlands Cricket Dugout 3" class="gallery-image" />
+              <img data-src="assets/projects/newlands-cricket/dugouts/dugout-4.webp" alt="Newlands Cricket Dugout 4" class="gallery-image" />
+              <img data-src="assets/projects/newlands-cricket/dugouts/dugout-5.webp" alt="Newlands Cricket Dugout 5" class="gallery-image" />
+              <img data-src="assets/projects/newlands-cricket/dugouts/dugout-6.webp" alt="Newlands Cricket Dugout 6" class="gallery-image" />
+              <img data-src="assets/projects/newlands-cricket/dugouts/dugout-7.webp" alt="Newlands Cricket Dugout 7" class="gallery-image" />
+              <img data-src="assets/projects/newlands-cricket/dugouts/dugout-8.webp" alt="Newlands Cricket Dugout 8" class="gallery-image" />
+              <img data-src="assets/projects/newlands-cricket/dugouts/dugout-9.webp" alt="Newlands Cricket Dugout 9" class="gallery-image" />
+              <img data-src="assets/projects/newlands-cricket/dugouts/dugout-10.webp" alt="Newlands Cricket Dugout 10" class="gallery-image" />
+              <img data-src="assets/projects/newlands-cricket/dugouts/dugout-11.webp" alt="Newlands Cricket Dugout 11" class="gallery-image" />
+            </div>
+          </div>
+          <div class="project-info">
+            <div class="project-info-left">
+              <h3 class="project-title">NEWLANDS CRICKET GROUND</h3>
+            </div>
+            <div class="project-info-right">
+              <span class="project-category">Council Submission North Pavilion</span>
+              <span class="project-type">Mix Used Development</span>
+              <span class="project-stage">Stage 1 & Stage 4.1</span>
+            </div>
+          </div>
+        </article>
+    
+    
+        <article class="project-card" data-target="projects/rondebosch-golf/index.html">
+          <div class="project-media">
+            <div class="hover-gallery gallery-12">
+              <img src="assets/projects/rondebosch-golf/rbgc-27.webp" alt="Rondebosch 27" class="gallery-image" loading="lazy" />
+              <img data-src="assets/projects/rondebosch-golf/rbgc-28.webp" alt="Rondebosch 28" class="gallery-image" />
+              <img data-src="assets/projects/rondebosch-golf/rbgc-29.webp" alt="Rondebosch 29" class="gallery-image" />
+              <img data-src="assets/projects/rondebosch-golf/rbgc-30.webp" alt="Rondebosch 30" class="gallery-image" />
+              <img data-src="assets/projects/rondebosch-golf/rbgc-31.webp" alt="Rondebosch 31" class="gallery-image" />
+              <img data-src="assets/projects/rondebosch-golf/rbgc-32.webp" alt="Rondebosch 32" class="gallery-image" />
+              <img data-src="assets/projects/rondebosch-golf/rbgc-33.webp" alt="Rondebosch 33" class="gallery-image" />
+              <img data-src="assets/projects/rondebosch-golf/rbgc-34.webp" alt="Rondebosch 34" class="gallery-image" />
+              <img data-src="assets/projects/rondebosch-golf/rbgc-35.webp" alt="Rondebosch 35" class="gallery-image" />
+              <img data-src="assets/projects/rondebosch-golf/rbgc-36.webp" alt="Rondebosch 36" class="gallery-image" />
+              <img data-src="assets/projects/rondebosch-golf/rbgc-37.webp" alt="Rondebosch 37" class="gallery-image" />
+              <img data-src="assets/projects/rondebosch-golf/rbgc-38.webp" alt="Rondebosch 38" class="gallery-image" />
+            </div>
+          </div>
+          <div class="project-info">
+            <div class="project-info-left">
+              <h3 class="project-title">RONDEBOSCH GOLF CLUB</h3>
+            </div>
+            <div class="project-info-right">
+              <span class="project-category">Design and 3D Proposal</span>
+              <span class="project-type">Commercial</span>
+              <span class="project-stage">Stage 1</span>
+            </div>
+          </div>
+        </article>
+    
+        <article class="project-card" data-target="projects/stud-hq/index.html">
+          <div class="project-media">
+            <div class="hover-gallery">
+              <video data-src="assets/projects/stud-hq/stud-video-1.mp4" poster="assets/projects/stud-hq/stud-pretoria-1.webp" preload="none" loop muted playsinline class="gallery-video" style="width:100%; height:100%; object-fit:cover; position:absolute; inset:0;"></video>
+              <img src="assets/projects/stud-hq/stud-pretoria-1.webp" alt="Stud HQ Main" class="gallery-image" loading="lazy" />
+            </div>
+          </div>
+          <div class="project-info">
+            <div class="project-info-left">
+              <h3 class="project-title">STUD HQ</h3>
+            </div>
+            <div class="project-info-right">
+              <span class="project-category">Stud Retail Store Nationwide Rollout</span>
+              <span class="project-type">Retail</span>
+              <span class="project-stage">Stage 1 - Stage 6</span>
+            </div>
+          </div>
+        </article>
+    
+    
+
+    
+      </div>
+    </div>
+  </section>
+
+  <!-- CV Embedded Section -->
+  <section id="cv-section" style="width: 100%; height: 100vh; background: #0a0a0a; border-top: 1px solid rgba(255,255,255,0.06); position: relative; z-index: 10;">
+    <iframe src="cv/index.html" loading="lazy" style="width: 100%; height: 100%; border: none; display: block;"></iframe>
+  </section>
+
+  <!-- Footer -->
+  <footer id="footer" class="footer-section">
+    <div class="footer-inner">
+      <p class="footer-copy">&copy; 2026 Bradley Brits. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

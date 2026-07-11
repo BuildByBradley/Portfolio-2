@@ -1,0 +1,121 @@
+/* Basic Resets and Layout Structure */
+:root {
+  --bg-color: #080808;
+  --text-primary: #f0ede8;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  font-family: sans-serif; /* Design agent can update */
+  overflow-x: hidden;
+}
+
+/* Nav */
+.nav-container {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+  padding: 20px;
+}
+.nav-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Hero Section */
+.hero-section {
+  position: relative;
+  width: 100%;
+  height: 100vh; /* Will be pinned by GSAP */
+  overflow: hidden;
+}
+
+.hero-video-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.hero-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: none; /* Fallback for image sequence */
+}
+
+.hero-content-overlay {
+  position: relative;
+  z-index: 10;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+/* Horizontal Projects */
+.projects-section {
+  position: relative;
+  width: 100%;
+  background-color: #111;
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
+.projects-container {
+  overflow: hidden;
+  width: 100%;
+  height: 100vh; /* Full viewport height for pinning */
+}
+
+.projects-track {
+  display: flex;
+  height: 100%;
+  width: max-content; /* Width depends on children */
+  padding: 0 10vw;
+  align-items: center;
+  gap: 50px;
+}
+
+.project-card {
+  width: 60vw;
+  height: 60vh;
+  background: #222;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-media {
+  flex: 1;
+  background: #333; /* Placeholder */
+}
+
+.project-info {
+  padding: 20px;
+}
+
+/* Footer */
+.footer-section {
+  padding: 40px;
+  text-align: center;
+  background: #000;
+}

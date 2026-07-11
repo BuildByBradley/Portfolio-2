@@ -1,0 +1,34 @@
+{
+  "projectTitle": "Belhar Regional Hospital",
+  "projectType": "Healthcare Planning // BIM Technical Coordination",
+  "heroVideo": "../../assets/projects/belhar-bim/hero-video.mp4",
+  "poster": "../../assets/projects/belhar-bim/hero-poster.jpg",
+  "nextProjectUrl": "../luxury-visualisation/index.html",
+  "totalDuration": 60,
+  "overlays": [
+    {
+      "start": 4,
+      "end": 18,
+      "audience": "TECHNICAL MATRIX",
+      "headline": "Coordination parameters at hospital scale.",
+      "supporting": "Large-format spatial planning layout relationships, consultant inputs, and intricate structural layer components mapped cleanly into unified Revit coordinates.",
+      "proof": ["642 Beds Target", "Healthcare Flow", "Revit Architecture"]
+    },
+    {
+      "start": 22,
+      "end": 38,
+      "audience": "CLASH AUDIT",
+      "headline": "Isolating mechanical routing hazards.",
+      "supporting": "Linked models and consultant system inputs cross-checked to flag spatial execution overrides long before construction procurement lines open up.",
+      "proof": ["MEP System Links", "Clash Visibility", "Void Optimization"]
+    },
+    {
+      "start": 42,
+      "end": 56,
+      "audience": "ACCOUNTABILITY",
+      "headline": "Coordinated drawing room verification.",
+      "supporting": "Translating structural ceiling voids, escape logic layout paths, and clinical clearance factors into cross-verified sheets ready for execution teams.",
+      "proof": ["Sign-Off Sets", "Zero Site Re-work", "Consultant Alignment"]
+    }
+  ]
+}

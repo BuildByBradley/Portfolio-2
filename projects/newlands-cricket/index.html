@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Newlands Cricket Ground — Bradley Brits</title>
+  <meta name="description" content="Architectural proposals across multiple phases for Newlands Cricket Ground.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/project.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --void: #0a0a0a; --carbon: #141414; --surface: #1a1a1a; --border: #1f1f1f; --border-light: #2a2a2a;
+      --text: #f5f5f5; --text-muted: #888888; --text-dim: #666666;
+      --gold: #C8A96E; --gold-dim: rgba(200,169,110,0.15); --gold-border: rgba(200,169,110,0.25);
+      --ff-display: 'Instrument Serif', serif; --ff-body: 'Inter', sans-serif; --ff-mono: 'JetBrains Mono', monospace;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--void); color: var(--text); font-family: var(--ff-body); font-weight: 300; line-height: 1.7; overflow-x: hidden; }
+    .eyebrow { font-family: var(--ff-mono); font-size: 0.65rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; margin-bottom: 1rem; }
+    h1 { font-family: var(--ff-display); font-size: clamp(3.5rem, 8vw, 6.5rem); line-height: 0.92; letter-spacing: -0.02em; margin-bottom: 1.5rem; font-style: italic; font-weight: 400; }
+    .subtitle { font-size: 1.25rem; color: var(--text-muted); line-height: 1.7; max-width: 900px; }
+    .metadata-block { max-width: 1200px; margin: 0 auto; padding: 0 4rem 4rem; display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; border-bottom: 1px solid var(--border); }
+    .meta-item { display: flex; flex-direction: column; gap: 0.5rem; }
+    .meta-label { font-family: var(--ff-mono); font-size: 0.58rem; letter-spacing: 0.15em; color: var(--text-dim); text-transform: uppercase; }
+    .meta-value { font-size: 0.85rem; color: var(--text); font-weight: 400; }
+    .hero-still-section { max-width: 1200px; margin: 4rem auto; padding: 0 4rem; }
+    .hero-image-wrapper { position: relative; width: 100%; height: auto; aspect-ratio: 16/9; background: var(--carbon); border: 1px solid var(--border); overflow: hidden; }
+    .hero-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .hero-caption { margin-top: 1.5rem; display: grid; grid-template-columns: 2fr 1fr; gap: 4rem; align-items: start; }
+    .hero-intro { font-size: 0.95rem; color: var(--text-muted); line-height: 1.8; }
+    .role-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .chip { font-family: var(--ff-mono); font-size: 0.58rem; letter-spacing: 0.1em; padding: 0.3rem 0.7rem; border: 1px solid var(--gold-border); color: var(--gold); text-transform: uppercase; background: var(--gold-dim); }
+    .proof-section { max-width: 1200px; margin: 0 auto; padding: 4rem; border-top: 1px solid var(--border); }
+    .module-header { margin-bottom: 2rem; }
+    .module-num { font-family: var(--ff-mono); font-size: 0.65rem; color: var(--gold); text-transform: uppercase; margin-bottom: 0.5rem; display: block; }
+    .module-title { font-family: var(--ff-display); font-size: 3rem; letter-spacing: -0.01em; font-style: italic; font-weight: 400; line-height: 1.1; }
+    .proof-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .proof-media { background: var(--carbon); border: 1px solid var(--border); position: relative; }
+    .proof-img { width: 100%; height: auto; display: block; object-fit: cover; }
+    .proof-narrative { display: flex; flex-direction: column; gap: 1.5rem; }
+    .proof-caption { font-size: 1rem; color: var(--text); font-weight: 400; line-height: 1.6; }
+    .proof-details { font-size: 0.85rem; color: var(--text-muted); line-height: 1.8; }
+    .gallery-section { padding: 4rem 0; border-top: 1px solid var(--border); overflow: hidden; }
+    .gallery-section-label { font-family: var(--ff-mono); font-size: 0.65rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; padding: 0 4rem; margin-bottom: 2rem; display: block; }
+    .gallery-scroll-track { display: flex; gap: 1.5rem; padding: 0 4rem; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; cursor: grab; }
+    .gallery-scroll-track::-webkit-scrollbar { display: none; }
+    .gallery-scroll-item { flex: 0 0 70vw; scroll-snap-align: start; height: 55vh; overflow: hidden; border: 1px solid var(--border); }
+    .gallery-scroll-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: opacity 0.6s ease; }
+    .cta-footer { background: #060606; padding: 8rem 4rem; border-top: 1px solid var(--border); text-align: center; }
+    .cta-label { font-family: var(--ff-mono); font-size: 0.65rem; letter-spacing: 0.3em; color: var(--text-dim); text-transform: uppercase; display: block; margin-bottom: 1.5rem; }
+    .cta-heading { font-family: var(--ff-display); font-size: clamp(2.5rem, 5vw, 4rem); font-style: italic; font-weight: 400; line-height: 1.1; color: var(--text); margin-bottom: 2.5rem; max-width: 600px; margin-left: auto; margin-right: auto; }
+    .cta-btn { display: inline-flex; background: #fff; color: #000; font-family: var(--ff-body); font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.75rem; padding: 1rem 2.5rem; border-radius: 50px; text-decoration: none; border: 1px solid #fff; transition: all 0.3s; }
+    .cta-btn:hover { background: transparent; color: #fff; }
+    @media (max-width: 1024px) {
+      header { padding: 4rem 2rem 2rem !important; }
+      .metadata-block { padding: 0 2rem 3rem; grid-template-columns: repeat(2, 1fr); }
+      .hero-still-section { padding: 0 2rem; }
+      .hero-caption { grid-template-columns: 1fr; gap: 2rem; }
+      .proof-section { padding: 3rem 2rem; }
+      .proof-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .gallery-scroll-item { flex: 0 0 90vw; }
+      .gallery-section-label, .gallery-scroll-track { padding-left: 2rem; padding-right: 2rem; }
+      .cta-footer { padding: 5rem 2rem; }
+    }
+
+    /* APPENDIX SECTION (Process Archive) */
+    .appendix-section {
+      background: var(--carbon);
+      border-top: 1px solid var(--border);
+      padding: 6rem 4rem;
+    }
+    .appendix-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .appendix-title {
+      font-family: var(--ff-display);
+      font-size: 3.5rem;
+      margin-bottom: 2rem;
+      letter-spacing: -0.02em;
+      font-style: italic;
+      font-weight: 400;
+    }
+    .appendix-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    .appendix-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      text-decoration: none;
+      color: var(--text);
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .appendix-card:hover {
+      border-color: var(--gold-border);
+      background: var(--carbon);
+    }
+    .appendix-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .appendix-type {
+      font-family: var(--ff-mono);
+      font-size: 0.55rem;
+      letter-spacing: 0.15em;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+    .appendix-name {
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+    .appendix-size {
+      font-family: var(--ff-mono);
+      font-size: 0.6rem;
+      color: var(--text-dim);
+    }
+    .appendix-icon {
+      font-size: 1.5rem;
+      color: var(--text-dim);
+      transition: color 0.2s;
+    }
+    .appendix-card:hover .appendix-icon {
+      color: var(--gold);
+    }
+    @media (max-width: 768px) {
+      .appendix-section { padding: 4rem 2rem; }
+      .appendix-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Hover Slider for Proof Module 1 */
+    .proof-media-slider {
+      transition: transform 24s ease-in-out;
+    }
+    .proof-media.group:hover .proof-media-slider {
+      transform: translateX(-91.6667%);
+    }
+  </style>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3PV9G8CCTQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-3PV9G8CCTQ');
+  </script>
+</head>
+<body>
+  <nav class="fixed top-0 left-0 right-0 z-50 flex justify-between items-center p-6 bg-gradient-to-b from-black/90 to-transparent pointer-events-none">
+    <a href="../../index.html#projects" class="inline-flex items-center gap-2 pointer-events-auto backdrop-blur-md border border-white/10 bg-[#141414]/80 text-xs text-white uppercase tracking-wider rounded-full px-5 py-2 hover:border-white transition-all duration-300" style="text-decoration:none;font-family:'Inter',sans-serif;">← BACK TO PORTFOLIO</a>
+    <a href="../rondebosch-golf/index.html" class="inline-flex items-center gap-2 pointer-events-auto backdrop-blur-md border border-white/10 bg-[#141414]/80 text-xs text-white uppercase tracking-wider rounded-full px-5 py-2 hover:border-white transition-all duration-300" style="text-decoration:none;font-family:'Inter',sans-serif;">NEXT CASE STUDY →</a>
+  </nav>
+
+    <section class="cinematic-hero-section relative w-screen h-screen overflow-hidden bg-black z-0">
+    <img src="../../assets/projects/newlands-cricket/001_1 - Photo.webp" alt="newlands-cricket Hero" class="cinematic-hero-img absolute inset-0 w-full h-full object-cover" loading="eager">
+    
+    <!-- Gradient Overlay -->
+    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" style="background: linear-gradient(to top, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.4) 25%, transparent 50%);"></div>
+    
+    <!-- Title Area (Bottom Left) -->
+    <div class="absolute bottom-12 left-6 md:bottom-16 md:left-12 z-10 max-w-2xl hero-text-anim">
+      <div class="eyebrow mb-2 text-gold tracking-widest text-xs uppercase" style="font-family: var(--ff-mono);">Case Study · Sports Architecture</div>
+      <h1 class="!mb-4 !text-6xl md:!text-[7rem] leading-none" style="font-family: var(--ff-display); font-style: italic;">NEWLANDS CRICKET GROUND</h1>
+      <p class="subtitle !text-sm md:!text-base !max-w-xl text-white/80" style="font-family: var(--ff-body);">
+        Architectural proposals across multiple phases for Newlands Cricket Ground — from concept renders and spatial studies through to technical documentation.
+      </p>
+    </div>
+
+    <!-- HUD Metadata (Bottom Right) -->
+    <div class="absolute bottom-12 right-6 md:bottom-16 md:right-12 z-10 hidden md:flex flex-col gap-6 text-right hero-text-anim">
+      <div class="flex flex-col gap-1">
+        <span class="meta-label !text-[0.55rem] text-white/50 tracking-widest uppercase" style="font-family: var(--ff-mono);">Client</span>
+        <span class="meta-value !text-sm text-white/90" style="font-family: var(--ff-body);">Western Province Cricket</span>
+      </div>
+      <div class="flex flex-col gap-1">
+        <span class="meta-label !text-[0.55rem] text-white/50 tracking-widest uppercase" style="font-family: var(--ff-mono);">Type</span>
+        <span class="meta-value !text-sm text-white/90" style="font-family: var(--ff-body);">Sports Architecture</span>
+      </div>
+      <div class="flex flex-col gap-1">
+        <span class="meta-label !text-[0.55rem] text-white/50 tracking-widest uppercase" style="font-family: var(--ff-mono);">Phase</span>
+        <span class="meta-value !text-sm text-white/90" style="font-family: var(--ff-body);">Multiple Phases</span>
+      </div>
+      <div class="flex flex-col gap-1">
+        <span class="meta-label !text-[0.55rem] text-white/50 tracking-widest uppercase" style="font-family: var(--ff-mono);">Key Scope</span>
+        <span class="meta-value !text-sm text-white/90" style="font-family: var(--ff-body);">Concept + Technical Documentation</span>
+      </div>
+    </div>
+  
+    <!-- Scroll Indicator -->
+    <div id="scroll-indicator" class="scroll-indicator">
+      <span class="scroll-indicator__text">SCROLL TO EXPLORE</span>
+      <div class="scroll-indicator__line"></div>
+    </div>
+</section>
+
+  <!-- Wrapping the rest of the page so it can slide over the pinned hero -->
+  <main class="relative z-10" style="background-color: var(--void);">
+
+  <section class="proof-section">
+    <div class="module-header">
+      <span class="module-num">Proof Module 01</span>
+      <h2 class="module-title">Concept Renders & Spatial Studies</h2>
+    </div>
+    <div class="proof-grid">
+      <div class="proof-media overflow-hidden group cursor-ew-resize relative rounded-xl border border-[#1f1f1f] bg-black" style="overflow: hidden; border: 1px solid var(--border); border-radius: 4px; background: #000; position: relative;">
+        <div class="proof-media-slider flex" style="display: flex; width: 1200%; height: auto;">
+          <div style="width: 8.3333%; aspect-ratio: 16/9; flex-shrink: 0;"><img src="../../assets/projects/newlands-cricket/dugouts/dugout-0.webp" class="proof-img" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy"></div>
+          <div style="width: 8.3333%; aspect-ratio: 16/9; flex-shrink: 0;"><img src="../../assets/projects/newlands-cricket/dugouts/dugout-1.webp" class="proof-img" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy"></div>
+          <div style="width: 8.3333%; aspect-ratio: 16/9; flex-shrink: 0;"><img src="../../assets/projects/newlands-cricket/dugouts/dugout-2.webp" class="proof-img" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy"></div>
+          <div style="width: 8.3333%; aspect-ratio: 16/9; flex-shrink: 0;"><img src="../../assets/projects/newlands-cricket/dugouts/dugout-3.webp" class="proof-img" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy"></div>
+          <div style="width: 8.3333%; aspect-ratio: 16/9; flex-shrink: 0;"><img src="../../assets/projects/newlands-cricket/dugouts/dugout-4.webp" class="proof-img" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy"></div>
+          <div style="width: 8.3333%; aspect-ratio: 16/9; flex-shrink: 0;"><img src="../../assets/projects/newlands-cricket/dugouts/dugout-5.webp" class="proof-img" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy"></div>
+          <div style="width: 8.3333%; aspect-ratio: 16/9; flex-shrink: 0;"><img src="../../assets/projects/newlands-cricket/dugouts/dugout-6.webp" class="proof-img" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy"></div>
+          <div style="width: 8.3333%; aspect-ratio: 16/9; flex-shrink: 0;"><img src="../../assets/projects/newlands-cricket/dugouts/dugout-7.webp" class="proof-img" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy"></div>
+          <div style="width: 8.3333%; aspect-ratio: 16/9; flex-shrink: 0;"><img src="../../assets/projects/newlands-cricket/dugouts/dugout-8.webp" class="proof-img" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy"></div>
+          <div style="width: 8.3333%; aspect-ratio: 16/9; flex-shrink: 0;"><img src="../../assets/projects/newlands-cricket/dugouts/dugout-9.webp" class="proof-img" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy"></div>
+          <div style="width: 8.3333%; aspect-ratio: 16/9; flex-shrink: 0;"><img src="../../assets/projects/newlands-cricket/dugouts/dugout-10.webp" class="proof-img" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy"></div>
+          <div style="width: 8.3333%; aspect-ratio: 16/9; flex-shrink: 0;"><img src="../../assets/projects/newlands-cricket/dugouts/dugout-11.webp" class="proof-img" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy"></div>
+        </div>
+        <div class="absolute inset-x-0 bottom-0 py-3 bg-gradient-to-t from-[#080808]/90 to-transparent flex justify-center opacity-100 group-hover:opacity-0 transition-opacity duration-300 pointer-events-none" style="position: absolute; left: 0; right: 0; bottom: 0; padding: 0.75rem 0; background: linear-gradient(to top, rgba(8,8,8,0.9) 0%, transparent 100%); display: flex; justify-content: center; transition: opacity 0.3s; pointer-events: none;">
+          <span class="text-[9px] uppercase tracking-[0.2em] text-[#C8A96E] font-mono" style="font-family: var(--ff-mono); font-size: 0.58rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase;">Hover to explore</span>
+        </div>
+      </div>
+      <div class="proof-narrative">
+        <p class="proof-caption">Concept renders establishing the architectural character and spatial quality of proposed interventions.</p>
+        <p class="proof-details">The concept phase tested a range of architectural approaches for various intervention areas across the ground. Render studies focused on spectator experience, arrival sequence, and the relationship between new interventions and the existing stadium fabric.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="proof-section">
+    <div class="module-header">
+      <span class="module-num">Proof Module 02</span>
+      <h2 class="module-title">Proposal Documentation</h2>
+    </div>
+    <div class="proof-grid">
+      <div class="proof-media">
+        <video class="proof-img w-full h-auto object-cover block" autoplay loop muted playsinline>
+          <source src="../../assets/projects/newlands-cricket/campground-001.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="proof-narrative">
+        <p class="proof-caption">Architectural drawings produced across multiple proposal phases, coordinating design intent with technical requirements.</p>
+        <p class="proof-details">Proposal documentation was developed in response to ongoing client and stakeholder feedback. Drawing sets covered floor plans, sections, elevations, and key details — progressing through revision cycles to meet submission deadlines for each phase.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="proof-section">
+    <div class="module-header">
+      <span class="module-num">Proof Module 03</span>
+      <h2 class="module-title">Site & Context Photography</h2>
+    </div>
+    <div class="proof-grid">
+      <div class="proof-media">
+        <video class="proof-img w-full h-auto object-cover block" autoplay loop muted playsinline>
+          <source src="../../assets/projects/newlands-cricket/ncg-proposal-2.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="proof-narrative">
+        <p class="proof-caption">Site documentation and context studies informing the architectural response to the existing ground.</p>
+        <p class="proof-details">Site photography and contextual analysis informed key design decisions — including sight-line management, materials selection, and the integration of new elements into the existing heritage character of Newlands Cricket Ground.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="gallery-section">
+    <span class="gallery-section-label">Project Archive</span>
+    <div class="gallery-scroll-track" id="gallery-track">
+      <div class="gallery-scroll-item"><img src="../../assets/projects/newlands-cricket/001_2 - Photo.webp" loading="lazy"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/newlands-cricket/001_3 - Photo.webp" loading="lazy"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/newlands-cricket/001_4 - Photo.webp" loading="lazy"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/newlands-cricket/001_6 - Photo.webp" loading="lazy"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/newlands-cricket/001_7 - Photo.webp" loading="lazy"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/newlands-cricket/001_8 - Photo.webp" loading="lazy"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/newlands-cricket/001_9 - Photo.webp" loading="lazy"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/newlands-cricket/001_10 - Photo.webp" loading="lazy"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/newlands-cricket/001_11 - Photo.webp" loading="lazy"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/newlands-cricket/001_12 - Photo.webp" loading="lazy"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/newlands-cricket/003.webp" loading="lazy"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/newlands-cricket/004.webp" loading="lazy"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/newlands-cricket/005.webp" loading="lazy"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/newlands-cricket/006.webp" loading="lazy"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/newlands-cricket/007.webp" loading="lazy"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/newlands-cricket/img-1.webp" loading="lazy"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/newlands-cricket/img-2.webp" loading="lazy"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/newlands-cricket/img-3.webp" loading="lazy"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/newlands-cricket/img-4.webp" loading="lazy"></div>
+      <div class="gallery-scroll-item"><img src="../../assets/projects/newlands-cricket/img-5.webp" loading="lazy"></div>
+    </div>
+  </section>
+
+  <!-- PROCESS APPENDIX -->
+  <section class="appendix-section">
+    <div class="appendix-container">
+      <h2 class="appendix-title">Process Archive</h2>
+      <div class="appendix-grid">
+        <a href="appendix/Arch NCG North Pavilion.pdf" class="appendix-card" target="_blank">
+          <div class="appendix-info">
+            <span class="appendix-type">Drawings PDF</span>
+            <span class="appendix-name">Council Submission</span>
+            <span class="appendix-size">North Pavilion Architectural Submission & Spatial Planning Packs</span>
+          </div>
+          <span class="appendix-icon">↗</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-footer">
+    <span class="cta-label">Reducing Pipeline Uncertainty</span>
+    <h2 class="cta-heading">Ready to secure design accountability?</h2>
+    <a href="../../cv/index.html" class="cta-btn">Discuss a Project ↗</a>
+  </section>
+  </main>
+
+  <!-- NPT Container (Will be injected by next-project.js) -->
+  <div id="next-project-transition"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+  <script src="../../js/next-project.js"></script>
+  <script>
+    const track = document.getElementById('gallery-track');
+    if (track) { let isDown=false,startX,scrollLeft; track.addEventListener('mousedown',e=>{isDown=true;track.style.cursor='grabbing';startX=e.pageX-track.offsetLeft;scrollLeft=track.scrollLeft;}); track.addEventListener('mouseleave',()=>{isDown=false;track.style.cursor='grab';}); track.addEventListener('mouseup',()=>{isDown=false;track.style.cursor='grab';}); track.addEventListener('mousemove',e=>{if(!isDown)return;e.preventDefault();const x=e.pageX-track.offsetLeft;track.scrollLeft=scrollLeft-(x-startX)*1.5;}); }
+  </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+        gsap.registerPlugin(ScrollTrigger);
+
+        // 1. Text Entrance Animation
+        gsap.from(".hero-text-anim", {
+          y: 40,
+          opacity: 0,
+          duration: 1.5,
+          stagger: 0.15,
+          ease: "power3.out",
+          delay: 0.1
+        });
+
+        // 2. Cinematic Pin & Scale
+        ScrollTrigger.create({
+          trigger: ".cinematic-hero-section",
+          start: "top top",
+          end: "+=100%", // Pin for 100vh of scroll distance
+          pin: true,
+          pinSpacing: false, // Critical: allows the <main> block below to slide up over the pinned hero
+          animation: gsap.to(".cinematic-hero-img", { scale: 1.08, ease: "none" }),
+          scrub: 1 // Smooth scrub
+        });
+      }
+    });
+  </script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const indicator = document.getElementById('scroll-indicator');
+      if (indicator) {
+        window.addEventListener('scroll', () => {
+          let opacity = 1 - Math.min(window.scrollY / 150, 1);
+          indicator.style.opacity = opacity;
+        }, { passive: true });
+      }
+    });
+  </script>
+</body>
+</html>
