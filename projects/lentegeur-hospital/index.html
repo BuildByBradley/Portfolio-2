@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lentegeur Hospital Upgrade — Bradley Brits</title>
+  <meta name="description" content="Stage 5 construction documentation for Lentegeur Hospital upgrades, delivering details for walkways, canopies, waterproof areas, mesh guards, and ablution rooms.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/project.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --void: #0a0a0a;
+      --carbon: #141414;
+      --surface: #1a1a1a;
+      --border: #1f1f1f;
+      --border-light: #2a2a2a;
+      --text: #f5f5f5;
+      --text-muted: #888888;
+      --text-dim: #666666;
+      --gold: #C8A96E;
+      --gold-dim: rgba(200,169,110,0.15);
+      --gold-border: rgba(200,169,110,0.25);
+      --ff-display: 'Instrument Serif', serif;
+      --ff-body: 'Inter', sans-serif;
+      --ff-mono: 'JetBrains Mono', monospace;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--void); color: var(--text); font-family: var(--ff-body); font-weight: 300; line-height: 1.7; overflow-x: hidden; }
+    
+    .eyebrow { font-family: var(--ff-mono); font-size: 0.65rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; margin-bottom: 1rem; }
+    h1 { font-family: var(--ff-display); font-size: clamp(3.5rem, 8vw, 6.5rem); line-height: 0.92; letter-spacing: -0.02em; margin-bottom: 1.5rem; font-style: italic; font-weight: 400; }
+    .subtitle { font-size: 1.25rem; color: var(--text-muted); line-height: 1.7; max-width: 900px; }
+    
+    .metadata-block { max-width: 1200px; margin: 0 auto; padding: 0 4rem 4rem; display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; border-bottom: 1px solid var(--border); }
+    .meta-item { display: flex; flex-direction: column; gap: 0.5rem; }
+    .meta-label { font-family: var(--ff-mono); font-size: 0.58rem; letter-spacing: 0.15em; color: var(--text-dim); text-transform: uppercase; }
+    .meta-value { font-size: 0.85rem; color: var(--text); font-weight: 400; }
+    
+    .hero-still-section { max-width: 1200px; margin: 4rem auto; padding: 0 4rem; }
+    .hero-image-wrapper { position: relative; width: 100%; height: auto; aspect-ratio: 16/9; background: var(--carbon); border: 1px solid var(--border); overflow: hidden; }
+    .hero-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .hero-caption { margin-top: 1.5rem; display: grid; grid-template-columns: 2fr 1fr; gap: 4rem; align-items: start; }
+    .hero-intro { font-size: 0.95rem; color: var(--text-muted); line-height: 1.8; }
+    .role-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .chip { font-family: var(--ff-mono); font-size: 0.58rem; letter-spacing: 0.1em; padding: 0.3rem 0.7rem; border: 1px solid var(--gold-border); color: var(--gold); text-transform: uppercase; background: var(--gold-dim); }
+    
+    /* PROOF MODULES SECTION */
+    .proof-section {
+      max-width: 1200px;
+      margin: 4rem auto;
+      padding: 4rem;
+      border-top: 1px solid var(--border);
+    }
+    .module-header {
+      margin-bottom: 2rem;
+    }
+    .module-num {
+      font-family: var(--ff-mono);
+      font-size: 0.65rem;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+    .module-title {
+      font-family: var(--ff-display);
+      font-size: 3rem;
+      letter-spacing: -0.01em;
+      font-style: italic;
+      font-weight: 400;
+      line-height: 1.1;
+    }
+    .proof-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .proof-media {
+      background: var(--carbon);
+      border: 1px solid var(--border);
+      position: relative;
+    }
+    .proof-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+    .proof-narrative {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .proof-caption {
+      font-size: 1rem;
+      color: var(--text);
+      font-weight: 400;
+      line-height: 1.6;
+    }
+    .proof-details {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+    }
+    
+    /* APPENDIX SECTION */
+    .appendix-section { max-width: 1200px; margin: 0 auto; padding: 4rem 4rem 8rem; border-top: 1px solid var(--border); }
+    .appendix-title { font-family: var(--ff-mono); font-size: 0.65rem; letter-spacing: 0.2em; color: var(--text-dim); text-transform: uppercase; margin-bottom: 2rem; }
+    .appendix-card { display: flex; justify-content: space-between; align-items: center; background: var(--carbon); border: 1px solid var(--border); padding: 1.5rem 2rem; border-radius: 4px; text-decoration: none; transition: all 0.3s; }
+    .appendix-card:hover { border-color: var(--gold-border); background: var(--surface); }
+    .appendix-info { display: flex; flex-direction: column; gap: 0.25rem; }
+    .appendix-type { font-family: var(--ff-mono); font-size: 0.55rem; color: var(--gold); text-transform: uppercase; letter-spacing: 0.1em; }
+    .appendix-name { font-size: 0.95rem; color: var(--text); font-weight: 400; }
+    .appendix-size { font-size: 0.75rem; color: var(--text-dim); }
+    .appendix-icon { font-size: 1.2rem; color: var(--text-dim); transition: transform 0.3s; }
+    .appendix-card:hover .appendix-icon { transform: translate(3px, -3px); color: var(--gold); }
+    
+    .cta-footer { background: #060606; padding: 8rem 4rem; border-top: 1px solid var(--border); text-align: center; }
+    .cta-label { font-family: var(--ff-mono); font-size: 0.65rem; letter-spacing: 0.3em; color: var(--text-dim); text-transform: uppercase; display: block; margin-bottom: 1.5rem; }
+    .cta-heading { font-family: var(--ff-display); font-size: clamp(2.5rem, 5vw, 4rem); font-style: italic; font-weight: 400; line-height: 1.1; color: var(--text); margin-bottom: 2.5rem; max-width: 600px; margin-left: auto; margin-right: auto; }
+    .cta-btn { display: inline-flex; background: #fff; color: #000; font-family: var(--ff-body); font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.75rem; padding: 1rem 2.5rem; border-radius: 50px; text-decoration: none; border: 1px solid #fff; transition: all 0.3s; }
+    .cta-btn:hover { background: transparent; color: #fff; }
+    
+    @media (max-width: 1024px) {
+      header { padding: 4rem 2rem 2rem !important; }
+      .metadata-block { padding: 0 2rem 3rem; grid-template-columns: repeat(2, 1fr); }
+      .hero-still-section { padding: 0 2rem; }
+      .hero-caption { grid-template-columns: 1fr; gap: 2rem; }
+      .proof-section { padding: 3rem 2rem; }
+      .proof-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .appendix-section { padding: 4rem 2rem; }
+      .cta-footer { padding: 5rem 2rem; }
+    }
+  </style>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3PV9G8CCTQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-3PV9G8CCTQ');
+  </script>
+</head>
+<body>
+  <nav class="fixed top-0 left-0 right-0 z-50 flex justify-between items-center p-6 bg-gradient-to-b from-black/90 to-transparent pointer-events-none">
+    <a href="../../index.html#projects" class="inline-flex items-center gap-2 pointer-events-auto backdrop-blur-md border border-white/10 bg-[#141414]/80 text-xs text-white uppercase tracking-wider rounded-full px-5 py-2 hover:border-white transition-all duration-300" style="text-decoration:none;font-family:'Inter',sans-serif;">← BACK TO PORTFOLIO</a>
+    <a href="../site-intelligence/index.html" class="inline-flex items-center gap-2 pointer-events-auto backdrop-blur-md border border-white/10 bg-[#141414]/80 text-xs text-white uppercase tracking-wider rounded-full px-5 py-2 hover:border-white transition-all duration-300" style="text-decoration:none;font-family:'Inter',sans-serif;">NEXT CASE STUDY →</a>
+  </nav>
+
+  <section class="cinematic-hero-section relative w-screen h-screen overflow-hidden bg-black z-0">
+    <img src="media/site-plan-cover.webp" alt="Lentegeur Hospital Hero" class="cinematic-hero-img absolute inset-0 w-full h-full object-cover" loading="eager">
+    
+    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" style="background: linear-gradient(to top, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.4) 25%, transparent 50%);"></div>
+    
+    <div class="absolute bottom-12 left-6 md:bottom-16 md:left-12 z-10 max-w-2xl hero-text-anim">
+      <div class="eyebrow mb-2 text-gold tracking-widest text-xs uppercase" style="font-family: var(--ff-mono);">Case Study · Health Care</div>
+      <h1 class="!mb-4 !text-6xl md:!text-[7rem] leading-none" style="font-family: var(--ff-display); font-style: italic;">LENTEGEUR HOSPITAL</h1>
+      <p class="subtitle !text-sm md:!text-base !max-w-xl text-white/80" style="font-family: var(--ff-body);">
+        Stage 5 construction documentation for Lentegeur Hospital upgrades — delivering walkway and canopy details, shower waterproofing layouts, typical mesh guards, and data sheets.
+      </p>
+    </div>
+
+    <!-- HUD Metadata -->
+    <div class="absolute bottom-12 right-6 md:bottom-16 md:right-12 z-10 hidden md:flex flex-col gap-6 text-right hero-text-anim">
+      <div class="flex flex-col gap-1">
+        <span class="meta-label !text-[0.55rem] text-white/50 tracking-widest uppercase" style="font-family: var(--ff-mono);">Client</span>
+        <span class="meta-value !text-sm text-white/90" style="font-family: var(--ff-body);">Western Cape Government</span>
+      </div>
+      <div class="flex flex-col gap-1">
+        <span class="meta-label !text-[0.55rem] text-white/50 tracking-widest uppercase" style="font-family: var(--ff-mono);">Type</span>
+        <span class="meta-value !text-sm text-white/90" style="font-family: var(--ff-body);">Health Care</span>
+      </div>
+      <div class="flex flex-col gap-1">
+        <span class="meta-label !text-[0.55rem] text-white/50 tracking-widest uppercase" style="font-family: var(--ff-mono);">Phase</span>
+        <span class="meta-value !text-sm text-white/90" style="font-family: var(--ff-body);">Stage 5 Construction · 2026</span>
+      </div>
+      <div class="flex flex-col gap-1">
+        <span class="meta-label !text-[0.55rem] text-white/50 tracking-widest uppercase" style="font-family: var(--ff-mono);">Key Scope</span>
+        <span class="meta-value !text-sm text-white/90" style="font-family: var(--ff-body);">Walkways, Waterproofing, Room Data Sheets</span>
+      </div>
+    </div>
+  
+    <div id="scroll-indicator" class="scroll-indicator">
+      <span class="scroll-indicator__text">SCROLL TO EXPLORE</span>
+      <div class="scroll-indicator__line"></div>
+    </div>
+  </section>
+
+  <main class="relative z-10" style="background-color: var(--void);">
+
+    <!-- PROOF MODULE 01 -->
+    <section class="proof-section" style="margin-top: 4rem;">
+      <div class="module-header">
+        <span class="module-num">Proof Module 01</span>
+        <h2 class="module-title">Stage 5 Detail Packages</h2>
+      </div>
+      <div class="proof-grid">
+        <div class="proof-media">
+          <picture>
+            <source srcset="media/site-plan-cover.webp" type="image/webp">
+            <img src="media/site-plan-cover.webp" alt="Lentegeur Hospital Site Plan" class="proof-img viewer-trigger" data-index="0" style="cursor: pointer; transition: filter 0.3s;" onmouseover="this.style.filter='brightness(0.9)'" onmouseout="this.style.filter='brightness(1)'">
+          </picture>
+        </div>
+        <div class="proof-narrative">
+          <p class="proof-caption">
+            Comprehensive construction drawing set and detail packs for Lentegeur Hospital.
+          </p>
+          <p class="proof-details">
+            The package comprised detailed walkways, canopy structures, typical mesh guard layouts, shower waterproofing, and door schedules. All drawings were coordinated across the structural and architectural grids and formatted to meet local provincial standards.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- APPENDIX / DOWNLOAD SECTION -->
+    <section class="appendix-section">
+      <h2 class="appendix-title">Process Archive</h2>
+      <a href="appendix/stage5-construction-set.pdf" target="_blank" rel="noopener" class="appendix-card">
+        <div class="appendix-info">
+          <span class="appendix-type">PDF Document</span>
+          <span class="appendix-name">Stage 5 Construction Drawing Set</span>
+          <span class="appendix-size">Complete coordinated construction details pack</span>
+        </div>
+        <span class="appendix-icon">↗</span>
+      </a>
+    </section>
+
+    <!-- CTA FOOTER -->
+    <section class="cta-footer">
+      <span class="cta-label">Reducing Pipeline Uncertainty</span>
+      <h2 class="cta-heading">Ready to secure design accountability?</h2>
+      <a href="../../cv/index.html" class="cta-btn">Discuss a Project ↗</a>
+    </section>
+  </main>
+
+  <!-- VIEWER MODAL -->
+  <div id="viewer-modal" style="display: none; position: fixed; inset: 0; background: rgba(10, 10, 10, 0.98); backdrop-filter: blur(10px); z-index: 99999; align-items: center; justify-content: center; font-family: 'Inter', sans-serif;">
+    <button id="viewer-close" style="position: absolute; top: 2rem; right: 2rem; background: none; border: 1px solid rgba(255,255,255,0.2); color: #fff; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; letter-spacing: 0.1em; padding: 0.6rem 1.2rem; border-radius: 50px; cursor: pointer; transition: all 0.3s; z-index: 100001;" onmouseover="this.style.borderColor='#fff'" onmouseout="this.style.borderColor='rgba(255,255,255,0.2)'">CLOSE ?</button>
+    <div id="viewer-header" style="position: absolute; top: 2.2rem; left: 50%; transform: translateX(-50%); text-align: center; z-index: 100001;">
+      <span id="viewer-title" style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: #C8A96E; letter-spacing: 0.2em; text-transform: uppercase; display: block; margin-bottom: 0.2rem; white-space: nowrap;">Loading...</span>
+      <span id="viewer-counter" style="font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; color: #666; letter-spacing: 0.1em;">1 OF 6</span>
+    </div>
+    <button id="viewer-prev" style="position: absolute; left: 3rem; top: 50%; transform: translateY(-50%); background: rgba(20,20,20,0.8); border: 1px solid rgba(255,255,255,0.1); color: #fff; font-size: 1.5rem; width: 3.5rem; height: 3.5rem; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s; z-index: 100001;" onmouseover="this.style.borderColor='#C8A96E'; this.style.color='#C8A96E';" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'; this.style.color='#fff';"> </button>
+    <button id="viewer-next" style="position: absolute; right: 3rem; top: 50%; transform: translateY(-50%); background: rgba(20,20,20,0.8); border: 1px solid rgba(255,255,255,0.1); color: #fff; font-size: 1.5rem; width: 3.5rem; height: 3.5rem; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s; z-index: 100001;" onmouseover="this.style.borderColor='#C8A96E'; this.style.color='#C8A96E';" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'; this.style.color='#fff';"> </button>
+    <div id="viewer-container" style="background: #000; border: 1px solid #1f1f1f; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; border-radius: 4px; cursor: grab;">
+      <div id="viewer-loading" style="position: absolute; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #666; letter-spacing: 0.1em; z-index: 100002;">LOADING...</div>
+      <canvas id="viewer-canvas" style="transform-origin: center; position: absolute; display: block; border: none; will-change: transform; max-width: none; max-height: none;" draggable="false"></canvas>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+  <script src="../../js/next-project.js"></script>
+  
+  <script>
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Gsap entrance and pin
+      if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+        gsap.registerPlugin(ScrollTrigger);
+
+        gsap.from(".hero-text-anim", {
+          y: 40,
+          opacity: 0,
+          duration: 1.5,
+          stagger: 0.15,
+          ease: "power3.out",
+          delay: 0.1
+        });
+
+        ScrollTrigger.create({
+          trigger: ".cinematic-hero-section",
+          start: "top top",
+          end: "+=100%",
+          pin: true,
+          pinSpacing: false,
+          animation: gsap.to(".cinematic-hero-img", { scale: 1.08, ease: "none" }),
+          scrub: 1
+        });
+      }
+
+      // Scroll indicator fade
+      const indicator = document.getElementById('scroll-indicator');
+      if (indicator) {
+        window.addEventListener('scroll', () => {
+          let opacity = 1 - Math.min(window.scrollY / 150, 1);
+          indicator.style.opacity = opacity;
+        }, { passive: true });
+      }
+
+      // 2. Viewer Modal Logic
+      const drawings = [
+        { name: '1 - Site Plan B', file: 'drawings/site-plan.pdf' },
+        { name: '2 - Walkway and Canopies Detail A', file: 'drawings/walkway-canopies-detail.pdf' },
+        { name: '3 - Typical Mesh Guard A', file: 'drawings/typical-mesh-guard.pdf' },
+        { name: '4 - Shower Waterproof Details C', file: 'drawings/shower-waterproof-details.pdf' },
+        { name: '5 - Ablutions Room Data Sheet B', file: 'drawings/ablutions-room-data-sheet.pdf' },
+        { name: '6 - Double Swing Door Mag Lock Detail', file: 'drawings/double-swing-door.pdf' }
+      ];
+
+      let currentIndex = 0;
+      let zoomScale = 1.0;
+      let panX = 0, panY = 0;
+      let isPanning = false, panStartX = 0, panStartY = 0, panOriginX = 0, panOriginY = 0;
+      let pdfViewport = null;
+      let currentRenderTask = null;
+
+      const modal = document.getElementById('viewer-modal');
+      const container = document.getElementById('viewer-container');
+      const canvas = document.getElementById('viewer-canvas');
+      const loadingEl = document.getElementById('viewer-loading');
+      const titleEl = document.getElementById('viewer-title');
+      const counterEl = document.getElementById('viewer-counter');
+      const closeBtn = document.getElementById('viewer-close');
+      const prevBtn = document.getElementById('viewer-prev');
+      const nextBtn = document.getElementById('viewer-next');
+
+      document.querySelectorAll('.viewer-trigger').forEach(el => {
+        el.addEventListener('click', () => {
+          const idx = parseInt(el.getAttribute('data-index'), 10);
+          if (!isNaN(idx)) openViewer(idx);
+        });
+      });
+
+      function openViewer(index) {
+        currentIndex = index;
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+        loadDrawing(currentIndex);
+      }
+
+      function closeViewer() {
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+        if (currentRenderTask) {
+          currentRenderTask.cancel();
+          currentRenderTask = null;
+        }
+        const ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        pdfViewport = null;
+        resetZoom();
+      }
+
+      function resetZoom() {
+        zoomScale = 1.0;
+        panX = 0;
+        panY = 0;
+        applyTransform();
+        container.style.cursor = 'grab';
+      }
+
+      function applyTransform() {
+        canvas.style.transform = `translate(${panX}px, ${panY}px) scale(${zoomScale})`;
+      }
+
+      function resizeContainer() {
+        if (modal.style.display !== 'flex' || !pdfViewport) return;
+        const maxW = window.innerWidth * 0.90;
+        const maxH = window.innerHeight * 0.90;
+        const ratio = pdfViewport.width / pdfViewport.height;
+        let cW = maxW;
+        let cH = cW / ratio;
+        if (cH > maxH) { cH = maxH; cW = cH * ratio; }
+        container.style.width = cW + 'px';
+        container.style.height = cH + 'px';
+        canvas.style.width = cW + 'px';
+        canvas.style.height = cH + 'px';
+      }
+
+      function loadDrawing(index) {
+        const drawing = drawings[index];
+        loadingEl.style.display = 'block';
+        titleEl.textContent = drawing.name;
+        counterEl.textContent = `${index + 1} OF ${drawings.length}`;
+
+        if (currentRenderTask) {
+          currentRenderTask.cancel();
+          currentRenderTask = null;
+        }
+
+        pdfjsLib.getDocument(drawing.file).promise.then(pdf => {
+          pdf.getPage(1).then(page => {
+            const viewport = page.getViewport({ scale: 2.0 });
+            pdfViewport = viewport;
+
+            const ctx = canvas.getContext('2d');
+            canvas.width = viewport.width;
+            canvas.height = viewport.height;
+
+            const renderContext = {
+              canvasContext: ctx,
+              viewport: viewport
+            };
+
+            currentRenderTask = page.render(renderContext);
+            currentRenderTask.promise.then(() => {
+              loadingEl.style.display = 'none';
+              resizeContainer();
+              currentRenderTask = null;
+            }).catch(err => {
+              if (err.name !== 'RenderingCancelledException') {
+                console.error(err);
+              }
+            });
+          });
+        }).catch(err => {
+          console.error('Error loading PDF:', err);
+        });
+      }
+
+      prevBtn.addEventListener('click', () => {
+        currentIndex = (currentIndex - 1 + drawings.length) % drawings.length;
+        loadDrawing(currentIndex);
+      });
+      nextBtn.addEventListener('click', () => {
+        currentIndex = (currentIndex + 1) % drawings.length;
+        loadDrawing(currentIndex);
+      });
+
+      closeBtn.addEventListener('click', closeViewer);
+      modal.addEventListener('click', (e) => { if (e.target === modal) closeViewer(); });
+      document.addEventListener('keydown', (e) => {
+        if (modal.style.display === 'flex') {
+          if (e.key === 'Escape') closeViewer();
+          if (e.key === 'ArrowRight') nextBtn.click();
+          if (e.key === 'ArrowLeft') prevBtn.click();
+        }
+      });
+
+      // Zoom with wheel
+      container.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        const delta = e.deltaY > 0 ? -0.15 : 0.15;
+        zoomScale = Math.max(0.5, Math.min(5, zoomScale + delta));
+        if (zoomScale <= 1.0) { panX = 0; panY = 0; }
+        applyTransform();
+        container.style.cursor = zoomScale > 1.0 ? 'grab' : 'default';
+      }, { passive: false });
+
+      // Pan with click-and-drag
+      container.addEventListener('mousedown', (e) => {
+        if (zoomScale <= 1.0) return;
+        isPanning = true;
+        panStartX = e.clientX;
+        panStartY = e.clientY;
+        panOriginX = panX;
+        panOriginY = panY;
+        container.style.cursor = 'grabbing';
+        e.preventDefault();
+      });
+      window.addEventListener('mousemove', (e) => {
+        if (!isPanning) return;
+        panX = panOriginX + (e.clientX - panStartX);
+        panY = panOriginY + (e.clientY - panStartY);
+        applyTransform();
+      });
+      window.addEventListener('mouseup', () => {
+        if (isPanning) {
+          isPanning = false;
+          container.style.cursor = zoomScale > 1.0 ? 'grab' : 'default';
+        }
+      });
+
+      window.addEventListener('resize', resizeContainer);
+    });
+  </script>
+</body>
+</html>

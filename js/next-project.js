@@ -20,7 +20,8 @@
     { slug: 'house-pather',            title: 'House Pather',             category: 'Architecture / Design',  heroImage: '../../assets/projects/house-pather/img-0.webp' },
     { slug: 'newlands-cricket',        title: 'Newlands Cricket',         category: 'Architecture / Design',  heroImage: '../../assets/projects/newlands-cricket/img-0.webp' },
     { slug: 'rondebosch-golf',         title: 'Rondebosch Golf',          category: 'Architecture / Design',  heroImage: '../../assets/projects/rondebosch-golf/img-0.webp' },
-    { slug: 'stud-hq',                 title: 'Stud HQ',                  category: 'Architecture / Design',  heroImage: '../../assets/projects/stud-hq/stud-bloemfontein-1.webp' }
+    { slug: 'stud-hq',                 title: 'Stud HQ',                  category: 'Architecture / Design',  heroImage: '../../assets/projects/stud-hq/stud-bloemfontein-1.webp' },
+    { slug: 'lentegeur-hospital',      title: 'Lentegeur Hospital',       category: 'Health Care',            heroImage: '../../projects/lentegeur-hospital/media/site-plan-cover.webp' }
   ];
 
   /* ── Helpers ─────────────────────────────────────────────────────────── */
