@@ -176,9 +176,48 @@ document.addEventListener("DOMContentLoaded", () => {
     }, index * 3000); // 3-second delay between starts
   });
 
-  // --- Footer CTA flashing button setup ---
+  // --- Footer CTA button setup ---
   const enterBtn = document.getElementById('enter-site-btn');
-  
+
+  // Magnetic pull toward the cursor once the button is live
+  let magnetActive = false;
+  let magnetXTo, magnetYTo;
+  if (enterBtn) {
+    const magnetRadius = 130; // px — cursor influence range
+    const magnetStrength = 0.4;
+    const magnetMax = 18; // px — max offset from rest position
+
+    magnetXTo = gsap.quickTo(enterBtn, 'x', { duration: 0.5, ease: 'power3.out' });
+    magnetYTo = gsap.quickTo(enterBtn, 'y', { duration: 0.5, ease: 'power3.out' });
+
+    window.addEventListener('mousemove', (e) => {
+      if (!magnetActive) return;
+      const rect = enterBtn.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      const dx = e.clientX - centerX;
+      const dy = e.clientY - centerY;
+      const dist = Math.hypot(dx, dy);
+
+      if (dist < magnetRadius) {
+        const pull = 1 - dist / magnetRadius;
+        let offsetX = dx * pull * magnetStrength;
+        let offsetY = dy * pull * magnetStrength;
+        const offsetDist = Math.hypot(offsetX, offsetY);
+        if (offsetDist > magnetMax) {
+          const clamp = magnetMax / offsetDist;
+          offsetX *= clamp;
+          offsetY *= clamp;
+        }
+        magnetXTo(offsetX);
+        magnetYTo(offsetY);
+      } else {
+        magnetXTo(0);
+        magnetYTo(0);
+      }
+    });
+  }
+
   // Show ENTER SITE button at T=15s (after Box 4 finishes float-in animation)
   setTimeout(() => {
     if (enterBtn) {
@@ -187,76 +226,165 @@ document.addEventListener("DOMContentLoaded", () => {
         opacity: 1,
         duration: 0.8
       });
+      magnetActive = true;
     }
   }, 15000);
 
   if (enterBtn) {
     enterBtn.addEventListener('click', () => {
+      magnetActive = false;
+      magnetXTo(0);
+      magnetYTo(0);
+
       const loaderRight = document.querySelector('.loading-screen__right');
       const loaderContact = document.getElementById('loading-contact-details');
+      const loaderCaptions = document.querySelectorAll('.loading-screen__description, .loading-screen__location, .loading-screen__label');
+      const iconWrap = enterBtn.querySelector('.enter-site-icon-wrap');
+      const dotsGroup = enterBtn.querySelector('.enter-site-dots');
+      const dots = enterBtn.querySelectorAll('.dot');
+      const label = enterBtn.querySelector('.enter-site-label');
 
-      // 0s to 3s: Fade out 4 boxes + captions and left contact details
-      gsap.to([loaderRight, loaderContact], {
+      // Stop the idle CSS breathing so GSAP owns the icon's motion from here
+      if (iconWrap) iconWrap.style.animation = 'none';
+
+      // Morph the icon into a 3-dot loader, then keep it pulsing while the
+      // homepage loads behind it (matches the ~4.5s reveal sequence below)
+      const morphTl = gsap.timeline();
+      morphTl.to(label, { opacity: 0, y: 6, duration: 0.35, ease: 'power2.out' }, 0);
+      morphTl.to(dotsGroup, { rotation: 180, transformOrigin: '50% 50%', duration: 0.9, ease: 'power3.inOut' }, 0);
+      morphTl.to(dots[0], { attr: { cx: 10, cy: 20 }, duration: 0.9, ease: 'power3.inOut' }, 0);
+      morphTl.to(dots[1], { attr: { cx: 20, cy: 20 }, duration: 0.9, ease: 'power3.inOut' }, 0);
+      morphTl.to(dots[2], { attr: { cx: 30, cy: 20 }, duration: 0.9, ease: 'power3.inOut' }, 0);
+      morphTl.to(dots, {
+        scale: 1.3,
+        transformOrigin: 'center',
+        duration: 0.45,
+        ease: 'sine.inOut',
+        yoyo: true,
+        repeat: 3,
+        stagger: 0.12
+      }, 0.9);
+
+      // Fade out everything EXCEPT the title/contact block — the 4 loader
+      // boxes and the loading screen's own backdrop color. loaderContact
+      // itself never fades: it's the one persistent element that grows into
+      // the hero heading, so the site never looks like it "swapped" text.
+      gsap.to(loaderRight, {
         opacity: 0,
-        duration: 3,
+        duration: 2,
         ease: 'power2.out'
       });
-      
+
+      gsap.to(loaderCaptions, {
+        opacity: 0,
+        duration: 1.5,
+        ease: 'power2.out'
+      });
+
       gsap.to(enterBtn, {
         opacity: 0,
         duration: 1,
+        delay: 1.5,
         pointerEvents: 'none'
       });
 
-      // 3s to 4s: Float away and fade out loader background completely
+      // Fade the loading screen's own background to transparent (not
+      // display:none — loaderContact is a child of it and must keep
+      // rendering on top instead of disappearing along with its parent).
       gsap.to(loadingScreen, {
-        y: '-100vh',
-        opacity: 0,
+        backgroundColor: 'rgba(0,0,0,0)',
         duration: 1.5,
-        ease: 'power3.inOut',
-        delay: 3,
+        delay: 1.5,
+        ease: 'power2.inOut',
         onComplete: () => {
-          loadingScreen.style.display = 'none';
+          loadingScreen.style.pointerEvents = 'none';
         }
       });
 
-      // FLIP: Calculate relative coordinates and scale transition for heroContent
-      if (loaderContact && heroContent) {
-        const rectLoader = loaderContact.getBoundingClientRect();
-        
-        // Temporarily render heroContent invisible to calculate normal layout position
-        gsap.set(heroContent, { opacity: 0, display: 'flex' });
-        const rectHero = heroContent.getBoundingClientRect();
+      // Detach the persistent title block from the loader's narrow grid
+      // column so it can grow AND glide toward a centered hero position —
+      // FLIP-style: it starts exactly where it currently sits on screen,
+      // then grows/slides to center as one continuous motion, never jumping.
+      if (loaderContact) {
+        const startRect = loaderContact.getBoundingClientRect();
+        const title = loaderContact.querySelector('.hero-title');
+        const role = loaderContact.querySelector('.hero-role');
+        const detailItems = Array.from(loaderContact.querySelectorAll('.loader-contact-detail-item'));
+        const centerTargets = [role, ...detailItems].filter(Boolean);
 
-        const deltaX = rectLoader.left - rectHero.left;
-        const deltaY = rectLoader.top - rectHero.top;
-        const scale = rectLoader.width / rectHero.width;
+        // Leave a same-sized placeholder in the flex column the instant
+        // loaderContact goes position:fixed — otherwise the description/
+        // availability lines below it snap upward to fill the vacated
+        // space immediately, colliding with the still-visible title block.
+        const placeholder = document.createElement('div');
+        placeholder.style.cssText = `height:${startRect.height}px;width:${startRect.width}px;flex-shrink:0;`;
+        loaderContact.parentNode.insertBefore(placeholder, loaderContact);
 
-        // Position home hero text exactly at loader's contact block location
-        gsap.set(heroContent, {
-          x: deltaX,
-          y: deltaY,
-          scale: scale,
-          transformOrigin: 'left center',
-          opacity: 0
-        });
+        loaderContact.style.transition = 'none';
+        loaderContact.style.position = 'fixed';
+        loaderContact.style.left = '50%';
+        loaderContact.style.top = '50%';
+        loaderContact.style.height = 'auto';
+        loaderContact.style.margin = '0';
+        loaderContact.style.zIndex = '20';
+        // Alignment stays 'left' the whole time — centering is driven purely
+        // by the translateX formula below, so there's no CSS text-align snap
+        // to desync from the transform-based glide.
 
-        // 4s+: Fade in and animate to the center of the homepage
-        gsap.to(heroContent, {
-          x: 0,
-          y: 0,
-          scale: 1,
-          opacity: 1,
-          duration: 1.5,
-          ease: 'power2.out',
-          delay: 4
-        });
+        // Must use the ORIGINAL (pre-fixed) width/height here, not the
+        // post-mutation size. The box's height collapses from a fixed 10rem
+        // (with justify-content:center holding slack above the content) to
+        // 'auto' the instant it goes fixed, which would otherwise make the
+        // content jump up by that lost slack — using startRect for both the
+        // anchor AND the yPercent-cancellation term makes that slack loss
+        // and the recentering math cancel out exactly, so the title lands
+        // right where it visually was. (Width doesn't have this problem —
+        // alignment stays flush-left the whole time — but startRect is used
+        // there too for consistency.)
+        const startX = startRect.left - (window.innerWidth / 2 - startRect.width / 2);
+        const startY = startRect.top - (window.innerHeight / 2 - startRect.height / 2);
+        gsap.set(loaderContact, { xPercent: -50, yPercent: -50, x: startX, y: startY });
+
+        const growTl = gsap.timeline({ delay: 1.5 });
+        growTl.to(loaderContact, { x: 0, y: 0, duration: 2.2, ease: 'power3.inOut' }, 0);
+        if (title) growTl.to(title, { fontSize: '5rem', duration: 2.2, ease: 'power3.inOut' }, 0);
+        if (role) growTl.to(role, { fontSize: '1.75rem', duration: 2.2, ease: 'power3.inOut' }, 0);
+        if (detailItems.length) growTl.to(detailItems, { fontSize: '0.85rem', duration: 2.2, ease: 'power3.inOut', stagger: 0.05 }, 0);
+
+        // Drive the left->center glide for the shorter lines as a single
+        // progress value (0 = flush-left, exactly matching the loader look;
+        // 1 = fully centered against the title's current width). Re-measures
+        // every frame, so it can't drift out of sync with the font-size
+        // tweens above no matter how the box's size changes as it grows.
+        if (centerTargets.length && title) {
+          const centerProgress = { t: 0 };
+          growTl.to(centerProgress, {
+            t: 1,
+            duration: 2.2,
+            ease: 'power3.inOut',
+            onUpdate: () => {
+              const boxWidth = title.getBoundingClientRect().width;
+              centerTargets.forEach((el) => {
+                const offset = (boxWidth - el.getBoundingClientRect().width) / 2;
+                el.style.transform = `translateX(${offset * centerProgress.t}px)`;
+              });
+            }
+          }, 0);
+        }
       }
 
-      // Start the background video playlists on homepage
+      // Background stays black through the whole transition above — only
+      // reveal the scroll-scrub hero canvas once the title has mostly
+      // finished growing into place
+      const heroCanvas = document.getElementById('hero-canvas');
+      if (heroCanvas) {
+        gsap.to(heroCanvas, { opacity: 0.6, duration: 2, delay: 3.5, ease: 'power2.out' });
+      }
+
+      // Start the background video playlist once the title has settled
       setTimeout(() => {
         triggerHeroEntrance();
-      }, 4000);
+      }, 3500);
     });
   }
 
@@ -444,7 +572,9 @@ function initScrollWalkthrough() {
     const headlineEl = document.getElementById('overlay-headline');
     const supportingEl = document.getElementById('overlay-supporting');
     const chipsContainer = document.getElementById('proof-chips-container');
-    const homeOverlay = document.getElementById('hero-content');
+    // Retargeted to the persistent title block — #hero-content is a retired
+    // duplicate that's kept permanently hidden (see the click handler above)
+    const homeOverlay = document.getElementById('loading-contact-details');
     const nav = document.getElementById('main-nav');
 
     const getFramePath = (index) => {
@@ -694,6 +824,26 @@ document.querySelectorAll('.project-card').forEach(card => {
     card.addEventListener('mouseleave', () => { video.pause(); video.currentTime = 0; });
   }
 });
+
+// Nav logo — click to return to the loading screen. A full reload (rather
+// than reversing the ENTER SITE animation in place) is used deliberately:
+// that transition permanently detaches/morphs the loader DOM into the hero
+// heading via inline styles, so re-running it backwards in JS would mean
+// unwinding every mutation by hand. Clearing the return-flags + stripping
+// hash/query guarantees the reload lands on the loading screen instead of
+// skipping it via the shouldReturnToJourney/shouldReturnToProcesses paths.
+(function () {
+  const navLogo = document.getElementById('nav-logo');
+  if (!navLogo) return;
+
+  navLogo.addEventListener('click', () => {
+    sessionStorage.removeItem('returnToJourney');
+    sessionStorage.removeItem('journeyScrollY');
+    sessionStorage.removeItem('returnToProjects');
+    localStorage.removeItem('returnToProjects');
+    window.location.href = window.location.pathname;
+  });
+})();
 
 // Nav hover-peek controller
 // Nav reveals when mouse enters the top 15% of the screen (= 85% from the bottom).

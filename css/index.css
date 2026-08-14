@@ -161,6 +161,11 @@ a:hover {
   font-size: 2rem;
   color: var(--accent-color);
   font-style: italic;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+.nav-logo:hover {
+  opacity: 0.75;
 }
 .nav-links {
   display: flex;
@@ -220,6 +225,13 @@ a:hover {
   height: 100%;
   object-fit: cover;
   display: none;
+}
+.hero-darken-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  background: linear-gradient(to bottom, rgba(8,8,8,0.35) 0%, rgba(8,8,8,0.55) 45%, rgba(8,8,8,0.85) 100%);
 }
 .hero-content-overlay {
   position: relative;
@@ -589,6 +601,7 @@ body.custom-cursor-active button {
   animation: none;
   opacity: 1;
   transform: none;
+  white-space: nowrap;
 }
 @media (min-width: 768px) {
   .loader-contact-wrapper .hero-title { font-size: 3rem; }
@@ -610,6 +623,7 @@ body.custom-cursor-active button {
 .loader-contact-details {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: 0.25rem;
   font-size: 0.65rem;
   text-transform: uppercase;
@@ -787,26 +801,56 @@ body.custom-cursor-active button {
 }
 
 .enter-site-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
   background: none;
   border: none;
-  color: var(--accent-color);
+  cursor: pointer;
+  padding: 0;
+  outline: none;
+  transition: opacity 0.5s ease;
+}
+
+.enter-site-icon-wrap {
+  display: block;
+  animation: icon-breathe 2.4s ease-in-out infinite;
+}
+
+.enter-site-icon {
+  display: block;
+  overflow: visible;
+}
+
+.enter-site-icon .dot {
+  fill: url(#enter-ball-gradient);
+  filter: drop-shadow(0 1.5px 2px rgba(0, 0, 0, 0.55));
+  transition: filter 0.3s ease;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.enter-site-btn:hover .dot {
+  filter: drop-shadow(0 1.5px 2px rgba(0, 0, 0, 0.55)) brightness(1.25);
+}
+
+.enter-site-label {
   font-family: monospace;
   font-size: 11px;
   letter-spacing: 0.25em;
-  cursor: pointer;
-  padding: 0;
   text-transform: uppercase;
-  transition: opacity 0.5s ease;
-  animation: slow-flash 2.5s infinite ease-in-out;
-  outline: none;
+  color: var(--accent-color);
+  transition: color 0.3s ease, opacity 0.4s ease;
 }
-.enter-site-btn:hover {
+
+.enter-site-btn:hover .enter-site-label {
   color: #fff;
 }
 
-@keyframes slow-flash {
-  0%, 100% { opacity: 0.25; }
-  50% { opacity: 1; }
+@keyframes icon-breathe {
+  0%, 100% { transform: scale(0.94); opacity: 0.7; }
+  50% { transform: scale(1.04); opacity: 1; }
 }
 
 /* =========================================================
@@ -1066,31 +1110,42 @@ body.custom-cursor-active button {
   opacity: 0.7;
 }
 
-.scroll-indicator__line {
-  width: 1px;
-  height: 135px;
-  background: rgba(200, 169, 110, 0.15);
+.scroll-indicator__mouse {
+  width: 26px;
+  height: 42px;
+  border: 1px solid rgba(200, 169, 110, 0.4);
+  border-radius: 13px;
   position: relative;
-  overflow: hidden;
 }
 
-.scroll-indicator__line::after {
-  content: '';
+.scroll-indicator__mouse-wheel {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 25px;
-  background: linear-gradient(to bottom, transparent, var(--gold, #C8A96E), transparent);
-  animation: scrollLineAnim 2.2s infinite cubic-bezier(0.15, 0.85, 0.35, 1);
+  top: 6px;
+  left: 50%;
+  width: 4px;
+  height: 8px;
+  margin-left: -2px;
+  background: var(--gold, #C8A96E);
+  border-radius: 2px;
+  animation: scrollWheelAnim 2.2s infinite cubic-bezier(0.15, 0.85, 0.35, 1);
 }
 
-@keyframes scrollLineAnim {
+@keyframes scrollWheelAnim {
   0% {
-    top: -25px;
+    top: 6px;
+    opacity: 1;
+  }
+  70% {
+    top: 24px;
+    opacity: 0;
+  }
+  71% {
+    top: 6px;
+    opacity: 0;
   }
   100% {
-    top: 135px;
+    top: 6px;
+    opacity: 1;
   }
 }
 
