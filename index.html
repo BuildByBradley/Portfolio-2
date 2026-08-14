@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Bradley Brits | Architectural Portfolio</title>
   
-  <link rel="stylesheet" href="css/index.css?v=6" />
+  <link rel="stylesheet" href="css/index.css?v=7" />
   
   <!-- GSAP CDN -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -152,15 +152,22 @@
   <nav id="main-nav" class="nav-container">
     <div class="nav-inner">
       <div class="nav-logo" id="nav-logo">BB</div>
-      <div class="nav-links">
+      <div id="nav-links" class="nav-links">
         <a href="#" class="nav-link" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">Home</a>
         <a href="#projects" class="nav-link">Projects</a>
         <a href="#capabilities" class="nav-link">Capabilities</a>
         <a href="#cv-section" class="nav-link">CV</a>
+        <a href="#cv-section" class="nav-link nav-link--contact-mobile">Contact</a>
       </div>
       <a href="#cv-section" class="nav-contact">Contact</a>
+      <button id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
+        <span class="nav-toggle__bar"></span>
+        <span class="nav-toggle__bar"></span>
+        <span class="nav-toggle__bar"></span>
+      </button>
     </div>
   </nav>
+  <div id="nav-backdrop" class="nav-backdrop"></div>
   <!-- Invisible hover strip — reveals nav when user moves mouse to top of screen -->
   <div id="nav-hover-zone" class="nav-hover-zone"></div>
 
@@ -504,6 +511,6 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=3"></script>
+  <script src="js/main.js?v=5"></script>
 </body>
 </html>

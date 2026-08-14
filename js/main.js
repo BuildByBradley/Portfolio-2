@@ -734,27 +734,37 @@ function initHorizontalScroll() {
 
   if (!container || !track) return;
 
-  // Calculate the total horizontal scroll distance
-  // It's the track's scrollable width minus the viewport width
-  function getScrollAmount() {
-    return track.scrollWidth - window.innerWidth;
-  }
+  // Pinned scroll-jacking is a known trouble spot on mobile (iOS Safari's
+  // address bar show/hide changes viewport height mid-scroll, which throws
+  // off pin math) and 50vw cards would be tiny on a phone anyway. Gate the
+  // whole pinned experience to desktop widths via matchMedia — below that,
+  // .projects-track just falls back to plain native horizontal touch-scroll
+  // (see the mobile CSS override on .projects-track/.project-card).
+  ScrollTrigger.matchMedia({
+    "(min-width: 769px)": function () {
+      // Calculate the total horizontal scroll distance
+      // It's the track's scrollable width minus the viewport width
+      function getScrollAmount() {
+        return track.scrollWidth - window.innerWidth;
+      }
 
-  // Create the GSAP animation
-  const tween = gsap.to(track, {
-    x: () => -getScrollAmount(),
-    ease: "none"
-  });
+      // Create the GSAP animation
+      const tween = gsap.to(track, {
+        x: () => -getScrollAmount(),
+        ease: "none"
+      });
 
-  // Create the ScrollTrigger
-  ScrollTrigger.create({
-    trigger: container,
-    start: "top top",
-    end: () => `+=${getScrollAmount()}`,
-    pin: true,
-    animation: tween,
-    scrub: 1, // Smoothing factor
-    invalidateOnRefresh: true, // Recalculate on resize
+      // Create the ScrollTrigger
+      ScrollTrigger.create({
+        trigger: container,
+        start: "top top",
+        end: () => `+=${getScrollAmount()}`,
+        pin: true,
+        animation: tween,
+        scrub: 1, // Smoothing factor
+        invalidateOnRefresh: true, // Recalculate on resize
+      });
+    }
   });
 }
 
@@ -848,13 +858,17 @@ document.querySelectorAll('.project-card').forEach(card => {
 // Nav hover-peek controller
 // Nav reveals when mouse enters the top 15% of the screen (= 85% from the bottom).
 // Hides again when mouse moves below that line and scroll > 30px.
+// Desktop-only: mousemove never fires from touch scrolling, so on mobile
+// this would hide the nav on scroll with no way to bring it back.
 (function () {
   const nav = document.getElementById('main-nav');
   if (!nav) return;
 
   const THRESHOLD = 0.15; // top 15% of viewport height
+  const isMobile = () => window.matchMedia('(max-width: 768px)').matches;
 
   document.addEventListener('mousemove', (e) => {
+    if (isMobile()) return;
     const inZone = e.clientY / window.innerHeight < THRESHOLD;
 
     if (inZone) {
@@ -863,6 +877,37 @@ document.querySelectorAll('.project-card').forEach(card => {
       nav.classList.add('nav-hidden');
     }
   }, { passive: true });
+})();
+
+// Mobile hamburger menu — slides .nav-links in as an off-canvas panel
+(function () {
+  const toggle = document.getElementById('nav-toggle');
+  const links = document.getElementById('nav-links');
+  const backdrop = document.getElementById('nav-backdrop');
+  if (!toggle || !links || !backdrop) return;
+
+  const close = () => {
+    toggle.setAttribute('aria-expanded', 'false');
+    links.classList.remove('nav-links--open');
+    backdrop.classList.remove('nav-backdrop--visible');
+  };
+  const open = () => {
+    toggle.setAttribute('aria-expanded', 'true');
+    links.classList.add('nav-links--open');
+    backdrop.classList.add('nav-backdrop--visible');
+  };
+
+  toggle.addEventListener('click', () => {
+    const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+    if (isOpen) close(); else open();
+  });
+  backdrop.addEventListener('click', close);
+  links.querySelectorAll('.nav-link').forEach((a) => a.addEventListener('click', close));
+
+  // Collapsing back to desktop width shouldn't leave the panel stuck open
+  window.matchMedia('(max-width: 768px)').addEventListener('change', (e) => {
+    if (!e.matches) close();
+  });
 })();
 
 /**
