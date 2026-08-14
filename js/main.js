@@ -29,8 +29,21 @@ document.addEventListener("DOMContentLoaded", () => {
     hashTarget === '#projects' || sessionStorage.getItem('returnToProjects') === 'true' ||
     localStorage.getItem('returnToProjects') === 'true' || cameFromCaseStudy;
 
+  // Hide home hero content initially if loader is active to prepare for transition
+  const heroContent = document.getElementById('hero-content');
+  if (heroContent) {
+    heroContent.style.opacity = '0';
+  }
+
   if (shouldReturnToJourney || shouldReturnToProcesses) {
-    if (loadingScreen) { loadingScreen.style.opacity='0'; loadingScreen.style.pointerEvents='none'; loadingScreen.style.display='none'; }
+    if (loadingScreen) { 
+      loadingScreen.style.opacity='0'; 
+      loadingScreen.style.pointerEvents='none'; 
+      loadingScreen.style.display='none'; 
+    }
+    if (heroContent) {
+      heroContent.style.opacity = '1';
+    }
     triggerHeroEntrance();
     setTimeout(() => {
       if (shouldReturnToProcesses) {
@@ -50,6 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
+  // --- Left Column: Cycling Heading & Morphing Contact Details ---
   const loadingStrings = [
     "Site to certainty.",
     "Risk before renders.",
@@ -59,131 +73,192 @@ document.addEventListener("DOMContentLoaded", () => {
     "Decisions before delays."
   ];
   let stringIndex = 0;
+  const maxCycles = loadingStrings.length;
+  let cycleCount = 0;
+
   const stringInterval = setInterval(() => {
-    stringIndex = (stringIndex + 1) % loadingStrings.length;
-    if (textEl) {
-      textEl.style.opacity = '0'; textEl.style.transform = 'translateY(-12px)';
-      setTimeout(() => {
-        textEl.innerText = loadingStrings[stringIndex];
-        textEl.style.opacity = '1'; textEl.style.transform = 'translateY(0)';
-        textEl.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-      }, 300);
+    cycleCount++;
+    if (cycleCount >= maxCycles) {
+      clearInterval(stringInterval);
+      if (textEl) {
+        gsap.to(textEl, {
+          opacity: 0,
+          y: -15,
+          duration: 0.5,
+          onComplete: () => {
+            textEl.style.display = 'none';
+            const contactDetailsEl = document.getElementById('loading-contact-details');
+            if (contactDetailsEl) {
+              contactDetailsEl.style.display = 'flex';
+              gsap.to(contactDetailsEl, {
+                opacity: 1,
+                y: 0,
+                duration: 0.5
+              });
+            }
+          }
+        });
+      }
+    } else {
+      stringIndex = (stringIndex + 1) % loadingStrings.length;
+      if (textEl) {
+        gsap.to(textEl, {
+          opacity: 0,
+          y: -12,
+          duration: 0.3,
+          onComplete: () => {
+            textEl.innerText = loadingStrings[stringIndex];
+            gsap.to(textEl, {
+              opacity: 1,
+              y: 0,
+              duration: 0.3
+            });
+          }
+        });
+      }
     }
   }, 950);
 
-  // --- Real Performance Preloader ---
+  // --- Real Performance Preloader (Runs silently in background) ---
   let videoProgress = 0;
   let imagesProgress = 0;
-  let videoLoaded = false;
-  let imagesLoaded = false;
 
-  // 1. Preload Hero Video (1.94 MB) via XHR
   const videoXHR = new XMLHttpRequest();
   videoXHR.open('GET', 'assets/projects/zimbali/zimbali-hero.mp4', true);
   videoXHR.responseType = 'blob';
-  
-  videoXHR.onprogress = (e) => {
-    if (e.lengthComputable && e.total > 0) {
-      videoProgress = e.loaded / e.total;
-    }
-  };
-  
   videoXHR.onload = () => {
     if (videoXHR.status === 200) {
       videoBlobUrl = URL.createObjectURL(videoXHR.response);
-      videoProgress = 1;
-      videoLoaded = true;
-    } else {
-      console.warn("Video preloading failed with status:", videoXHR.status);
-      videoLoaded = true;
-      videoProgress = 1;
     }
   };
-  
-  videoXHR.onerror = () => {
-    console.warn("Video preloading network error.");
-    videoLoaded = true;
-    videoProgress = 1;
-  };
-  
   videoXHR.send();
 
-  // 2. Preload First 20 Sequence Frames
   const FIRST_FRAME_NUMBER = 86400;
   const getFramePath = (index) => {
     const realFrameNumber = FIRST_FRAME_NUMBER + index - 1;
     return `assets/hero-sequence/frame_${String(realFrameNumber).padStart(9, '0')}.webp`;
   };
 
-  let loadedImagesCount = 0;
   const numPreloadImages = 20;
-
   for (let i = 1; i <= numPreloadImages; i++) {
     const img = new Image();
-    img.onload = () => {
-      loadedImagesCount++;
-      imagesProgress = loadedImagesCount / numPreloadImages;
-      if (loadedImagesCount === numPreloadImages) {
-        imagesLoaded = true;
-      }
-    };
-    img.onerror = () => {
-      loadedImagesCount++;
-      imagesProgress = loadedImagesCount / numPreloadImages;
-      if (loadedImagesCount === numPreloadImages) {
-        imagesLoaded = true;
-      }
-    };
     img.src = getFramePath(i);
     globalImages[i] = img;
   }
 
-  const MIN_LOADING_TIME = 1500; // 1.5s minimum loading screen time for visual transition
-  const MAX_LOADING_TIME = 15000; // 15s safety fallback
-  const loadingStartTime  = Date.now();
-  let loaderFinished = false;
+  // --- Right Column: 2x2 Grid Animation Sequencer ---
+  const loaderBlocks = [
+    document.getElementById('loader-block-1'),
+    document.getElementById('loader-block-2'),
+    document.getElementById('loader-block-3'),
+    document.getElementById('loader-block-4')
+  ];
 
-  function updateCounter() {
-    if (loaderFinished) return;
-    const elapsed = Date.now() - loadingStartTime;
+  loaderBlocks.forEach((block, index) => {
+    if (!block) return;
     
-    // Combined progress: 80% video, 20% images
-    const combinedProgress = (videoProgress * 0.8) + (imagesProgress * 0.2);
-    let disp = Math.floor(combinedProgress * 100);
-    if (disp > 99) disp = 99;
-    
-    const isReady = videoLoaded && imagesLoaded;
-    const minPassed = elapsed >= MIN_LOADING_TIME;
-    const maxPassed = elapsed >= MAX_LOADING_TIME;
-    
-    if (isReady && minPassed) {
-      disp = 100;
-    }
-    
-    if (counterEl) counterEl.innerText = String(disp).padStart(3, '0');
-    if (progressEl) progressEl.style.width = `${disp}%`;
-
-    if ((isReady && minPassed) || maxPassed) {
-      loaderFinished = true;
-      if (counterEl) counterEl.innerText = '100';
-      if (progressEl) progressEl.style.width = '100%';
-      clearInterval(stringInterval);
+    // Scale and float in from center over 6 seconds
+    setTimeout(() => {
+      block.classList.add('visible');
+      const video = block.querySelector('video');
+      if (video) {
+        video.play().catch(() => {});
+      }
+      
+      // Caption text appears once fully floated in
       setTimeout(() => {
-        if (loadingScreen) { 
-          loadingScreen.style.transition = 'opacity 0.6s ease'; 
-          loadingScreen.style.opacity = '0'; 
-          loadingScreen.style.pointerEvents = 'none'; 
+        const caption = block.querySelector('.loader-block__caption');
+        if (caption) {
+          caption.classList.add('visible');
         }
-        setTimeout(() => { if(loadingScreen) loadingScreen.style.display = 'none'; }, 650);
-        triggerHeroEntrance();
-      }, 400);
-      return;
-    }
-    requestAnimationFrame(updateCounter);
-  }
+      }, 6000);
+      
+    }, index * 3000); // 3-second delay between starts
+  });
 
-  // Start the counter
-  updateCounter();
+  // --- Footer CTA flashing button setup ---
+  const enterBtn = document.getElementById('enter-site-btn');
+  
+  // Show ENTER SITE button at T=15s (after Box 4 finishes float-in animation)
+  setTimeout(() => {
+    if (enterBtn) {
+      enterBtn.style.pointerEvents = 'auto';
+      gsap.to(enterBtn, {
+        opacity: 1,
+        duration: 0.8
+      });
+    }
+  }, 15000);
+
+  if (enterBtn) {
+    enterBtn.addEventListener('click', () => {
+      const loaderRight = document.querySelector('.loading-screen__right');
+      const loaderContact = document.getElementById('loading-contact-details');
+
+      // 0s to 3s: Fade out 4 boxes + captions and left contact details
+      gsap.to([loaderRight, loaderContact], {
+        opacity: 0,
+        duration: 3,
+        ease: 'power2.out'
+      });
+      
+      gsap.to(enterBtn, {
+        opacity: 0,
+        duration: 1,
+        pointerEvents: 'none'
+      });
+
+      // 3s to 4s: Float away and fade out loader background completely
+      gsap.to(loadingScreen, {
+        y: '-100vh',
+        opacity: 0,
+        duration: 1.5,
+        ease: 'power3.inOut',
+        delay: 3,
+        onComplete: () => {
+          loadingScreen.style.display = 'none';
+        }
+      });
+
+      // FLIP: Calculate relative coordinates and scale transition for heroContent
+      if (loaderContact && heroContent) {
+        const rectLoader = loaderContact.getBoundingClientRect();
+        
+        // Temporarily render heroContent invisible to calculate normal layout position
+        gsap.set(heroContent, { opacity: 0, display: 'flex' });
+        const rectHero = heroContent.getBoundingClientRect();
+
+        const deltaX = rectLoader.left - rectHero.left;
+        const deltaY = rectLoader.top - rectHero.top;
+        const scale = rectLoader.width / rectHero.width;
+
+        // Position home hero text exactly at loader's contact block location
+        gsap.set(heroContent, {
+          x: deltaX,
+          y: deltaY,
+          scale: scale,
+          transformOrigin: 'left center',
+          opacity: 0
+        });
+
+        // 4s+: Fade in and animate to the center of the homepage
+        gsap.to(heroContent, {
+          x: 0,
+          y: 0,
+          scale: 1,
+          opacity: 1,
+          duration: 1.5,
+          ease: 'power2.out',
+          delay: 4
+        });
+      }
+
+      // Start the background video playlists on homepage
+      setTimeout(() => {
+        triggerHeroEntrance();
+      }, 4000);
+    });
+  }
 
   // Register GSAP plugins
   try {

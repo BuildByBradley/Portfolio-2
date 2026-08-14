@@ -30,29 +30,99 @@
     <div class="loading-screen__header">
       <span class="loading-screen__label">Portfolio // 2026</span>
     </div>
-    <div class="loading-screen__body">
-      <div class="loading-screen__title-wrapper">
-        <h2 id="loading-text" class="loading-screen__title">Site to certainty.</h2>
+    
+    <div class="loading-screen__content-wrapper">
+      <!-- Left Column: Fixed details and Cycling Title / Contact details -->
+      <div class="loading-screen__left">
+        <div id="loading-text-container" class="loading-screen__title-container">
+          <h2 id="loading-text" class="loading-screen__title">Site to certainty.</h2>
+        </div>
+        
+        <!-- Target container for contact details to replace cycles -->
+        <div id="loading-contact-details" class="loader-contact-wrapper" style="opacity: 0; display: none;">
+          <h1 class="hero-title">Bradley Brits</h1>
+          <h2 class="hero-role">Senior Architectural Technologist</h2>
+          <div class="loader-contact-details">
+            <span class="loader-contact-detail-item">078 661 8090</span>
+            <span class="loader-contact-detail-item">Cape Town</span>
+            <span class="loader-contact-detail-item">ibradleyqbrits@gmail.com</span>
+          </div>
+        </div>
+
+        <p class="loading-screen__description">
+          Technical visualisation · BIM coordination · spatial intelligence
+        </p>
+        <div class="loading-screen__location">
+          <span class="loading-screen__location-label">Available globally</span>
+          <span class="loading-screen__location-dot"></span>
+          <span class="loading-screen__location-text">Cape Town · Dubai · London</span>
+        </div>
       </div>
-      <p class="loading-screen__description">
-        Technical visualisation · BIM coordination · spatial intelligence
-      </p>
-      <div class="loading-screen__location">
-        <span class="loading-screen__location-label">Available globally</span>
-        <span class="loading-screen__location-dot"></span>
-        <span class="loading-screen__location-text">Cape Town · Dubai · London</span>
+
+      <!-- Right Column: 2x2 Grid of Borderless Capabilities / Interactive Cards -->
+      <div class="loading-screen__right">
+        <div class="loader-grid">
+          <!-- Block 01 -->
+          <div id="loader-block-1" class="loader-block">
+            <div class="loader-block__video-wrapper">
+              <video src="assets/capabilities/photogrammetry.mp4" autoplay loop muted playsinline class="loader-block__video"></video>
+            </div>
+            <div class="loader-block__caption">
+              <span class="loader-block__number">01</span>
+              <p class="loader-block__text">Sourcing and converting real-world topographical data into highly accurate Revit context models using open-source photogrammetry and DaVinci Resolve. This workflow provides realistic, site-specific grounding for any project.</p>
+            </div>
+          </div>
+
+          <!-- Block 02 -->
+          <div id="loader-block-2" class="loader-block">
+            <div class="loader-block__video-wrapper">
+              <video src="assets/capabilities/lumion_organic.mp4" autoplay loop muted playsinline class="loader-block__video"></video>
+            </div>
+            <div class="loader-block__caption">
+              <span class="loader-block__number">02</span>
+              <p class="loader-block__text">Pushing beyond standard architectural constraints. I leverage advanced 3D techniques to rapidly prototype complex, organic geometries and bespoke elements, transitioning them into high-fidelity Lumion environments.</p>
+            </div>
+          </div>
+
+          <!-- Block 03: Google Earth -->
+          <a href="https://earth.google.com/web/data=MkEKPwo9CiExa0tockRwbHJkWklmcFgyRWZQRUJhcFEzVXVUTXhnX0QSFgoUMDU1QjRBRkFGNzQwQkUxMTYyNDggAUICCABKCAiI2a_qBRAB" target="_blank" id="loader-block-3" class="loader-block loader-block--link">
+            <div class="loader-block__video-wrapper">
+              <video src="assets/capabilities/google_earth_preview.mp4" autoplay loop muted playsinline class="loader-block__video"></video>
+              <div class="loader-block__link-overlay">
+                <span>OPEN INTERACTIVE GLOBE ↗</span>
+              </div>
+            </div>
+            <div class="loader-block__caption">
+              <span class="loader-block__number">03</span>
+              <p class="loader-block__text">Interactive 3D visualization of West Avenue Developments directly on a global canvas.</p>
+            </div>
+          </a>
+
+          <!-- Block 04: Navigation Tutorial -->
+          <div id="loader-block-4" class="loader-block">
+            <div class="loader-block__video-wrapper">
+              <video src="assets/capabilities/how_to_use.mp4" autoplay loop muted playsinline class="loader-block__video"></video>
+            </div>
+            <div class="loader-block__caption">
+              <span class="loader-block__number">04</span>
+              <p class="loader-block__text loader-block__text--highlight">
+                <strong>( Click , not hold , middle mouse button to activate )</strong>
+                <span class="loader-block__subheading">Scrolling - best navigation for this portfolio</span>
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="loading-screen__footer">
-      <div class="loading-screen__counter-wrapper">
-        <span class="loading-screen__counter-label">Loading</span>
-        <span id="loading-counter" class="loading-screen__counter">000</span>
-      </div>
-      <div class="loading-screen__progress-wrapper">
-        <div id="loading-progress" class="loading-screen__progress"></div>
-      </div>
+
+    <!-- Footer: CTA replacing counter/progress -->
+    <div class="loading-screen__footer-new">
+      <button id="enter-site-btn" class="enter-site-btn" style="opacity: 0; pointer-events: none;">
+        ENTER SITE
+      </button>
     </div>
   </div>
+
 
   <!-- Navigation -->
   <nav id="main-nav" class="nav-container">
@@ -61,6 +131,7 @@
       <div class="nav-links">
         <a href="#" class="nav-link" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">Home</a>
         <a href="#projects" class="nav-link">Projects</a>
+        <a href="#capabilities" class="nav-link">Capabilities</a>
         <a href="#cv-section" class="nav-link">CV</a>
       </div>
       <a href="#cv-section" class="nav-contact">Contact</a>
@@ -353,6 +424,45 @@
     </div>
   </section>
 
+  <!-- Capabilities Section (Cinematic Snap-Scroll) -->
+  <section id="capabilities" class="capabilities-section">
+    
+    <!-- Slide 1 -->
+    <div class="capability-slide">
+      <video src="assets/capabilities/photogrammetry.mp4" autoplay loop muted playsinline class="capability-bg-video"></video>
+      <div class="capability-overlay"></div>
+      <div class="capability-hud">
+        <span class="hud-label">// 01 &mdash; CONTEXT & PHOTOGRAMMETRY</span>
+        <h3 class="hud-title">Sourcing and converting real-world topographical data into highly accurate Revit context models using open-source photogrammetry and DaVinci Resolve. This workflow provides realistic, site-specific grounding for any project, anywhere on earth.</h3>
+      </div>
+    </div>
+
+    <!-- Slide 2 -->
+    <div class="capability-slide split-slide">
+      <div class="split-left">
+        <video src="assets/capabilities/light_fitting.mp4" autoplay loop muted playsinline class="capability-bg-video"></video>
+      </div>
+      <div class="split-right">
+        <video src="assets/capabilities/lumion_organic.mp4" autoplay loop muted playsinline class="capability-bg-video"></video>
+      </div>
+      <div class="capability-overlay"></div>
+      <div class="capability-hud">
+        <span class="hud-label">// 02 &mdash; ADVANCED ORGANIC PROTOTYPING</span>
+        <h3 class="hud-title">Pushing beyond standard architectural constraints. I leverage advanced 3D techniques to rapidly prototype complex, organic geometries and bespoke elements. This ensures design intent is never compromised by software limitations, transitioning seamlessly from concept into high-fidelity Lumion environments.</h3>
+      </div>
+    </div>
+
+    <!-- Slide 3 -->
+    <div class="capability-slide">
+      <video src="assets/capabilities/zoning_calculator.mp4" autoplay loop muted playsinline class="capability-bg-video"></video>
+      <div class="capability-overlay"></div>
+      <div class="capability-hud">
+        <span class="hud-label">// 03 &mdash; THE ENGINE ROOM (AI & SYSTEMS)</span>
+        <h3 class="hud-title">Behind the drafting, I actively explore Agentic AI to automate and optimize standard architectural workflows. I am currently developing a visual zoning calculator application to instantly illustrate a site's bulk capacity based on Cape Town zoning parameters—proving that my value extends far beyond traditional modeling.</h3>
+      </div>
+    </div>
+
+  </section>
   <!-- CV Embedded Section -->
   <section id="cv-section" style="width: 100%; height: 100vh; background: #0a0a0a; border-top: 1px solid rgba(255,255,255,0.06); position: relative; z-index: 10;">
     <iframe src="cv/index.html" loading="lazy" style="width: 100%; height: 100%; border: none; display: block;"></iframe>
